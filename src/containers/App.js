@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import MessagesWrapper from "../components/MessagesWrapper";
+import MessageInput from "../components/MessageInput";
 
 class App extends Component {
   render() {
@@ -9,7 +10,9 @@ class App extends Component {
       <Container fluid>
         <Row>
           <Sidebar />
-          <MessagesWrapper />
+          <MessagesWrapper className={{ position: "relative" }}>
+            <MessageInput />
+          </MessagesWrapper>
         </Row>
       </Container>
     );
