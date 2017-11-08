@@ -1,0 +1,10 @@
+{
+  "name": "slackr",
+  "version": "0.0.1",
+  "description": "Collaboration tool based on react",
+  "main": "index.js",
+  "repository": "https://github.com/rendact/slackr.git",
+  "author": "ihfazhillah <mihfazhillah@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
