@@ -4,18 +4,17 @@ import { InputGroup, InputGroupButton, Button, Input } from "reactstrap";
 export default class MessageInput extends Component {
   render() {
     return (
-      <InputGroup
+      <div
+        id="input-wrapper"
         style={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          padding: 14,
-          width: "100%"
+          margin: 15
         }}
       >
-        <Input placeholder="Message Rendact" id="message-input" />
-        <InputGroupButton>Send</InputGroupButton>
-      </InputGroup>
+        <InputGroup>
+          <Input placeholder="Message Rendact" id="message-input" />
+          <InputGroupButton>Send</InputGroupButton>
+        </InputGroup>
+      </div>
     );
   }
 }

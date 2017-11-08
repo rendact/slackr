@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar";
 import MessagesWrapper from "../components/MessagesWrapper";
 import MessageInput from "../components/MessageInput";
 import MessagesHead from "../components/MessagesHead";
+import ChatItem from "../components/ChatItem";
+import ChatBody from "../components/ChatBody";
 
 class App extends Component {
   render() {
@@ -13,6 +15,18 @@ class App extends Component {
           <Sidebar />
           <MessagesWrapper className={{ position: "relative" }}>
             <MessagesHead name={"rendact"} hashtag={"rendact"} />
+            <ChatBody>
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+              <ChatItem />
+            </ChatBody>
             <MessageInput />
           </MessagesWrapper>
         </Row>

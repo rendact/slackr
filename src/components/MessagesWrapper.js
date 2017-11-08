@@ -6,7 +6,12 @@ export default class MessagesWrapper extends Component {
     return (
       <Col
         md={10}
-        style={{ background: "blue", height: "100vh" }}
+        style={{
+          background: "blue",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column"
+        }}
         className="messages-wrapper"
         id="messages-wrapper"
       >
