@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 class PrivateRoute extends React.Component {
   isAuthenticated() {
-    if (localStorage.getItem("graphcoolToken")) return true;
+    if (localStorage.getItem("slackrToken")) return true;
     return false;
   }
   render() {
