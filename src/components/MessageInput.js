@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { InputGroup, InputGroupButton, Button, Input } from "reactstrap";
+import { reduxForm, Field } from "redux-form";
+import { renderInputGroupTextWithSend } from "./reduxFormComponents/renderInputGroupText";
+import { Form } from "reactstrap";
 
-export default class MessageInput extends Component {
+class MessageInput extends Component {
   render() {
     return (
       <div
@@ -10,11 +12,16 @@ export default class MessageInput extends Component {
           margin: 15
         }}
       >
-        <InputGroup>
-          <Input placeholder="Message Rendact" id="message-input" />
-          <InputGroupButton>Send</InputGroupButton>
-        </InputGroup>
+        <Form onSubmit={this.props.handleSubmit}>
+          <Field
+            component={renderInputGroupTextWithSend}
+            name="messageContent"
+            id="messageContent"
+          />
+        </Form>
       </div>
     );
   }
 }
+
+export default reduxForm({ form: "message" })(MessageInput);

@@ -3,7 +3,7 @@ import { Container, Row } from "reactstrap";
 import Sidebar from "../components/Sidebar";
 import SidebarHead from "../components/SidebarHead";
 import MessagesWrapper from "../components/MessagesWrapper";
-import MessageInput from "../components/MessageInput";
+import MessageInputWithMutation from "./MessageInputWithMutation";
 import MessagesHead from "../components/MessagesHead";
 import ChatItem from "../components/ChatItem";
 import ChatBody from "../components/ChatBody";
@@ -35,7 +35,7 @@ class App extends Component {
               <ChatItem />
               <ChatItem />
             </ChatBody>
-            <MessageInput />
+            <MessageInputWithMutation />
           </MessagesWrapper>
         </Row>
       </Container>
