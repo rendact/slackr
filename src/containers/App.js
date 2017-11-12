@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
+import ChatsSection from "./ChatsSection";
 import Sidebar from "../components/Sidebar";
 import SidebarHead from "../components/SidebarHead";
 import MessagesWrapper from "../components/MessagesWrapper";
@@ -23,18 +24,7 @@ class App extends Component {
           </Sidebar>
           <MessagesWrapper className={{ position: "relative" }}>
             <MessagesHead name={"rendact"} hashtag={"rendact"} />
-            <ChatBody>
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-              <ChatItem />
-            </ChatBody>
+            <ChatsSection />
             <MessageInputWithMutation />
           </MessagesWrapper>
         </Row>
