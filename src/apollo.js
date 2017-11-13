@@ -10,12 +10,19 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("slackrToken");
 
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : null
-    }
-  };
+  // got error here, when no token provided. always return 401 unauthorized error.
+  // so, i make checking. if there token, this will use authorization header. otherwise
+  // use default headers
+
+  if (token)
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`
+      }
+    };
+
+  return { headers: { ...headers } };
 });
 
 export default new ApolloClient({
