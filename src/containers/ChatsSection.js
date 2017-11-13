@@ -14,7 +14,7 @@ class ChatsSection extends Component {
     return (
       <ChatBody>
         {messages
-          ? messages.map(message => <ChatItem content={message.node.content} />)
+          ? messages.map(message => <ChatItem body={message.node.content} />)
           : null}
       </ChatBody>
     );
