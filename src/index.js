@@ -16,7 +16,7 @@ import "bootstrap/dist/css/bootstrap.css";
 const store = createStore(slackrApp);
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={client} store={store}>
     <Provider store={store}>
       <HashRouter>
         <Switch>
