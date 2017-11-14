@@ -4,6 +4,18 @@ import { renderInputGroupTextWithSend } from "./reduxFormComponents/renderInputG
 import { Form } from "reactstrap";
 
 class MessageInput extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onSubmit(val) {
+    this.props
+      .onSubmit(val)
+      .then(() => this.props.reset())
+      .catch(() => {
+        debugger;
+      });
+  }
   render() {
     return (
       <div
@@ -12,7 +24,7 @@ class MessageInput extends Component {
           margin: 15
         }}
       >
-        <Form onSubmit={this.props.handleSubmit}>
+        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field
             component={renderInputGroupTextWithSend}
             name="messageContent"

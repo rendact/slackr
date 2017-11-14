@@ -10,14 +10,18 @@ class MessageInputWithMutation extends Component {
     this.handleCreateMessage = this.handleCreateMessage.bind(this);
   }
   handleCreateMessage(val) {
-    this.props
-      .createMessage({ variables: { input: { content: val.messageContent } } })
-      .then(data => {
-        debugger;
-      })
-      .catch(error => {
-        debugger;
-      });
+    return new Promise((resolve, reject) => {
+      this.props
+        .createMessage({
+          variables: { input: { content: val.messageContent } }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
   render() {
     return <MessageInput onSubmit={this.handleCreateMessage} />;
