@@ -22,8 +22,9 @@ class Login extends Component {
       .login({
         variables: { input: { username: val.email, password: val.password } }
       })
-      .then(({ data: { loginUser: { token } } }) => {
+      .then(({ data: { loginUser: { token, user: { id } } } }) => {
         localStorage.setItem("slackrToken", token);
+        localStorage.setItem("slackrUserId", id);
         this.setState({ success: true, error: false });
       })
       .catch(error => {
