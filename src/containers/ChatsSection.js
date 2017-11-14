@@ -49,7 +49,10 @@ class ChatsSection extends Component {
       <ChatBody>
         {data.viewer
           ? data.viewer.allMessages.edges.map(message => (
-              <ChatItem body={message.node.content} />
+              <ChatItem
+                body={message.node.content}
+                head={message.node.author && message.node.author.username}
+              />
             ))
           : null}
       </ChatBody>
