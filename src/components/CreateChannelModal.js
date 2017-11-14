@@ -6,12 +6,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Form,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  FormText,
-  Label
+  Form
 } from "reactstrap";
 import { renderInputGroupAddonText } from "./reduxFormComponents/renderInputGroupAddonText";
 

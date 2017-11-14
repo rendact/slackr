@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Media } from "reactstrap";
 
 export default class ChatBody extends Component {
   render() {

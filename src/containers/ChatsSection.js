@@ -11,10 +11,6 @@ class ChatsSection extends Component {
     this.subscribeToMessage = this.subscribeToMessage.bind(this);
   }
 
-  componentWillReceiveProps(next) {
-    debugger;
-  }
-
   subscribeToMessage() {
     return this.props.messages.subscribeToMore({
       document: messageSubscription,
@@ -26,8 +22,6 @@ class ChatsSection extends Component {
         const { data: { subscribeToMessage: { edge } } } = subscriptionData;
 
         let newEdges = [...prev.viewer.allMessages.edges, edge];
-
-        debugger;
         return {
           viewer: {
             allMessages: {
@@ -48,8 +42,9 @@ class ChatsSection extends Component {
     return (
       <ChatBody>
         {data.viewer
-          ? data.viewer.allMessages.edges.map(message => (
+          ? data.viewer.allMessages.edges.map((message, idx) => (
               <ChatItem
+                key={idx}
                 body={message.node.content}
                 head={message.node.author && message.node.author.username}
               />
