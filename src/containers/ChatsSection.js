@@ -8,44 +8,49 @@ import { graphql } from "react-apollo";
 class ChatsSection extends Component {
   constructor(props) {
     super(props);
-
-    this.subscribeToNewMessages = this.subscribeToNewMessages.bind(this);
+    this.subscribeToMessage = this.subscribeToMessage.bind(this);
   }
 
-  componentWillMount() {
-    this.subscribeToNewMessages();
-    //    debugger;
-    //   this.props.subscribeToNewMessages();
-  }
-  componentWillReceiveProps(newProps) {
-    if (!newProps.messages.loading && newProps.messages.allMessages) {
-      // If we change channels, subscribe to the new channel
-      this.subscribeToNewMessages();
-    }
+  componentWillReceiveProps(next) {
+    debugger;
   }
 
-  subscribeToNewMessages() {
-    this.subscription = this.props.messages.subscribeToMore({
+  subscribeToMessage() {
+    return this.props.messages.subscribeToMore({
       document: messageSubscription,
-      /*
-            *    Update query specifies how the new data should be merged
-            *    with our previous results. Note how the structure of the
-            *    object we return here directly matches the structure of
-            *    the GetPublicChannels query.
-            */
       updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const { data: { subscribeToMessage: { edge } } } = subscriptionData;
+
+        let newEdges = [...prev.viewer.allMessages.edges, edge];
+
         debugger;
+        return {
+          viewer: {
+            allMessages: {
+              edges: newEdges
+            }
+          }
+        };
       }
     });
   }
+
+  componentWillMount() {
+    this.subscribeToMessage();
+  }
+
   render() {
     let { messages: data } = this.props;
-    return null;
-    let messages = data ? null : data.viewer.allMessages.edges;
     return (
       <ChatBody>
-        {messages
-          ? messages.map(message => <ChatItem body={message.node.content} />)
+        {data.viewer
+          ? data.viewer.allMessages.edges.map(message => (
+              <ChatItem body={message.node.content} />
+            ))
           : null}
       </ChatBody>
     );
