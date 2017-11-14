@@ -14,7 +14,12 @@ class MessageInputWithMutation extends Component {
     return new Promise((resolve, reject) => {
       this.props
         .createMessage({
-          variables: { input: { content: val.messageContent } }
+          variables: {
+            input: {
+              content: val.messageContent,
+              authorId: localStorage.getItem("slackrUserId")
+            }
+          }
         })
         .then(data => {
           resolve(data);
