@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const getMessages = gql`
   {
     viewer {
-      allMessages(orderBy: { field: createdAt, direction: ASC }) {
+      allMessages(last: 50, orderBy: { field: createdAt, direction: ASC }) {
         edges {
           node {
             id
