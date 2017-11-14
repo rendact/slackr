@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   Row,
@@ -7,7 +8,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input
+  Input,
+  Label,
+  FormText,
+  InputGroup,
+  InputGroupAddon
 } from "reactstrap";
 import ChatsSection from "./ChatsSection";
 import Sidebar from "../components/Sidebar";
@@ -17,6 +22,8 @@ import MessageInputWithMutation from "./MessageInputWithMutation";
 import MessagesHead from "../components/MessagesHead";
 import ChatItem from "../components/ChatItem";
 import ChatBody from "../components/ChatBody";
+import CreateChannel from "./CreateChannelWithMutation";
+import { createChannelToggle } from "../actions/createChannel";
 
 class App extends Component {
   render() {
@@ -24,7 +31,18 @@ class App extends Component {
       <Container fluid>
         <Row>
           <Sidebar style={{ padding: 15 }}>
-            <SidebarHead title="Slackr" /> <h3>Channels</h3>
+            <SidebarHead title="Slackr" />{" "}
+            <h2>
+              <a
+                href="#"
+                onClick={r => {
+                  r.preventDefault();
+                  this.props.dispatch(createChannelToggle());
+                }}
+              >
+                Channels
+              </a>
+            </h2>
             <dl>
               <dd>#general</dd>
               <dd>#general</dd>
@@ -33,23 +51,10 @@ class App extends Component {
           </Sidebar>
           <MessagesWrapper className={{ position: "relative" }} />
         </Row>
-        <Modal isOpen size="lg">
-          <ModalHeader>
-            <h2>
-              Create A Channel{" "}
-              <small>Channel are where your members communicate</small>
-            </h2>
-          </ModalHeader>
-          <ModalBody>
-            <Input />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary">Submit</Button>
-          </ModalFooter>
-        </Modal>
+        <CreateChannel />
       </Container>
     );
   }
 }
 
-export default App;
+export default connect()(App);
