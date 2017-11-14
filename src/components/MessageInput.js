@@ -11,7 +11,11 @@ class MessageInput extends Component {
   onSubmit(val) {
     this.props
       .onSubmit(val)
-      .then(() => this.props.reset())
+      .then(() => {
+        this.props.reset();
+        // by triggering this, the message body scroll to bottom
+        this.props.triggerNewMessage();
+      })
       .catch(() => {
         debugger;
       });

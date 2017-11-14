@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import MessageInput from "../components/MessageInput";
 import { createMessageMtn } from "../queries/createMessageMtn";
@@ -28,6 +29,6 @@ class MessageInputWithMutation extends Component {
   }
 }
 
-export default graphql(createMessageMtn, { name: "createMessage" })(
-  MessageInputWithMutation
-);
+const withRedux = connect()(MessageInputWithMutation);
+
+export default graphql(createMessageMtn, { name: "createMessage" })(withRedux);

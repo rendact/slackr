@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Col } from "reactstrap";
+import MessagesHead from "../components/MessagesHead";
+import ChatsSection from "./ChatsSection";
+import MessageInputWithMutation from "./MessageInputWithMutation";
 
 export default class MessagesWrapper extends Component {
   render() {
@@ -15,7 +18,9 @@ export default class MessagesWrapper extends Component {
         className="messages-wrapper"
         id="messages-wrapper"
       >
-        {this.props.children}
+        <MessagesHead name={"rendact"} hashtag={"rendact"} />
+        <ChatsSection />
+        <MessageInputWithMutation />
       </Col>
     );
   }

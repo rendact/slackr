@@ -3,7 +3,7 @@ import { Container, Row } from "reactstrap";
 import ChatsSection from "./ChatsSection";
 import Sidebar from "../components/Sidebar";
 import SidebarHead from "../components/SidebarHead";
-import MessagesWrapper from "../components/MessagesWrapper";
+import MessagesWrapper from "./MessagesWrapper";
 import MessageInputWithMutation from "./MessageInputWithMutation";
 import MessagesHead from "../components/MessagesHead";
 import ChatItem from "../components/ChatItem";
@@ -22,11 +22,7 @@ class App extends Component {
               <dd>#general</dd>
             </dl>
           </Sidebar>
-          <MessagesWrapper className={{ position: "relative" }}>
-            <MessagesHead name={"rendact"} hashtag={"rendact"} />
-            <ChatsSection />
-            <MessageInputWithMutation />
-          </MessagesWrapper>
+          <MessagesWrapper className={{ position: "relative" }} />
         </Row>
       </Container>
     );
