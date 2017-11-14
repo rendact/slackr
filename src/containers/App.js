@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Container, Row } from "reactstrap";
+import {
+  Container,
+  Row,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input
+} from "reactstrap";
 import ChatsSection from "./ChatsSection";
 import Sidebar from "../components/Sidebar";
 import SidebarHead from "../components/SidebarHead";
@@ -24,6 +33,20 @@ class App extends Component {
           </Sidebar>
           <MessagesWrapper className={{ position: "relative" }} />
         </Row>
+        <Modal isOpen size="lg">
+          <ModalHeader>
+            <h2>
+              Create A Channel{" "}
+              <small>Channel are where your members communicate</small>
+            </h2>
+          </ModalHeader>
+          <ModalBody>
+            <Input />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary">Submit</Button>
+          </ModalFooter>
+        </Modal>
       </Container>
     );
   }
