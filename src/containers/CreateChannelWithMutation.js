@@ -13,16 +13,19 @@ class CreateChannel extends Component {
   }
 
   createChannelSubmit(val) {
-    this.props
-      .createChannel({
-        variables: { input: { name: val.name, type: "public" } }
-      })
-      .then(data => {
-        debugger;
-      })
-      .catch(error => {
-        debugger;
-      });
+    return new Promise((resolve, reject) => {
+      this.props
+        .createChannel({
+          variables: { input: { name: val.name, type: "public" } }
+        })
+        .then(data => {
+          this.props.dispatch(createChannelToggle());
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
   render() {
     return (
