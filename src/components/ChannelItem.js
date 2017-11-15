@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class ChannelItem extends Component {
   generateChannelUrl(id) {
@@ -9,9 +10,9 @@ export default class ChannelItem extends Component {
     const { id, type, name } = this.props;
     return (
       <dd>
-        <a href={this.generateChannelUrl(id)}>
+        <Link to={this.generateChannelUrl(id)}>
           <span>{type === "public" ? "\u0023" : "\ue567"}</span> {name}
-        </a>
+        </Link>
       </dd>
     );
   }

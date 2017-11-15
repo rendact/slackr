@@ -14,7 +14,8 @@ export default class MessagesWrapper extends Component {
           display: "flex",
           flexDirection: "column",
           flex: "10 0px",
-          order: 1
+          order: 1,
+          padding: 15
         }}
         className="messages-wrapper"
         id="messages-wrapper"

@@ -3,10 +3,22 @@ import SidebarHead from "../components/SidebarHead";
 import ChannelItem from "../components/ChannelItem";
 import { createChannelToggle } from "../actions/createChannel";
 import { connect } from "react-redux";
-import { Col } from "reactstrap";
+import { graphql } from "react-apollo";
+import { getChannels } from "../queries/getChannels";
 
 class Sidebar extends Component {
+  renderChannels(channels) {
+    return (
+      <dl>
+        {channels.map(channel => (
+          <ChannelItem key={channel.node.id} {...channel.node} />
+        ))}
+      </dl>
+    );
+  }
+
   render() {
+    let { channels } = this.props;
     return (
       <div
         style={{
@@ -18,7 +30,7 @@ class Sidebar extends Component {
         }}
       >
         <SidebarHead title="Slackr" />{" "}
-        <h2>
+        <h4>
           <a
             href="#head"
             onClick={r => {
@@ -28,21 +40,15 @@ class Sidebar extends Component {
           >
             Channels
           </a>
-        </h2>
+        </h4>
         <dl>
-          <ChannelItem id="jflkasjflkasjf" type="public" name="hello" />
-          <ChannelItem id="klfdsjalfajl" type="private" name="aku" />
-          <dd>
-            <a href="#dkfaj">
-              <span id="status">#</span> general
-            </a>
-          </dd>
-          <dd>#general</dd>
-          <dd>#general</dd>
+          {!channels.loading &&
+            this.renderChannels(channels.viewer.allChannels.edges)}
         </dl>
       </div>
     );
   }
 }
 
+Sidebar = graphql(getChannels, { name: "channels" })(Sidebar);
 export default connect()(Sidebar);
