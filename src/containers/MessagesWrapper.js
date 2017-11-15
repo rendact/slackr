@@ -25,7 +25,6 @@ class MessagesWrapper extends Component {
         return;
       }
     }
-    debugger;
   }
 
   subscribeToMessage() {
@@ -56,42 +55,42 @@ class MessagesWrapper extends Component {
   render() {
     const { match, channel: data } = this.props;
     return (
-      <div
-        style={{
-          background: "blue",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          flex: "10 0px",
-          order: 1,
-          padding: 15
-        }}
-        className="messages-wrapper"
-        id="messages-wrapper"
-      >
-        {match.params.id && (
-          <div>
-            <MessagesHead
-              name={data.getChannel && data.getChannel.name}
-              hashtag={data.getChannel && data.getChannel.name}
-            />
-            <ChatBody>
-              {data.getChannel && data.getChannel.messages
-                ? data.getChannel.messages.edges.map((message, idx) => (
-                    <ChatItem
-                      key={idx}
-                      body={message.node.content}
-                      head={message.node.author && message.node.author.username}
-                    />
-                  ))
-                : null}
-            </ChatBody>
-            <MessageInputWithMutation
-              channelId={match.params && match.params.id}
-            />
-          </div>
-        )}
-      </div>
+      (match.params.id && (
+        <div style={{}} className="messages-wrapper" id="messages-wrapper">
+          <MessagesHead
+            name={data.getChannel && data.getChannel.name}
+            type={data.getChannel && data.getChannel.type}
+          />
+          <ChatBody>
+            {data.getChannel && data.getChannel.messages
+              ? data.getChannel.messages.edges.map((message, idx) => (
+                  <ChatItem
+                    key={idx}
+                    body={message.node.content}
+                    head={message.node.author && message.node.author.username}
+                  />
+                ))
+              : null}
+          </ChatBody>
+          <MessageInputWithMutation
+            channelId={match.params && match.params.id}
+          />
+        </div>
+      )) || (
+        <div
+          style={{
+            background: "blue",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            flex: "10 0px",
+            order: 1,
+            padding: 15
+          }}
+          className="messages-wrapper"
+          id="messages-wrapper"
+        />
+      )
     );
   }
 }

@@ -12,6 +12,7 @@ import slackrApp from "./reducers";
 import PrivateRoute from "./PrivateRoute";
 import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
+import "./index.css";
 
 const store = createStore(slackrApp);
 

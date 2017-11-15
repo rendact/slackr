@@ -11,7 +11,10 @@ export default class ChannelItem extends Component {
     return (
       <dd>
         <Link to={this.generateChannelUrl(id)}>
-          <span>{type === "public" ? "\u0023" : "\ue567"}</span> {name}
+          <span
+            className={type === "private" ? "fa fa-lock" : "fa fa-hashtag"}
+          />{" "}
+          {name}
         </Link>
       </dd>
     );
