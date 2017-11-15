@@ -7,13 +7,14 @@ import MessageInputWithMutation from "./MessageInputWithMutation";
 export default class MessagesWrapper extends Component {
   render() {
     return (
-      <Col
-        md={10}
+      <div
         style={{
           background: "blue",
           height: "100vh",
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
+          flex: "10 0px",
+          order: 1
         }}
         className="messages-wrapper"
         id="messages-wrapper"
@@ -21,7 +22,7 @@ export default class MessagesWrapper extends Component {
         <MessagesHead name={"rendact"} hashtag={"rendact"} />
         <ChatsSection />
         <MessageInputWithMutation />
-      </Col>
+      </div>
     );
   }
 }
