@@ -10,7 +10,7 @@ export default class App extends Component {
       <Container fluid>
         <Row>
           <Sidebar />
-          <MessagesWrapper />
+          <MessagesWrapper match={this.props.match} />
         </Row>
         <CreateChannel />
       </Container>

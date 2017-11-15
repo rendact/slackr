@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChatBody from "../components/ChatBody";
 import ChatItem from "../components/ChatItem";
 import { getMessages } from "../queries/getMessages";
+import { getChannel } from "../queries/getChannel";
 import { messageSubscription } from "../queries/messageSubscription";
 import { graphql } from "react-apollo";
 
@@ -12,7 +13,7 @@ class ChatsSection extends Component {
   }
 
   subscribeToMessage() {
-    return this.props.messages.subscribeToMore({
+    return this.props.channel.subscribeToMore({
       document: messageSubscription,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) {
@@ -38,7 +39,7 @@ class ChatsSection extends Component {
   }
 
   render() {
-    let { messages: data } = this.props;
+    let { channel: data } = this.props;
     return (
       <ChatBody>
         {data.viewer
@@ -55,6 +56,13 @@ class ChatsSection extends Component {
   }
 }
 
-export default graphql(getMessages, {
-  name: "messages"
+export default graphql(getChannel, {
+  name: "channel",
+  options: props => {
+    const id = props.match.params ? props.match.params.id : null;
+
+    return {
+      variables: { id: id }
+    };
+  }
 })(ChatsSection);

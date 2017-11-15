@@ -20,7 +20,7 @@ ReactDOM.render(
     <Provider store={store}>
       <HashRouter>
         <Switch>
-          <PrivateRoute path="/messages" component={App} />
+          <PrivateRoute path="/messages/:id?" component={App} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Switch>

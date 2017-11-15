@@ -5,6 +5,7 @@ export const messageSubscription = gql`
     subscribeToMessage(mutations: [createMessage], filter: $filter) {
       edge {
         node {
+          createdAt
           id
           content
           author {

@@ -17,7 +17,8 @@ class MessageInputWithMutation extends Component {
           variables: {
             input: {
               content: val.messageContent,
-              authorId: localStorage.getItem("slackrUserId")
+              authorId: localStorage.getItem("slackrUserId"),
+              channelId: this.props.channelId
             }
           }
         })
