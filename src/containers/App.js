@@ -6,6 +6,7 @@ import SidebarHead from "../components/SidebarHead";
 import MessagesWrapper from "./MessagesWrapper";
 import CreateChannel from "./CreateChannelWithMutation";
 import { createChannelToggle } from "../actions/createChannel";
+import ChannelItem from "../components/ChannelItem";
 
 class App extends Component {
   render() {
@@ -26,7 +27,13 @@ class App extends Component {
               </a>
             </h2>
             <dl>
-              <dd>#general</dd>
+              <ChannelItem id="jflkasjflkasjf" type="public" name="hello" />
+              <ChannelItem id="klfdsjalfajl" type="private" name="aku" />
+              <dd>
+                <a href="#dkfaj">
+                  <span id="status">#</span> general
+                </a>
+              </dd>
               <dd>#general</dd>
               <dd>#general</dd>
             </dl>
