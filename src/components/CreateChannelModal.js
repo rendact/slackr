@@ -79,5 +79,5 @@ class CreateChannelModal extends Component {
 
 export default reduxForm({
   form: "createChannel",
-  initialValues: { type: "Public" }
+  initialValues: { type: "public" }
 })(CreateChannelModal);

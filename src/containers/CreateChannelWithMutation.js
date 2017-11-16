@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import { createChannel } from "../queries/createChannel";
+import { bindUserChannel } from "../queries/bindUserChannel";
 import { createChannelToggle } from "../actions/createChannel";
 import CreateChannelModal from "../components/CreateChannelModal";
 
@@ -16,11 +17,28 @@ class CreateChannel extends Component {
     return new Promise((resolve, reject) => {
       this.props
         .createChannel({
-          variables: { input: { name: val.name, type: val.type } }
+          variables: {
+            input: {
+              name: val.name,
+              type: val.type
+            }
+          }
         })
         .then(data => {
           this.props.dispatch(createChannelToggle());
-          resolve(data);
+
+          this.props
+            .bindUserChannel({
+              variables: {
+                input: {
+                  channelId: data.data.createChannel.changedChannel.id,
+                  userId: localStorage.getItem("slackrUserId"),
+                  memberType: "owner"
+                }
+              }
+            })
+            .then(data => resolve(data))
+            .catch(error => reject(error));
         })
         .catch(error => {
           reject(error);
@@ -41,4 +59,8 @@ const mapStateToProps = state => state.createChannel || {};
 
 CreateChannel = connect(mapStateToProps)(CreateChannel);
 
-export default graphql(createChannel, { name: "createChannel" })(CreateChannel);
+const withBinding = graphql(bindUserChannel, { name: "bindUserChannel" })(
+  CreateChannel
+);
+
+export default graphql(createChannel, { name: "createChannel" })(withBinding);
