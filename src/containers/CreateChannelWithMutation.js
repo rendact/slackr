@@ -16,7 +16,7 @@ class CreateChannel extends Component {
     return new Promise((resolve, reject) => {
       this.props
         .createChannel({
-          variables: { input: { name: val.name, type: "public" } }
+          variables: { input: { name: val.name, type: val.type } }
         })
         .then(data => {
           this.props.dispatch(createChannelToggle());

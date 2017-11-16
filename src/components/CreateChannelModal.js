@@ -9,12 +9,23 @@ import {
   Form
 } from "reactstrap";
 import { renderInputGroupAddonText } from "./reduxFormComponents/renderInputGroupAddonText";
+import ToggleButton from "./ToggleButton";
 
 class CreateChannelModal extends Component {
   constructor(props) {
     super(props);
 
+    this.handleChangeType = this.handleChangeType.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      public: true
+    };
+  }
+
+  handleChangeType(bool) {
+    this.props.change("type", bool ? "public" : "private");
+    this.setState({ public: bool });
   }
 
   handleSubmit(val) {
@@ -28,6 +39,7 @@ class CreateChannelModal extends Component {
         debugger;
       });
   }
+
   render() {
     let { createChannelOpen, createChannelToggle, handleSubmit } = this.props;
     return (
@@ -38,10 +50,18 @@ class CreateChannelModal extends Component {
             <small>Channel are where your members communicate</small>
           </ModalHeader>
           <ModalBody>
+            <ToggleButton
+              textOn="Public"
+              textOff="Private"
+              labelOn="Any one can join this channel."
+              labelOff="Only invited user can join this channel."
+              onChange={this.handleChangeType}
+            />
+            <Field type="hidden" name="type" component="hidden" />
             <Field
               label="Name"
               name="name"
-              addon="#"
+              addonFaName={this.state.public ? "hashtag" : "lock"}
               helpText="names must lowercase, without period or spaces and shorter than 22 characters"
               component={renderInputGroupAddonText}
             />
@@ -57,4 +77,7 @@ class CreateChannelModal extends Component {
   }
 }
 
-export default reduxForm({ form: "createChannel" })(CreateChannelModal);
+export default reduxForm({
+  form: "createChannel",
+  initialValues: { type: "Public" }
+})(CreateChannelModal);

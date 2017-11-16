@@ -50,3 +50,114 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+/* 
+ * toggle button
+ */
+
+.tg {
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.tg-handler{
+  background: #fff;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border-radius: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-transition: 70ms ease-out;
+    -moz-transition: 70ms ease-out;
+    transition: 70ms ease-out;
+    margin: 2px;
+  }
+
+  .tg.checked .tg-btn .tg-handler{
+    left: 100%;
+    margin-left: -25px;
+  }
+
+.tg-btn {
+  background: #e8e8e8;
+    color: #717274;
+    display: inline-block;
+    border-radius: 1rem;
+    margin-right: .5rem;
+    padding: .1rem 1rem .1rem 2rem;
+    font-size: .9rem;
+    font-weight: 700;
+    -webkit-transition: 70ms ease-out;
+    -moz-transition: 70ms ease-out;
+    transition: 70ms ease-out;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    height: 27px;
+    line-height: 23px;
+    float: left;
+  }
+
+  .tg.checked .tg-btn{
+    padding: .1rem 2rem .1rem 1rem;
+  }
+
+  .tg.checked .tg-btn{
+   background: #5cb85c !important ;
+   color: white;
+ }
+
+ .tg.off .tg-btn{
+   background: #d9534f!important;
+   color: white;
+ }
+
+  .tg.checked .tg-btn .tg-on-text {
+    visibility: visible;
+  }
+
+  .tg.checked .tg-btn .tg-off-text{
+    visibility: hidden;
+  }
+
+  .tg.off .tg-btn .tg-off-text{
+    visibility: visible;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+
+  .tg-label{
+    margin-left: 7rem;
+  }
+
+  .tg.off .tg-btn .tg-on-text{
+    visibility: hidden;
+  }
+
+
+  .tg.checked .tg-label .tg-on-text{
+    visibility: visible;
+  }
+
+  .tg.checked .tg-label .tg-off-text{
+    visibility: hidden;
+  }
+
+  .tg.off .tg-label .tg-on-text{
+    visibility: hidden;
+  }
+
+  .tg.off .tg-label .tg-off-text {
+    visibility: visible;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+

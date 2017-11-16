@@ -10,7 +10,7 @@ import {
 export const renderInputGroupAddonText = ({
   input,
   label,
-  addon,
+  addonFaName,
   helpText,
   meta: { error, touch },
   ...attr
@@ -18,7 +18,9 @@ export const renderInputGroupAddonText = ({
   <div>
     <Label>{label}</Label>
     <InputGroup>
-      <InputGroupAddon>{addon}</InputGroupAddon>
+      <InputGroupAddon>
+        <span className={"fa fa-" + addonFaName} />
+      </InputGroupAddon>
       <Input {...input} {...attr} />
     </InputGroup>
     <FormText color="muted">{helpText}</FormText>
