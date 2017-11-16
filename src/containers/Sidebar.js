@@ -21,10 +21,12 @@ class Sidebar extends Component {
     this.props.dispatch(toggleProfileModal());
   }
 
-  handleSignout() {
+  handleSignout(e) {
+    e && e.preventDefault();
+    this.props.profileModalOpen && this.props.dispatch(toggleProfileModal());
     localStorage.removeItem("slackrToken");
     localStorage.removeItem("slackrUserId");
-    window.location.reload();
+    this.props.history.push("/login");
   }
 
   render() {
@@ -63,4 +65,10 @@ class Sidebar extends Component {
 const mapStateToProps = state => state.profileModal || {};
 const withRedux = connect(mapStateToProps)(withRouter(Sidebar));
 
-export default graphql(getUser, { name: "user" })(withRedux);
+export default graphql(getUser, {
+  name: "user",
+  options: {
+    variables: { id: localStorage.getItem("slackrUserId") }
+  },
+  skip: !localStorage.getItem("slackrUserId")
+})(withRedux);

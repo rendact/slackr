@@ -16,7 +16,7 @@ export default class ProfileModal extends Component {
           <Nav vertical>
             <NavItem>
               <a href="#" className="nav-link" onClick={profileModalSignout}>
-                Sign out of<strong>upSlack</strong>
+                Sign out of <strong>upSlack</strong>
               </a>
             </NavItem>
           </Nav>
