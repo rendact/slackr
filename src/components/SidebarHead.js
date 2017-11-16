@@ -5,6 +5,7 @@ export default class SidebarHead extends Component {
     return (
       <div id="sidebar-head">
         <h2>{this.props.title}</h2>
+        <p className="text-muted">{this.props.tagline}</p>
         <hr />
       </div>
     );
