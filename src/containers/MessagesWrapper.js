@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { Col } from "reactstrap";
 import MessagesHead from "../components/MessagesHead";
-import ChatsSection from "./ChatsSection";
 import MessageInputWithMutation from "./MessageInputWithMutation";
 import ChatBody from "../components/ChatBody";
 import ChatItem from "../components/ChatItem";
-import { getMessages } from "../queries/getMessages";
 import { getChannel } from "../queries/getChannel";
 import { messageSubscription } from "../queries/messageSubscription";
 import { graphql } from "react-apollo";
@@ -103,5 +100,6 @@ export default graphql(getChannel, {
     return {
       variables: { id: id }
     };
-  }
+  },
+  skip: props => !props.match.params.id
 })(MessagesWrapper);

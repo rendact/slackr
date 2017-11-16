@@ -32,8 +32,7 @@ class Sidebar extends Component {
   render() {
     let {
       user: { loading: userLoading, getUser: user },
-      profileModalOpen,
-      dispatch
+      profileModalOpen
     } = this.props;
     return (
       <div
