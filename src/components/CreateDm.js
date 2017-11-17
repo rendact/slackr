@@ -7,7 +7,18 @@ export default class CreateDm extends Component {
     return (
       <Modal isOpen={this.props.isOpen} size="lg">
         <ModalHeader>Direct Messages</ModalHeader>
-        <ModalBody>
+        <ModalBody style={{ overflow: "auto", maxHeight: "55vh" }}>
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
+          <DMItem />
           <DMItem />
         </ModalBody>
         <ModalFooter>
