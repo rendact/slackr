@@ -172,3 +172,27 @@ body {
     width: inherit;
     cursor: pointer;
   }
+
+  /*
+   * Direct Message
+   */
+
+#dm-list {
+  overflow: auto;
+  max-height: 55vh;
+}
+
+.dm-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border-top: 1px solid #e8e8e8;
+}
+
+.dm-item:last-child{
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.dm-item-body {
+  margin-left: 15px;
+}
