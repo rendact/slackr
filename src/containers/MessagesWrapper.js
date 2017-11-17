@@ -57,6 +57,7 @@ class MessagesWrapper extends Component {
     const isMember =
       userArray &&
       userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
+
     return (
       (match.params.id && (
         <div style={{}} className="messages-wrapper" id="messages-wrapper">
@@ -75,14 +76,11 @@ class MessagesWrapper extends Component {
                 ))
               : null}
           </ChatBody>
-          {(userArray &&
-            userArray.find(
-              el => el.node.id === localStorage.getItem("slackrUserId")
-            ) && (
-              <MessageInputWithMutation
-                channelId={match.params && match.params.id}
-              />
-            )) || (
+          {isMember ? (
+            <MessageInputWithMutation
+              channelId={match.params && match.params.id}
+            />
+          ) : (
             <ButtonJoin
               isVisible={!isMember}
               channelId={match.params && match.params.id}
