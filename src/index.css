@@ -161,3 +161,14 @@ body {
     transform: translateY(-100%);
   }
 
+  #button-join{
+    flex: 1 0px;
+    width: 100%;
+    margin: 15px 0;
+    cursor: pointer;
+  }
+
+  #button-join button {
+    width: inherit;
+    cursor: pointer;
+  }

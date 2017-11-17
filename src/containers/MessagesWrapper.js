@@ -3,6 +3,7 @@ import MessagesHead from "../components/MessagesHead";
 import MessageInputWithMutation from "./MessageInputWithMutation";
 import ChatBody from "../components/ChatBody";
 import ChatItem from "../components/ChatItem";
+import ButtonJoin from "./ButtonJoinMutation";
 import { getChannel } from "../queries/getChannel";
 import { messageSubscription } from "../queries/messageSubscription";
 import { graphql } from "react-apollo";
@@ -51,6 +52,10 @@ class MessagesWrapper extends Component {
   }
   render() {
     const { match, channel: data } = this.props;
+    const userArray = data.getChannel && data.getChannel.participants.edges;
+    const isMember =
+      userArray &&
+      userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
     return (
       (match.params.id && (
         <div style={{}} className="messages-wrapper" id="messages-wrapper">
@@ -69,9 +74,19 @@ class MessagesWrapper extends Component {
                 ))
               : null}
           </ChatBody>
-          <MessageInputWithMutation
-            channelId={match.params && match.params.id}
-          />
+          {(userArray &&
+            userArray.find(
+              el => el.node.id === localStorage.getItem("slackrUserId")
+            ) && (
+              <MessageInputWithMutation
+                channelId={match.params && match.params.id}
+              />
+            )) || (
+            <ButtonJoin
+              isVisible={!isMember}
+              channelId={match.params && match.params.id}
+            />
+          )}
         </div>
       )) || (
         <div
