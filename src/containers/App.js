@@ -3,7 +3,7 @@ import { Container, Row } from "reactstrap";
 import MessagesWrapper from "./MessagesWrapper";
 import Sidebar from "./Sidebar";
 import CreateChannel from "./CreateChannelWithMutation";
-import CreateDm from "../components/CreateDm";
+import CreateDm from "./CreateDmWithData";
 
 export default class App extends Component {
   render() {
@@ -14,7 +14,7 @@ export default class App extends Component {
           <MessagesWrapper match={this.props.match} />
         </Row>
         <CreateChannel />
-        <CreateDm isOpen={true} />
+        <CreateDm createDmIsOpen={true} />
       </Container>
     );
   }
