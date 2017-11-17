@@ -4,9 +4,9 @@ import profile from "../images/dummy-profile.png";
 
 export default class DMItem extends Component {
   render() {
-    const { username, status, image } = this.props;
+    const { username, status, image, onClick } = this.props;
     return (
-      <Media className="dm-item">
+      <Media className="dm-item" onClick={onClick}>
         <Media left>
           <Media object src={image ? image : profile} />
         </Media>

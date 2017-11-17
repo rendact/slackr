@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import DMItem from "./DMItem";
+import DMItem from "../containers/DMItem";
 
 export default class CreateDm extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class CreateDm extends Component {
       DmItems
     } = this.props;
     return (
-      <Modal isOpen={createDmIsOpen} size="lg">
+      <Modal isOpen={createDmIsOpen || false} size="lg">
         <ModalHeader onClick={createDmHeaderClick}>Direct Messages</ModalHeader>
         <ModalBody id="dm-list">
           {isLoading ? (
@@ -22,7 +22,11 @@ export default class CreateDm extends Component {
           ) : (
             (DmItems &&
               DmItems.map((item, i) => (
-                <DMItem username={item.node.username} key={i} />
+                <DMItem
+                  username={item.node.username}
+                  userId={item.node.id}
+                  key={i}
+                />
               ))) ||
             "No user can be displayed."
           )}
