@@ -14,7 +14,7 @@ class MessagesWrapper extends Component {
     this.subscribeToMessage = this.subscribeToMessage.bind(this);
   }
   componentWillReceiveProps(props) {
-    if (!props.channel.loading && props.channel.getChannel) {
+    if (props.channel && !props.channel.loading && props.channel.getChannel) {
       if (
         !this.props.channel.getChannel ||
         props.channel.getChannel.id !== this.props.channel.getChannel.id
@@ -52,7 +52,8 @@ class MessagesWrapper extends Component {
   }
   render() {
     const { match, channel: data } = this.props;
-    const userArray = data.getChannel && data.getChannel.participants.edges;
+    const userArray =
+      data && data.getChannel && data.getChannel.participants.edges;
     const isMember =
       userArray &&
       userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
