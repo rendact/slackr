@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import ButtonJoin from "../components/ButtonJoin";
 import { bindUserChannel } from "../queries/bindUserChannel";
+import { getChannel } from "../queries/getChannel";
 
 class ButtonJoinMutation extends Component {
   constructor(props) {
@@ -18,7 +19,13 @@ class ButtonJoinMutation extends Component {
             userId: localStorage.getItem("slackrUserId"),
             channelId: this.props.channelId
           }
-        }
+        },
+        refetchQueries: [
+          {
+            query: getChannel,
+            variables: { id: this.props.channelId }
+          }
+        ]
       })
       .then(({ data }) => {
         debugger;
