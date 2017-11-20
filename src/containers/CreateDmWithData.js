@@ -3,17 +3,20 @@ import { graphql } from "react-apollo";
 import { connect } from "react-redux";
 import CreateDm from "../components/CreateDm";
 import { getUsers } from "../queries/getUsers";
+import { toggleDMUserList } from "../actions/toggleDMUserList";
 
 class CreateDmWithData extends Component {
   render() {
-    const { createDmIsOpen, users } = this.props;
-    debugger;
+    const { createDmIsOpen, users, dispatch } = this.props;
     const { edges: DmItems } =
       !users.loading && users.viewer
         ? users.viewer.allUsers
         : { viewer: { allUsers: { edges: null } } };
     return (
       <CreateDm
+        createDmToggle={() => {
+          dispatch(toggleDMUserList());
+        }}
         createDmIsOpen={createDmIsOpen}
         isLoading={users.loading}
         DmItems={DmItems}

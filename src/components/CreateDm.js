@@ -7,11 +7,12 @@ export default class CreateDm extends Component {
     const {
       isLoading,
       createDmIsOpen,
+      createDmToggle,
       createDmHeaderClick,
       DmItems
     } = this.props;
     return (
-      <Modal isOpen={createDmIsOpen || false} size="lg">
+      <Modal toggle={createDmToggle} isOpen={createDmIsOpen || false} size="lg">
         <ModalHeader onClick={createDmHeaderClick}>Direct Messages</ModalHeader>
         <ModalBody id="dm-list">
           {isLoading ? (
