@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import DMItem from "../components/DMItem";
+import DMUserItem from "../components/DMUserItem";
 import { bindToDM } from "../queries/bindToDM";
 import { createChannel } from "../queries/createChannel";
 import { checkDMExists } from "../queries/checkDMExists";
 import { withApollo } from "react-apollo";
 import { withRouter } from "react-router-dom";
 
-class DMItemWithMutation extends Component {
+class DMUserItemWithMutation extends Component {
   constructor(props) {
     super(props);
 
@@ -67,8 +67,8 @@ class DMItemWithMutation extends Component {
   }
   render() {
     const { username } = this.props;
-    return <DMItem username={username} onClick={this.onClick} />;
+    return <DMUserItem username={username} onClick={this.onClick} />;
   }
 }
 
-export default withRouter(withApollo(DMItemWithMutation));
+export default withRouter(withApollo(DMUserItemWithMutation));
