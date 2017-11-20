@@ -19,7 +19,7 @@ class DMUserItemWithMutation extends Component {
     const otherId = this.props.userId;
     const meId = localStorage.getItem("slackrUserId");
     const client = this.props.client;
-    const channelName = [meId, otherId].sort().join("");
+    const channelName = [meId, otherId].sort().join(";");
     let channelId;
 
     client

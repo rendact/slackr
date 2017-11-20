@@ -18,8 +18,8 @@ export const getDMs = gql`
             participants {
               edges {
                 node {
-                  username
                   id
+                  username
                 }
               }
             }
