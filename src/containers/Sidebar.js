@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SidebarHead from "../components/SidebarHead";
 import ChannelsSection from "./ChannelsSection";
+import DMsSection from "./DMsSection";
 import ProfileModal from "../components/ProfileModal";
 import { graphql } from "react-apollo";
 import { getUser } from "../queries/getUser";
@@ -50,6 +51,7 @@ class Sidebar extends Component {
           onClick={this.handleToggle}
         />{" "}
         <ChannelsSection />
+        <DMsSection />
         <ProfileModal
           profileModalOpen={profileModalOpen}
           profileModalToggle={this.handleToggle}
