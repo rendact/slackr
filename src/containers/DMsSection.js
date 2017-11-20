@@ -38,6 +38,12 @@ class DMsSection extends Component {
     const currentUserId = localStorage.getItem("slackrUserId");
     return this.props.DM.subscribeToMore({
       document: dmSubscriptionOnCreate,
+      variables: {
+        filter: {
+          type: { eq: "direct" },
+          name: { matches: `(${currentUserId});?` }
+        }
+      },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) {
           return prev;
