@@ -1,16 +1,11 @@
 import gql from "graphql-tag";
 
 export const checkDMExists = gql`
-  query($meId: ID!, $otherId: ID!) {
+  query($channelName: String!) {
     viewer {
       allChannels(
-        where: {
-          type: { eq: direct }
-          AND: {
-            participants: { node: { id: { eq: $meId } } }
-            AND: { participants: { node: { id: { eq: $otherId } } } }
-          }
-        }
+        where: { type: { eq: direct }, name: { eq: $channelName } }
+        first: 1
       ) {
         edges {
           node {

@@ -4,6 +4,7 @@ import { bindToDM } from "../queries/bindToDM";
 import { createChannel } from "../queries/createChannel";
 import { checkDMExists } from "../queries/checkDMExists";
 import { withApollo } from "react-apollo";
+import { withRouter } from "react-router-dom";
 
 class DMItemWithMutation extends Component {
   constructor(props) {
@@ -16,45 +17,51 @@ class DMItemWithMutation extends Component {
     const otherId = this.props.userId;
     const meId = localStorage.getItem("slackrUserId");
     const client = this.props.client;
-    const channelName = otherId + ";" + meId;
+    const channelName = [meId, otherId].sort().join("");
+    let channelId;
 
-    /*
     client
       .query({
         query: checkDMExists,
-        variables: { meId: meId, otherId: otherId }
+        variables: { channelName: channelName }
       })
-      .then(data => {
-        debugger;
+      .then(({ data: { viewer: { allChannels: { edges: channels } } } }) => {
+        if (!channels[0]) {
+          debugger;
+          client
+            .mutate({
+              mutation: createChannel,
+              variables: { input: { name: channelName, type: "direct" } }
+            })
+            .then(({ data }) => {
+              channelId = data.createChannel.changedChannel.id;
+              client
+                .mutate({
+                  mutation: bindToDM,
+                  variables: {
+                    meId: meId,
+                    otherId: otherId,
+                    channelId: channelId
+                  }
+                })
+                .then(data => {
+                  this.props.history.push("/messages/" + channelId);
+                })
+                .catch(error => {
+                  // error in binding
+                  debugger;
+                });
+            })
+            .catch(({ error }) => {
+              // error when creating channel
+              debugger;
+            });
+        } else {
+          this.props.history.push("/messages/" + channels[0].node.id);
+        }
       })
       .catch(error => {
-        debugger;
-      });
-      */
-
-    client
-      .mutate({
-        mutation: createChannel,
-        variables: { input: { name: channelName, type: "direct" } }
-      })
-      .then(({ data }) => {
-        client
-          .mutate({
-            mutation: bindToDM,
-            variables: {
-              meId: meId,
-              otherId: otherId,
-              channelId: data.createChannel.changedChannel.id
-            }
-          })
-          .then(data => {
-            debugger;
-          })
-          .catch(error => {
-            debugger;
-          });
-      })
-      .catch(({ error }) => {
+        // error inside check channel exists
         debugger;
       });
   }
@@ -64,4 +71,4 @@ class DMItemWithMutation extends Component {
   }
 }
 
-export default withApollo(DMItemWithMutation);
+export default withRouter(withApollo(DMItemWithMutation));
