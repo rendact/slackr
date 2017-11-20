@@ -57,13 +57,26 @@ class MessagesWrapper extends Component {
     const isMember =
       userArray &&
       userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
+    let name, type;
+
+    if (data && !data.loading) {
+      if (data.getChannel.type === "direct") {
+        type = "direc";
+        name = userArray.find(
+          u => u.node.id !== localStorage.getItem("slackrUserId")
+        ).node.username;
+      } else {
+        type = data.getChannel.type;
+        name = data.getChannel.name;
+      }
+    }
 
     return (
       (match.params.id && (
         <div style={{}} className="messages-wrapper" id="messages-wrapper">
           <MessagesHead
-            name={data.getChannel && data.getChannel.name}
-            type={data.getChannel && data.getChannel.type}
+            name={data.getChannel && name}
+            type={data.getChannel && type}
           />
           <ChatBody>
             {data.getChannel && data.getChannel.messages
