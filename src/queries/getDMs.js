@@ -1,10 +1,13 @@
 import gql from "graphql-tag";
 
 export const getDMs = gql`
-  query {
+  query($userId: ID!) {
     viewer {
       allChannels(
-        where: { type: { eq: direct } }
+        where: {
+          type: { eq: direct }
+          participants: { node: { id: { eq: $userId } } }
+        }
         orderBy: { field: createdAt, direction: DESC }
       ) {
         edges {

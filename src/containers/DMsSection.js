@@ -38,4 +38,7 @@ class DMsSection extends Component {
 
 const withRedux = connect()(DMsSection);
 
-export default graphql(getDMs, { name: "DM" })(withRedux);
+export default graphql(getDMs, {
+  name: "DM",
+  options: { variables: { userId: localStorage.getItem("slackrUserId") } }
+})(withRedux);
