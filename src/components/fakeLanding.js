@@ -17,7 +17,19 @@ class Home extends Component {
         <Row>
           <Col md={12}>
             <Link to="/login">
-              <Button size="lg">go to login page</Button>
+              <Button
+                style={{
+                  position: "absolute",
+                  zIndex: 15,
+                  top: "50%",
+                  left: "50%",
+                  margin: "-100px 0 0 -150px",
+                  cursor: "pointer"
+                }}
+                size="lg"
+              >
+                go to login page
+              </Button>
             </Link>
           </Col>
         </Row>
