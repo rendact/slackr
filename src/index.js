@@ -8,6 +8,7 @@ import client from "./apollo";
 import App from "./containers/App";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
+import Home from "./components/fakeLanding";
 import slackrApp from "./reducers";
 import PrivateRoute from "./PrivateRoute";
 import registerServiceWorker from "./registerServiceWorker";
@@ -24,6 +25,7 @@ ReactDOM.render(
           <PrivateRoute path="/messages/:id?" component={App} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route component={Home} />
         </Switch>
       </HashRouter>
     </Provider>
