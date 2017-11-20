@@ -14,7 +14,7 @@ export const getChannel = gql`
           }
         }
       }
-      messages(orderBy: { field: createdAt, direction: DESC }) {
+      messages(orderBy: { field: createdAt, direction: ASC }) {
         edges {
           node {
             id
