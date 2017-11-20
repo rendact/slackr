@@ -3,8 +3,10 @@ import DMUserItem from "../components/DMUserItem";
 import { bindToDM } from "../queries/bindToDM";
 import { createChannel } from "../queries/createChannel";
 import { checkDMExists } from "../queries/checkDMExists";
+import { toggleDMUserList } from "../actions/toggleDMUserList";
 import { withApollo } from "react-apollo";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class DMUserItemWithMutation extends Component {
   constructor(props) {
@@ -46,6 +48,7 @@ class DMUserItemWithMutation extends Component {
                 })
                 .then(data => {
                   this.props.history.push("/messages/" + channelId);
+                  this.props.dispatch(toggleDMUserList());
                 })
                 .catch(error => {
                   // error in binding
@@ -58,6 +61,7 @@ class DMUserItemWithMutation extends Component {
             });
         } else {
           this.props.history.push("/messages/" + channels[0].node.id);
+          this.props.dispatch(toggleDMUserList());
         }
       })
       .catch(error => {
@@ -71,4 +75,4 @@ class DMUserItemWithMutation extends Component {
   }
 }
 
-export default withRouter(withApollo(DMUserItemWithMutation));
+export default withRouter(withApollo(connect()(DMUserItemWithMutation)));
