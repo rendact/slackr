@@ -14,7 +14,7 @@ export default class App extends Component {
           <MessagesWrapper match={this.props.match} />
         </Row>
         <CreateChannel />
-        <CreateDm createDmIsOpen={true} />
+        <CreateDm />
       </Container>
     );
   }
