@@ -17,13 +17,10 @@ export default class DMItem extends Component {
     const otherNode = participants.find(
       p => localStorage.getItem("slackrUserId") !== p.node.id
     );
-    debugger;
     return (
       <dd>
         <Link to={this.generateChannelUrl(id)}>
-          <span
-            className={type === "private" ? "fa fa-lock" : "fa fa-hashtag"}
-          />{" "}
+          <span className="fa fa-circle" style={{ color: "green" }} />{" "}
           {otherNode.node.username}
         </Link>
       </dd>
