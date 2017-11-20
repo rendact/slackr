@@ -16,6 +16,7 @@ class ChannelsSection extends Component {
   subscribeToChannels() {
     return this.props.channels.subscribeToMore({
       document: channelSubscription,
+      variables: { filter: { type: { ne: "direct" } } },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) {
           return prev;

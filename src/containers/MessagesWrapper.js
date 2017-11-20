@@ -59,7 +59,7 @@ class MessagesWrapper extends Component {
       userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
     let name, type;
 
-    if (data && !data.loading) {
+    if (data && !data.loading && data.getChannel) {
       if (data.getChannel.type === "direct") {
         type = "direct";
         name = userArray.find(
