@@ -5,7 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import client from "./apollo";
-import App from "./containers/App";
+import Messages from "scenes/Messages";
 import slackrApp from "./reducers";
 import PrivateRoute from "components/Router/PrivateRoute";
 import Register from "scenes/Register";
@@ -22,7 +22,7 @@ ReactDOM.render(
     <Provider store={store}>
       <HashRouter>
         <Switch>
-          <PrivateRoute path="/messages/:id?" component={App} />
+          <PrivateRoute path="/messages/:id?" component={Messages} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route component={Home} />

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
-import MessagesWrapper from "./MessagesWrapper";
-import Sidebar from "./Sidebar";
-import CreateChannel from "./CreateChannelWithMutation";
-import CreateDm from "./CreateDmWithData";
+import MessagesWrapper from "containers/MessagesWrapper";
+import Sidebar from "containers/Sidebar";
+import CreateChannel from "containers/CreateChannelWithMutation";
+import CreateDm from "containers/CreateDmWithData";
 
 export default class App extends Component {
   render() {
