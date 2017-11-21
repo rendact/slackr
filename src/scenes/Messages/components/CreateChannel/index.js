@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { graphql } from "react-apollo";
-import { createChannel } from "../queries/createChannel";
-import { bindUserChannel } from "../queries/bindUserChannel";
-import { createChannelToggle } from "../actions/createChannel";
-import CreateChannelModal from "../components/CreateChannelModal";
+
+import CreateChannelModal from "./components/CreateChannelModal";
+import { createChannel } from "./queries/createChannel";
+import { bindUserChannel } from "./queries/bindUserChannel";
+import { createChannelToggle } from "scenes/Messages/actions/createChannel";
 
 class CreateChannel extends Component {
   constructor(props) {

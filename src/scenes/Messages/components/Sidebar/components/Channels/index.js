@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 
 import ChannelItem from "./components/ChannelItem";
-import { createChannelToggle } from "./actions/createChannel";
 import { getChannels } from "./queries/channels/getChannels";
 import { channelSubscription } from "./queries/channels/channelSubscription";
+
+import { createChannelToggle } from "scenes/Messages/actions/createChannel";
 
 class ChannelsSection extends Component {
   constructor(props) {

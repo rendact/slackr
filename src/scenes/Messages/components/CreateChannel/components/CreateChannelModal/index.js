@@ -8,8 +8,8 @@ import {
   Button,
   Form
 } from "reactstrap";
-import { renderInputGroupAddonText } from "./reduxFormComponents/renderInputGroupAddonText";
-import ToggleButton from "./ToggleButton";
+import { renderInputGroupAddonText } from "components/reduxFormComponents/renderInputGroupAddonText";
+import ToggleButton from "components/ToggleButton";
 
 class CreateChannelModal extends Component {
   constructor(props) {
