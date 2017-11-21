@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import ChannelItem from "../components/ChannelItem";
-import { createChannelToggle } from "../actions/createChannel";
 import { connect } from "react-redux";
 import { graphql } from "react-apollo";
-import { getChannels } from "../queries/getChannels";
-import { channelSubscription } from "../queries/channelSubscription";
+
+import ChannelItem from "./components/ChannelItem";
+import { createChannelToggle } from "./actions/createChannel";
+import { getChannels } from "./queries/channels/getChannels";
+import { channelSubscription } from "./queries/channels/channelSubscription";
 
 class ChannelsSection extends Component {
   constructor(props) {

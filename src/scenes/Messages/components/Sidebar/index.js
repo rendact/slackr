@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import { withRouter } from "react-router-dom";
 
-import ChannelsSection from "containers/ChannelsSection";
 import DMsSection from "containers/DMsSection";
 
+import Channels from "./components/Channels";
 import SidebarHead from "./components/SidebarHead";
 import ProfileModal from "./components/ProfileModal";
 import { getUser } from "./queries/getUser";
@@ -53,7 +53,7 @@ class Sidebar extends Component {
           tagline={!userLoading && user ? user.username : "username"}
           onClick={this.handleToggle}
         />{" "}
-        <ChannelsSection />
+        <Channels />
         <DMsSection location={location} />
         <ProfileModal
           profileModalOpen={profileModalOpen}
