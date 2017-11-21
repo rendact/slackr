@@ -85,6 +85,8 @@ class MessagesWrapper extends Component {
                     key={idx}
                     body={message.node.content}
                     head={message.node.author && message.node.author.username}
+                    createdAt={message.node.createdAt}
+                    id={message.node.id}
                   />
                 ))
               : null}
