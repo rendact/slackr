@@ -21,6 +21,7 @@ class MessageInput extends Component {
       });
   }
   render() {
+    const { isSending } = this.props;
     return (
       <div
         id="input-wrapper"
@@ -33,6 +34,7 @@ class MessageInput extends Component {
             component={renderInputGroupTextWithSend}
             name="messageContent"
             id="messageContent"
+            isSending={isSending}
           />
         </Form>
       </div>

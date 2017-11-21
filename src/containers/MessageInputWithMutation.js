@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import MessageInput from "../components/MessageInput";
 import { createMessageMtn } from "../queries/createMessageMtn";
+import { getChannel } from "../queries/getChannel";
+import { toggleSending } from "../actions/toggleSending";
+import moment from "moment";
 
 class MessageInputWithMutation extends Component {
   constructor(props) {
@@ -12,6 +15,7 @@ class MessageInputWithMutation extends Component {
   }
   handleCreateMessage(val) {
     return new Promise((resolve, reject) => {
+      this.props.dispatch(toggleSending());
       this.props
         .createMessage({
           variables: {
@@ -23,18 +27,27 @@ class MessageInputWithMutation extends Component {
           }
         })
         .then(data => {
+          this.props.dispatch(toggleSending());
           resolve(data);
         })
         .catch(error => {
+          this.props.dispatch(toggleSending());
           reject(error);
         });
     });
   }
   render() {
-    return <MessageInput onSubmit={this.handleCreateMessage} />;
+    return (
+      <MessageInput
+        isSending={this.props.isSending}
+        onSubmit={this.handleCreateMessage}
+      />
+    );
   }
 }
 
-const withRedux = connect()(MessageInputWithMutation);
+const mapStateToProps = state => state.inputMessage || {};
+
+const withRedux = connect(mapStateToProps)(MessageInputWithMutation);
 
 export default graphql(createMessageMtn, { name: "createMessage" })(withRedux);
