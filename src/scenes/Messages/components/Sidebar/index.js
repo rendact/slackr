@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import SidebarHead from "../components/SidebarHead";
-import ChannelsSection from "./ChannelsSection";
-import DMsSection from "./DMsSection";
-import ProfileModal from "../components/ProfileModal";
-import { graphql } from "react-apollo";
-import { getUser } from "../queries/getUser";
 import { connect } from "react-redux";
-import { toggleProfileModal } from "../actions/profileModal";
+import { graphql } from "react-apollo";
 import { withRouter } from "react-router-dom";
+
+import ChannelsSection from "containers/ChannelsSection";
+import DMsSection from "containers/DMsSection";
+
+import SidebarHead from "./components/SidebarHead";
+import ProfileModal from "./components/ProfileModal";
+import { getUser } from "./queries/getUser";
+import { toggleProfileModal } from "./actions/profileModal";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -29,7 +31,6 @@ class Sidebar extends Component {
     localStorage.removeItem("slackrUserId");
     this.props.history.push("/login");
   }
-  componentWillMount() {}
 
   render() {
     let {
