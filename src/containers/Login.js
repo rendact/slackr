@@ -12,7 +12,8 @@ class Login extends Component {
 
     this.state = {
       success: false,
-      error: false
+      error: false,
+      userId: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,16 +26,16 @@ class Login extends Component {
       .then(({ data: { loginUser: { token, user: { id } } } }) => {
         localStorage.setItem("slackrToken", token);
         localStorage.setItem("slackrUserId", id);
-        this.setState({ success: true, error: false });
+        this.setState({ success: true, error: false, userId: id });
       })
       .catch(error => {
         this.setState({ error: true });
       });
   }
   render() {
-    let { success } = this.state;
+    let { success, userId } = this.state;
     let { from } = this.props.location.state || {
-      from: { pathname: "/messages" }
+      from: { pathname: "/messages", state: { userId: userId } }
     };
 
     if (success || localStorage.getItem("slackrToken")) {

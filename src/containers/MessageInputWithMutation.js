@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import MessageInput from "../components/MessageInput";
 import { createMessageMtn } from "../queries/createMessageMtn";
-import { getChannel } from "../queries/getChannel";
 import { toggleSending } from "../actions/toggleSending";
-import moment from "moment";
 
 class MessageInputWithMutation extends Component {
   constructor(props) {

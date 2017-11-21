@@ -12,9 +12,9 @@ export default class App extends Component {
         <Row>
           <Sidebar />
           <MessagesWrapper match={this.props.match} />
+          <CreateChannel />
+          <CreateDm location={this.props.location} />
         </Row>
-        <CreateChannel />
-        <CreateDm />
       </Container>
     );
   }

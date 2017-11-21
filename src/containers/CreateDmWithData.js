@@ -29,5 +29,9 @@ const withRedux = connect(state => state.dmUserList || {})(CreateDmWithData);
 
 export default graphql(getUsers, {
   name: "users",
-  options: { variables: { id: localStorage.getItem("slackrUserId") } }
+  options: props => ({
+    variables: {
+      id: localStorage.getItem("slackrUserId") || props.location.state.userId
+    }
+  })
 })(withRedux);

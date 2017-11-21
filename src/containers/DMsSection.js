@@ -5,7 +5,6 @@ import DMItem from "../components/DMItem";
 import { toggleDMUserList } from "../actions/toggleDMUserList";
 import { getDMs } from "../queries/getDMs";
 import { getUsers } from "../queries/getUsers";
-import { getUser } from "../queries/getUser";
 import { dmSubscriptionOnCreate } from "../queries/DMSubscriptionOnCreate";
 
 class DMsSection extends Component {
@@ -90,5 +89,10 @@ const withRedux = connect()(DMsSection);
 
 export default graphql(getDMs, {
   name: "DM",
-  options: { variables: { userId: localStorage.getItem("slackrUserId") } }
+  options: props => ({
+    variables: {
+      userId:
+        localStorage.getItem("slackrUserId") || props.location.state.userId
+    }
+  })
 })(withApollo(withRedux));

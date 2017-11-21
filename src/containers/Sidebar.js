@@ -29,11 +29,13 @@ class Sidebar extends Component {
     localStorage.removeItem("slackrUserId");
     this.props.history.push("/login");
   }
+  componentWillMount() {}
 
   render() {
     let {
       user: { loading: userLoading, getUser: user },
-      profileModalOpen
+      profileModalOpen,
+      location
     } = this.props;
     return (
       <div
@@ -51,7 +53,7 @@ class Sidebar extends Component {
           onClick={this.handleToggle}
         />{" "}
         <ChannelsSection />
-        <DMsSection />
+        <DMsSection location={location} />
         <ProfileModal
           profileModalOpen={profileModalOpen}
           profileModalToggle={this.handleToggle}
@@ -68,8 +70,11 @@ const withRedux = connect(mapStateToProps)(withRouter(Sidebar));
 
 export default graphql(getUser, {
   name: "user",
-  options: {
-    variables: { id: localStorage.getItem("slackrUserId") }
-  },
-  skip: !localStorage.getItem("slackrUserId")
+  options: props => ({
+    variables: {
+      id: localStorage.getItem("slackrUserId") || props.location.state.userId
+    }
+  }),
+  skip: props =>
+    !localStorage.getItem("slackrUserId") && !props.location.state.userId
 })(withRedux);

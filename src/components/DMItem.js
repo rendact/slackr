@@ -22,13 +22,7 @@ export default class DMItem extends Component {
   }
 
   render() {
-    const {
-      id,
-      type,
-      name,
-      participants: { edges: participants },
-      userList
-    } = this.props;
+    const { id, name, participants: { edges: participants } } = this.props;
     const currentUserId = localStorage.getItem("slackrUserId");
 
     let otherNode = participants.find(p => currentUserId !== p.node.id);
