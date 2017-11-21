@@ -39,7 +39,7 @@ class LoginPage extends Component {
               />
               <Button color="primary" style={{ cursor: "pointer" }}>
                 {isProcess ? (
-                  <span className="fa fa-cog fa-spin  fa-fw" />
+                  <span className="fa fa-cog fa-spin fa-fw" />
                 ) : (
                   "Login"
                 )}
