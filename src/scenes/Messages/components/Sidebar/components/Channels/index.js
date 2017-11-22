@@ -7,12 +7,14 @@ import { getChannels } from "./queries/channels/getChannels";
 import { channelSubscription } from "./queries/channels/channelSubscription";
 
 import { createChannelToggle } from "scenes/Messages/actions/createChannel";
+import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
 
 class ChannelsSection extends Component {
   constructor(props) {
     super(props);
 
     this.subscribeToChannels = this.subscribeToChannels.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   subscribeToChannels() {
@@ -51,20 +53,19 @@ class ChannelsSection extends Component {
       </dl>
     );
   }
+
+  onClick(e) {
+    e.preventDefault();
+    this.props.dispatch(createChannelToggle());
+  }
+
   render() {
     let { channels } = this.props;
     return (
       <div>
         <h4>
-          <a
-            href="#head"
-            onClick={r => {
-              r.preventDefault();
-              this.props.dispatch(createChannelToggle());
-            }}
-          >
-            Channels
-          </a>
+          Channels
+          <CircleAddButton isRight onClick={this.onClick} />
         </h4>
         <dl>
           {!channels.loading &&

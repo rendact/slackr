@@ -7,6 +7,7 @@ import { toggleDMUserList } from "scenes/Messages/components/Sidebar/actions/tog
 import { getUsers } from "scenes/Messages/components/Sidebar/queries/getUsers";
 import { getDMs } from "./queries/getDMs";
 import { dmSubscriptionOnCreate } from "./queries/DMSubscriptionOnCreate";
+import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
 
 class DMsSection extends Component {
   constructor(props) {
@@ -74,9 +75,8 @@ class DMsSection extends Component {
     return (
       <div>
         <h4>
-          <a onClick={this.handleHeaderDMClick} href="#dm">
-            Direct Messages
-          </a>
+          Direct Messages
+          <CircleAddButton onClick={this.handleHeaderDMClick} isRight />
         </h4>
         <dl>
           {!DM.loading && this.renderDMs(DM.viewer.allChannels.edges, client)}
