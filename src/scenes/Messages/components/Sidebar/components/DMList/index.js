@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { graphql, withApollo } from "react-apollo";
-import DMItem from "../components/DMItem";
-import { toggleDMUserList } from "../actions/toggleDMUserList";
-import { getDMs } from "../queries/getDMs";
-import { getUsers } from "../queries/getUsers";
-import { dmSubscriptionOnCreate } from "../queries/DMSubscriptionOnCreate";
+
+import DMItem from "./components/DMItem";
+import { toggleDMUserList } from "scenes/Messages/components/Sidebar/actions/toggleDMUserList";
+import { getUsers } from "scenes/Messages/components/Sidebar/queries/getUsers";
+import { getDMs } from "./queries/getDMs";
+import { dmSubscriptionOnCreate } from "./queries/DMSubscriptionOnCreate";
 
 class DMsSection extends Component {
   constructor(props) {

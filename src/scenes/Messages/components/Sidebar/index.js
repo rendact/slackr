@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 import { withRouter } from "react-router-dom";
 
-import DMsSection from "containers/DMsSection";
-
 import Channels from "./components/Channels";
 import SidebarHead from "./components/SidebarHead";
 import ProfileModal from "./components/ProfileModal";
+import DMsSection from "./components/DMList";
 import { getUser } from "./queries/getUser";
 import { toggleProfileModal } from "./actions/profileModal";
 
