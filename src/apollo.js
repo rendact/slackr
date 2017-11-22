@@ -27,7 +27,7 @@ networkInterface.use([
     }
   }
 ]);
-const wsClient = new SubscriptionClient(websocketUrl);
+const wsClient = new SubscriptionClient(websocketUrl, { reconnect: true });
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
   networkInterface,
   wsClient

@@ -72,6 +72,24 @@ class MessagesWrapper extends Component {
       }
     }
 
+    if (data && data.loading) {
+      return (
+        <div className="messages-wrapper" id="messages-wrapper">
+          <div
+            style={{
+              fontSize: "larger",
+              animation: "blinking 4s infinite",
+              position: "fixed",
+              bottom: "50%",
+              left: "50%"
+            }}
+          >
+            Retrieving data...
+          </div>
+        </div>
+      );
+    }
+
     return (
       (match.params.id && (
         <div style={{}} className="messages-wrapper" id="messages-wrapper">

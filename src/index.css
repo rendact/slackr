@@ -196,3 +196,21 @@ body {
 .dm-item-body {
   margin-left: 15px;
 }
+
+/**
+ * animation
+ */
+
+@keyframes blinking {
+  0%{
+    color: red;
+  }
+
+  50% {
+    color: pink;
+  }
+
+  100%{
+    color: blue;
+  }
+}
