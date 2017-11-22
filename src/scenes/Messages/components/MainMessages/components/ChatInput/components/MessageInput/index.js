@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { renderInputGroupTextWithSend } from "./reduxFormComponents/renderInputGroupText";
 import { Form } from "reactstrap";
+
+import { renderInputGroupTextWithSend } from "components/reduxFormComponents/renderInputGroupText";
 
 class MessageInput extends Component {
   constructor(props) {

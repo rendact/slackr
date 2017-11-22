@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
-import ButtonJoin from "../components/ButtonJoin";
-import { bindUserChannel } from "../queries/bindUserChannel";
-import { getChannel } from "../queries/getChannel";
+
+import ButtonJoin from "./components/ButtonJoin";
+import { bindUserChannel } from "./queries/bindUserChannel";
+import { getChannel } from "scenes/Messages/components/MainMessages/queries/Channel/getChannel";
 
 class ButtonJoinMutation extends Component {
   constructor(props) {

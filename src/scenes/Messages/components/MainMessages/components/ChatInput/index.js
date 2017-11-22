@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { graphql } from "react-apollo";
-import MessageInput from "../components/MessageInput";
-import { createMessageMtn } from "../queries/createMessageMtn";
-import { toggleSending } from "../actions/toggleSending";
+
+import MessageInput from "./components/MessageInput";
+import { createMessageMtn } from "./queries/Message/create";
+import { toggleSending } from "./actions/toggleSending";
 
 class MessageInputWithMutation extends Component {
   constructor(props) {

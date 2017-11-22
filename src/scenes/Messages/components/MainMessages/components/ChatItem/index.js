@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Media, Tooltip } from "reactstrap";
-import dummyprofile from "../images/dummy-profile.png";
+import dummyprofile from "images/dummy-profile.png";
 import moment from "moment";
 
 export default class ChatItem extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RemoveButton from "./RemoveButton";
+import RemoveButton from "../../components/RemoveButton";
 
 export default class MessagesHead extends Component {
   render() {

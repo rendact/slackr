@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import MessagesHead from "../components/MessagesHead";
-import MessageInputWithMutation from "./MessageInputWithMutation";
-import ChatBody from "../components/ChatBody";
-import ChatItem from "../components/ChatItem";
-import ButtonJoin from "./ButtonJoinMutation";
-import { getChannel } from "../queries/getChannel";
-import { messageSubscription } from "../queries/messageSubscription";
 import { graphql } from "react-apollo";
+
+import MessagesHead from "./components/MessageHead";
+import ChatBody from "./components/MessageBodyWrapper";
+import ChatItem from "./components/ChatItem";
+import MessageInputWithMutation from "./components/ChatInput";
+import ButtonJoin from "./components/ButtonJoin";
+import { getChannel } from "./queries/Channel/getChannel";
+import { messageSubscription } from "./queries/Message/Subscription/onCreate";
 
 class MessagesWrapper extends Component {
   constructor(props) {

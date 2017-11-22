@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
-import MessagesWrapper from "containers/MessagesWrapper";
 
 import Sidebar from "./components/Sidebar";
 import CreateChannel from "./components/CreateChannel";
 import CreateDm from "./components/CreateDM";
+import MessagesWrapper from "./components/MainMessages";
 
 export default class App extends Component {
   render() {
