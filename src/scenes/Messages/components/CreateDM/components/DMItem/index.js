@@ -8,6 +8,7 @@ import { createChannel } from "scenes/Messages/components/Sidebar/queries/create
 import { bindToDM } from "../../queries/bindToDM";
 import { checkDMExists } from "../../queries/checkDMExists";
 import { toggleDMUserList } from "scenes/Messages/components/CreateDM/actions/toggleDMUserList";
+import { toggleDMProcessing as toggleProcessing } from "scenes/Messages/components/CreateDM/actions/toggleProcessing";
 
 class DMUserItemWithMutation extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class DMUserItemWithMutation extends Component {
     this.onClick = this.onClick.bind(this);
   }
   onClick(e) {
+    this.props.dispatch(toggleProcessing());
     e.preventDefault();
     const otherId = this.props.userId;
     const meId = localStorage.getItem("slackrUserId");
@@ -49,31 +51,46 @@ class DMUserItemWithMutation extends Component {
                 })
                 .then(data => {
                   this.props.history.push("/messages/" + channelId);
+                  this.props.dispatch(toggleProcessing());
                   this.props.dispatch(toggleDMUserList());
                 })
                 .catch(error => {
+                  this.props.dispatch(toggleProcessing());
                   // error in binding
                   debugger;
                 });
             })
             .catch(({ error }) => {
+              this.props.dispatch(toggleProcessing());
               // error when creating channel
               debugger;
             });
         } else {
           this.props.history.push("/messages/" + channels[0].node.id);
+          this.props.dispatch(toggleProcessing());
           this.props.dispatch(toggleDMUserList());
         }
       })
       .catch(error => {
         // error inside check channel exists
         debugger;
+        this.props.dispatch(toggleProcessing());
       });
   }
   render() {
-    const { username } = this.props;
-    return <DMItem username={username} onClick={this.onClick} />;
+    const { username, isProcessing } = this.props;
+    return (
+      <DMItem
+        username={username}
+        onClick={this.onClick}
+        isProcessing={isProcessing}
+      />
+    );
   }
 }
 
-export default withRouter(withApollo(connect()(DMUserItemWithMutation)));
+const mapStateToProps = state => state.dmUserList || {};
+
+export default withRouter(
+  withApollo(connect(mapStateToProps)(DMUserItemWithMutation))
+);
