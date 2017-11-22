@@ -41,7 +41,12 @@ class CreateChannelModal extends Component {
   }
 
   render() {
-    let { createChannelOpen, createChannelToggle, handleSubmit } = this.props;
+    let {
+      createChannelOpen,
+      createChannelToggle,
+      handleSubmit,
+      isSubmitting
+    } = this.props;
     return (
       <Modal isOpen={createChannelOpen} size="lg" toggle={createChannelToggle}>
         <Form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -64,11 +69,16 @@ class CreateChannelModal extends Component {
               addonFaName={this.state.public ? "hashtag" : "lock"}
               helpText="names must lowercase, without period or spaces and shorter than 22 characters"
               component={renderInputGroupAddonText}
+              disabled={isSubmitting}
             />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" type="submit">
-              Submit
+            <Button color="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <span className="fa fa-spinner fa-spin" />
+              ) : (
+                "Submit"
+              )}
             </Button>
           </ModalFooter>
         </Form>

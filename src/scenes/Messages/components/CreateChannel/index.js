@@ -6,6 +6,7 @@ import CreateChannelModal from "./components/CreateChannelModal";
 import { createChannel } from "scenes/Messages/components/Sidebar/queries/createChannel";
 import { bindUserChannel } from "./queries/bindUserChannel";
 import { createChannelToggle } from "scenes/Messages/actions/createChannel";
+import { toggleCreateChannelSubmit } from "./actions/toggleCreateChannelSubmit";
 
 class CreateChannel extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class CreateChannel extends Component {
   }
 
   createChannelSubmit(val) {
+    this.props.dispatch(toggleCreateChannelSubmit());
     return new Promise((resolve, reject) => {
       this.props
         .createChannel({
@@ -38,11 +40,18 @@ class CreateChannel extends Component {
                 }
               }
             })
-            .then(data => resolve(data))
-            .catch(error => reject(error));
+            .then(data => {
+              resolve(data);
+              this.props.dispatch(toggleCreateChannelSubmit());
+            })
+            .catch(error => {
+              reject(error);
+              this.props.dispatch(toggleCreateChannelSubmit());
+            });
         })
         .catch(error => {
           reject(error);
+          this.props.dispatch(toggleCreateChannelSubmit());
         });
     });
   }
@@ -52,6 +61,7 @@ class CreateChannel extends Component {
         createChannelOpen={this.props.createChannelOpen}
         createChannelToggle={() => this.props.dispatch(createChannelToggle())}
         createChannelSubmit={this.createChannelSubmit}
+        isSubmitting={this.props.isSubmitting}
       />
     );
   }
