@@ -89,6 +89,17 @@ class ChannelsSection extends Component {
 
   render() {
     let { channels } = this.props;
+    if (channels.loading) {
+      return (
+        <div style={{ minHeight: 50 }}>
+          <div
+            style={{ animation: "blinking 4s infinite", fontSize: "larger" }}
+          >
+            Retrieving channel data...
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <h4>

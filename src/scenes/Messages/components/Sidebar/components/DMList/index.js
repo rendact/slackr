@@ -72,6 +72,14 @@ class DMsSection extends Component {
 
   render() {
     const { DM, client } = this.props;
+
+    if (DM.loading) {
+      return (
+        <div style={{ animation: "blinking 4s infinite", fontSize: "larger" }}>
+          Retrieving DM list...
+        </div>
+      );
+    }
     return (
       <div>
         <h4>

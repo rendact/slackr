@@ -37,6 +37,25 @@ class Sidebar extends Component {
       profileModalOpen,
       location
     } = this.props;
+
+    if (userLoading) {
+      return (
+        <div
+          style={{
+            background: "#303e4d",
+            flex: "1 auto",
+            order: 0,
+            color: "#fff",
+            padding: 15
+          }}
+        >
+          <div style={{ animation: "blinking 4s infinite" }}>
+            Retrieving data....
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div
         style={{
