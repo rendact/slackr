@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import RemoveButton from "../../components/RemoveButton";
+import RemoveButton from "./components/RemoveButton";
 
 export default class MessagesHead extends Component {
   render() {
-    let { name, type } = this.props;
+    let { name, type, channelId } = this.props;
     return (
       <div id="messagesHead">
         <h2>
@@ -11,7 +11,7 @@ export default class MessagesHead extends Component {
             className={type === "private" ? "fa fa-lock" : "fa fa-hashtag"}
           />{" "}
           {name}
-          <RemoveButton isRight />
+          <RemoveButton isRight channelId={channelId} />
         </h2>
         <hr />
       </div>

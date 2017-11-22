@@ -78,6 +78,7 @@ class MessagesWrapper extends Component {
           <MessagesHead
             name={data.getChannel && name}
             type={data.getChannel && type}
+            channelId={match.params.id}
           />
           <ChatBody>
             {data.getChannel && data.getChannel.messages
