@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import RemoveButton from "./RemoveButton";
 
 export default class MessagesHead extends Component {
   render() {
@@ -10,10 +11,7 @@ export default class MessagesHead extends Component {
             className={type === "private" ? "fa fa-lock" : "fa fa-hashtag"}
           />{" "}
           {name}
-          <span
-            className="fa fa-cog"
-            style={{ float: "right", color: "white", paddingRight: 10 }}
-          />
+          <RemoveButton isRight />
         </h2>
         <hr />
       </div>
