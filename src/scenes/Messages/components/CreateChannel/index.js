@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 
 import CreateChannelModal from "./components/CreateChannelModal";
-import { createChannel } from "./queries/createChannel";
+import { createChannel } from "scenes/Messages/components/Sidebar/queries/createChannel";
 import { bindUserChannel } from "./queries/bindUserChannel";
 import { createChannelToggle } from "scenes/Messages/actions/createChannel";
 

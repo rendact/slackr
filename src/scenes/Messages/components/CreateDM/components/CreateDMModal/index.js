@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
 import DMItem from "../../components/DMItem";
 
 export default class CreateDm extends Component {
