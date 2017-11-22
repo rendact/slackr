@@ -11,7 +11,7 @@ export default class MessagesHead extends Component {
             className={type === "private" ? "fa fa-lock" : "fa fa-hashtag"}
           />{" "}
           {name}
-          <RemoveButton isRight channelId={channelId} />
+          {type !== "direct" && <RemoveButton isRight channelId={channelId} />}
         </h2>
         <hr />
       </div>
