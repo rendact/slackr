@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 
 import ChannelItem from "./components/ChannelItem";
+
 import { getChannels } from "./queries/channels/getChannels";
 import { channelSubscription } from "./queries/channels/channelSubscription";
+import { subscribeToDeleteChannel } from "./queries/channels/subscription/delete";
 
 import { createChannelToggle } from "scenes/Messages/actions/createChannel";
 import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
@@ -13,11 +15,36 @@ class ChannelsSection extends Component {
   constructor(props) {
     super(props);
 
-    this.subscribeToChannels = this.subscribeToChannels.bind(this);
+    this.subscribeToCreateChannels = this.subscribeToCreateChannels.bind(this);
+    this.subscribeToDeleteChannel = this.subscribeToDeleteChannel.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
-  subscribeToChannels() {
+  subscribeToDeleteChannel() {
+    return this.props.channels.subscribeToMore({
+      document: subscribeToDeleteChannel,
+      varibales: { filter: { type: { ne: "direct" } } },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const {
+          data: { subscribeToChannel: { value: { id: deletedId } } }
+        } = subscriptionData;
+
+        const prevEdges = prev.viewer.allChannels.edges;
+
+        const newEdges = prevEdges.filter(edge => edge.node.id !== deletedId);
+
+        return {
+          viewer: { allChannels: { edges: newEdges } }
+        };
+      }
+    });
+  }
+
+  subscribeToCreateChannels() {
     return this.props.channels.subscribeToMore({
       document: channelSubscription,
       variables: { filter: { type: { ne: "direct" } } },
@@ -41,7 +68,8 @@ class ChannelsSection extends Component {
   }
 
   componentWillMount() {
-    this.subscribeToChannels();
+    this.subscribeToCreateChannels();
+    this.subscribeToDeleteChannel();
   }
 
   renderChannels(channels) {
