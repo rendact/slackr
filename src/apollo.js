@@ -2,7 +2,7 @@ import ApolloClient from "apollo-client/ApolloClient";
 import {
   SubscriptionClient,
   addGraphQLSubscriptions
-} from "subscriptions-transport-ws";
+} from "subscriptions-transport-ws-race";
 import { createNetworkInterface } from "apollo-client";
 
 // creates a subscription ready Apollo Client instance

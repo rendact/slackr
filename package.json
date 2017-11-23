@@ -50,7 +50,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "style-loader": "0.19.0",
-    "subscriptions-transport-ws": "^0.5.5-alpha.0",
+    "subscriptions-transport-ws-race": "^0.5.6",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
