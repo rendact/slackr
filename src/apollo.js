@@ -27,7 +27,10 @@ networkInterface.use([
     }
   }
 ]);
-const wsClient = new SubscriptionClient(websocketUrl, { reconnect: true });
+const wsClient = new SubscriptionClient(websocketUrl, {
+  reconnect: true,
+  timeout: 20000
+});
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
   networkInterface,
   wsClient
