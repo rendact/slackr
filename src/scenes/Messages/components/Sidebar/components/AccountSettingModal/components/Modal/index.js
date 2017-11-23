@@ -28,7 +28,7 @@ class AccountModal extends Component {
   render() {
     const { handleSubmit, onSubmit } = this.props;
     return (
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit || (() => {}))}>
         <Modal isOpen={true} size="lg">
           <ModalHeader>Account Name Setting</ModalHeader>
           <ModalBody>
