@@ -7,6 +7,7 @@ import Channels from "./components/Channels";
 import SidebarHead from "./components/SidebarHead";
 import ProfileModal from "./components/ProfileModal";
 import DMsSection from "./components/DMList";
+import AccountSettingModal from "./components/AccountSettingModal";
 import { getUser } from "./queries/getUser";
 import { toggleProfileModal } from "./actions/profileModal";
 
@@ -79,6 +80,7 @@ class Sidebar extends Component {
           username={!userLoading && user && user.username}
           profileModalSignout={this.handleSignout}
         />
+        <AccountSettingModal />
       </div>
     );
   }
