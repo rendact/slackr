@@ -12,6 +12,9 @@ class AccountSettingModal extends Component {
         toggle={() => {
           dispatch(toggleAccountSettingModal());
         }}
+        onSubmit={val => {
+          debugger;
+        }}
       />
     );
   }

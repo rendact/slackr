@@ -66,7 +66,9 @@ class CreateChannel extends Component {
     );
   }
 }
-const mapStateToProps = state => state.createChannel || {};
+const mapStateToProps = state => {
+  return state.createChannel || {};
+};
 
 CreateChannel = connect(mapStateToProps)(CreateChannel);
 

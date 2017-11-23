@@ -15,6 +15,7 @@ import {
 import { reduxForm, Field } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 import image from "images/dummy-profile.png";
+import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";
 
 class AccountModal extends Component {
   constructor(props) {
@@ -26,10 +27,11 @@ class AccountModal extends Component {
     // TODO: make it in another component
   }
   render() {
-    const { handleSubmit, onSubmit, isOpen, toggle } = this.props;
+    debugger;
+    const { onSubmit, isOpen, toggle } = this.props;
     return (
-      <Form onSubmit={handleSubmit(onSubmit || (() => {}))}>
-        <Modal isOpen={isOpen} toggle={toggle} size="lg">
+      <Modal isOpen={isOpen} toggle={toggle} size="lg">
+        <form onSubmit={this.props.handleSubmit(value => {})}>
           <ModalHeader>Account Name Setting</ModalHeader>
           <ModalBody>
             <div>
@@ -73,12 +75,20 @@ class AccountModal extends Component {
               for="password"
               component={renderInputText}
             />
+            <Field
+              name="pss"
+              component={renderPasswordMatch}
+              validate={val =>
+                (val && val.match) || val ? undefined : "Password not match"}
+            />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary">Submit</Button>
+            <Button type="submit" color="primary">
+              Submit
+            </Button>
           </ModalFooter>
-        </Modal>
-      </Form>
+        </form>
+      </Modal>
     );
   }
 }

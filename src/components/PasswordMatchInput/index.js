@@ -15,13 +15,17 @@ export default class PasswordMatchInput extends Component {
 
   onMatching(e) {
     const value = e.currentTarget.value;
-    if (value !== this.state.temp) {
-      this.setState({ match: false });
-      this.props.onConfirmedChange && this.props.onConfirmedChange(value);
-    } else {
-      this.setState({ match: true });
-      this.props.onConfirmedChange && this.props.onConfirmedChange(value);
-    }
+    let match;
+    this.setState(prevState => {
+      if (value !== this.state.temp) {
+        match = false;
+      } else {
+        match = true;
+      }
+      this.props.onConfirmedChange &&
+        this.props.onConfirmedChange({ value: value, match: match });
+      return { value: value, match: match };
+    });
   }
 
   onConfirmFocus(e) {
