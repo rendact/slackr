@@ -1,10 +1,22 @@
 import React, { Component } from "react";
 import AccountModal from "./components/Modal";
+import { connect } from "react-redux";
+import { toggleAccountSettingModal } from "scenes/Messages/components/Sidebar/actions/accountSettingModal";
 
 class AccountSettingModal extends Component {
   render() {
-    return <AccountModal />;
+    const { isOpen, dispatch } = this.props;
+    return (
+      <AccountModal
+        isOpen={isOpen}
+        toggle={() => {
+          dispatch(toggleAccountSettingModal());
+        }}
+      />
+    );
   }
 }
 
-export default AccountSettingModal;
+const mapStateToProps = state => state.accountSetting || {};
+
+export default connect(mapStateToProps)(AccountSettingModal);

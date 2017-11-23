@@ -26,10 +26,10 @@ class AccountModal extends Component {
     // TODO: make it in another component
   }
   render() {
-    const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit, isOpen, toggle } = this.props;
     return (
       <Form onSubmit={handleSubmit(onSubmit || (() => {}))}>
-        <Modal isOpen={true} size="lg">
+        <Modal isOpen={isOpen} toggle={toggle} size="lg">
           <ModalHeader>Account Name Setting</ModalHeader>
           <ModalBody>
             <div>

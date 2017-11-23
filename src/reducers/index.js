@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import { createChannel } from "./createChannel";
+import accountSetting from "./accountSetting";
 import inputMessage from "./inputMessage";
 import dmUserList from "./dmUserList";
 import profileModal from "./profileModal";
@@ -10,5 +11,6 @@ export default combineReducers({
   createChannel,
   profileModal,
   dmUserList,
-  inputMessage
+  inputMessage,
+  accountSetting
 });
