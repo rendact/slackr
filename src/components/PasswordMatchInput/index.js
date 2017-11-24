@@ -17,7 +17,7 @@ export default class PasswordMatchInput extends Component {
     const value = e.currentTarget.value;
     let match;
     this.setState(prevState => {
-      if (value !== this.state.temp) {
+      if (value !== prevState.temp) {
         match = false;
       } else {
         match = true;

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import "components/reduxFormComponents/renderPasswordMatch";
-import PasswordMatchInput from "components/PasswordMatchInput";
 
 class Home extends Component {
   render() {
@@ -33,7 +31,6 @@ class Home extends Component {
                 go to login page
               </Button>
             </Link>
-            <PasswordMatchInput />
           </Col>
         </Row>
       </Container>

@@ -69,14 +69,14 @@ class AccountModal extends Component {
             />
             <Field
               type="password"
-              label="Password"
-              name="password"
-              placeholder="enter a new password"
-              for="password"
+              label="Old Password"
+              name="oldPassword"
+              placeholder="enter your old password"
+              for="oldPassword"
               component={renderInputText}
             />
             <Field
-              name="pss"
+              name="newPassword"
               component={renderPasswordMatch}
               validate={val =>
                 (val && val.match) || val ? undefined : "Password not match"}
