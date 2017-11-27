@@ -33,6 +33,7 @@ export default class PasswordMatchInput extends Component {
   }
 
   render() {
+    const { disabled } = this.props;
     return (
       <div>
         <div className="form-group">
@@ -41,6 +42,7 @@ export default class PasswordMatchInput extends Component {
             className="form-control"
             type="password"
             onChange={this.onTempChange}
+            disabled={disabled}
           />
         </div>
         <div className="form-group">
@@ -55,6 +57,7 @@ export default class PasswordMatchInput extends Component {
             type="password"
             onChange={this.onMatching}
             onFocus={this.onConfirmFocus}
+            disabled={disabled}
           />
           {this.state.confirmFocus &&
             (this.state.match ? null : (

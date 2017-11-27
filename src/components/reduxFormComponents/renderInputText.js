@@ -11,6 +11,6 @@ export const renderInputText = ({
   <FormGroup>
     <Label for={labelFor}>{label}</Label>
     <Input {...input} {...attr} />
-    {error && <span>error</span>}
+    {error && <small style={{ color: "red" }}>{error}</small>}
   </FormGroup>
 );
