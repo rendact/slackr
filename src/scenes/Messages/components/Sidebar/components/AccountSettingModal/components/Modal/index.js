@@ -10,19 +10,38 @@ import {
   Label,
   FormText,
   Media,
+  Nav,
+  TabPane,
+  TabContent,
+  NavItem,
+  NavLink,
   Button
 } from "reactstrap";
 import { reduxForm, Field } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 import image from "images/dummy-profile.png";
 import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";
+import AvatarTab from "../AvatarTab";
+import GeneralTab from "../GeneralTab";
+import PasswordTab from "../PasswordTab";
 
 class AccountModal extends Component {
   constructor(props) {
     super(props);
 
     this.onImageClick = this.onImageClick.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      activeTab: "1"
+    };
   }
+
+  toggle(tab) {
+    if (tab !== this.state.activeTab) {
+      this.setState({ activeTab: tab });
+    }
+  }
+
   onImageClick(e) {
     // TODO: make it in another component
   }
@@ -34,58 +53,45 @@ class AccountModal extends Component {
           <ModalHeader>Account Name Setting</ModalHeader>
           <ModalBody>
             <div>
-              <Label>Profile Picture</Label>
-              <Media
-                onClick={this.onImageClick}
-                object
-                src={image}
-                className="img-thumbnail"
-                style={{ display: "block", width: 100, cursor: "pointer" }}
-              />
-              <input
-                ref={input => {
-                  this.file = input;
-                }}
-                type="file"
-                style={{ visibility: "hidden", height: 0, width: 0 }}
-              />
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={this.state.activeTab === "1" ? "active" : ""}
+                    onClick={() => this.toggle("1")}
+                  >
+                    General
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={this.state.activeTab === "2" && "active"}
+                    onClick={() => this.toggle("2")}
+                  >
+                    Password
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={this.state.activeTab === "3" && "active"}
+                    onClick={() => this.toggle("3")}
+                  >
+                    Profile Picture
+                  </NavLink>
+                </NavItem>
+              </Nav>
+
+              <TabContent activeTab={this.state.activeTab}>
+                <GeneralTab {...this.props} {...this.context} {...this.state} />
+                <PasswordTab
+                  {...this.props}
+                  {...this.context}
+                  {...this.state}
+                />
+                <AvatarTab {...this.props} {...this.context} {...this.state} />
+              </TabContent>
             </div>
-            <Field
-              type="text"
-              label="Full Name"
-              placeholder="Your Full Name"
-              name="fullName"
-              for="fullName"
-              component={renderInputText}
-            />
-            <Field
-              type="text"
-              label="Display Name"
-              placeholder="The display name"
-              name="displayName"
-              for="displayName"
-              component={renderInputText}
-            />
-            <Field
-              type="password"
-              label="Old Password"
-              name="oldPassword"
-              placeholder="enter your old password"
-              for="oldPassword"
-              component={renderInputText}
-            />
-            <Field
-              name="newPassword"
-              component={renderPasswordMatch}
-              validate={val =>
-                (val && val.match) || val ? undefined : "Password not match"}
-            />
           </ModalBody>
-          <ModalFooter>
-            <Button type="submit" color="primary">
-              Submit
-            </Button>
-          </ModalFooter>
+          <ModalFooter>your friend from upslack</ModalFooter>
         </form>
       </Modal>
     );
