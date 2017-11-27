@@ -9,6 +9,7 @@ import ProfileModal from "./components/ProfileModal";
 import DMsSection from "./components/DMList";
 import AccountSettingModal from "./components/AccountSettingModal";
 import { getUser } from "./queries/getUser";
+import { subscribeToUpdateUser } from "./queries/subscribeToUser";
 import { toggleProfileModal } from "./actions/profileModal";
 
 class Sidebar extends Component {
@@ -17,6 +18,7 @@ class Sidebar extends Component {
 
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
+    this.subscribeToUpdateUser = this.subscribeToUpdateUser.bind(this);
   }
 
   handleToggle(e) {
@@ -30,6 +32,30 @@ class Sidebar extends Component {
     localStorage.removeItem("slackrToken");
     localStorage.removeItem("slackrUserId");
     this.props.history.push("/login");
+  }
+
+  subscribeToUpdateUser(userId) {
+    this.props.user.subscribeToMore({
+      document: subscribeToUpdateUser,
+      variables: {
+        filter: { id: { eq: userId } }
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+        return {
+          getUser: {
+            ...prev.getUser,
+            ...subscriptionData.data.subscribeToUser.value
+          }
+        };
+      }
+    });
+  }
+
+  componentWillMount() {
+    this.subscribeToUpdateUser(localStorage.getItem("slackrUserId"));
   }
 
   render() {
