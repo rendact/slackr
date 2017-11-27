@@ -17,7 +17,6 @@ import {
   NavLink,
   Button
 } from "reactstrap";
-import { reduxForm, Field } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 import image from "images/dummy-profile.png";
 import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";
@@ -46,56 +45,50 @@ class AccountModal extends Component {
     // TODO: make it in another component
   }
   render() {
-    const { onSubmit, isOpen, toggle } = this.props;
+    const { isOpen, toggle } = this.props;
     return (
-      <Modal isOpen={isOpen} toggle={toggle} size="lg">
-        <form onSubmit={this.props.handleSubmit(value => {})}>
-          <ModalHeader>Account Name Setting</ModalHeader>
-          <ModalBody>
-            <div>
-              <Nav tabs>
-                <NavItem>
-                  <NavLink
-                    className={this.state.activeTab === "1" ? "active" : ""}
-                    onClick={() => this.toggle("1")}
-                  >
-                    General
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={this.state.activeTab === "2" && "active"}
-                    onClick={() => this.toggle("2")}
-                  >
-                    Password
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={this.state.activeTab === "3" && "active"}
-                    onClick={() => this.toggle("3")}
-                  >
-                    Profile Picture
-                  </NavLink>
-                </NavItem>
-              </Nav>
+      <Modal isOpen={isOpen || true} toggle={toggle} size="lg">
+        <ModalHeader>Account Name Setting</ModalHeader>
+        <ModalBody>
+          <div>
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={this.state.activeTab === "1" ? "active" : ""}
+                  onClick={() => this.toggle("1")}
+                >
+                  General
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={this.state.activeTab === "2" ? "active" : ""}
+                  onClick={() => this.toggle("2")}
+                >
+                  Password
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={this.state.activeTab === "3" ? "active" : ""}
+                  onClick={() => this.toggle("3")}
+                >
+                  Profile Picture
+                </NavLink>
+              </NavItem>
+            </Nav>
 
-              <TabContent activeTab={this.state.activeTab}>
-                <GeneralTab {...this.props} {...this.context} {...this.state} />
-                <PasswordTab
-                  {...this.props}
-                  {...this.context}
-                  {...this.state}
-                />
-                <AvatarTab {...this.props} {...this.context} {...this.state} />
-              </TabContent>
-            </div>
-          </ModalBody>
-          <ModalFooter>your friend from upslack</ModalFooter>
-        </form>
+            <TabContent activeTab={this.state.activeTab}>
+              <GeneralTab {...this.props} {...this.context} {...this.state} />
+              <PasswordTab {...this.props} {...this.context} {...this.state} />
+              <AvatarTab {...this.props} {...this.context} {...this.state} />
+            </TabContent>
+          </div>
+        </ModalBody>
+        <ModalFooter>your friend from upslack</ModalFooter>
       </Modal>
     );
   }
 }
 
-export default reduxForm({ form: "accountSettingForm" })(AccountModal);
+export default AccountModal;
