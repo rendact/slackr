@@ -10,23 +10,20 @@ class GeneralTab extends Component {
  */
 
   render() {
+    debugger;
     return (
       <TabPane tabId="1">
         <form onSubmit={this.handleSubmit}>
           <Field
             type="text"
             label="Full Name"
-            placeholder="Your Full Name"
-            name="fullName"
-            for="fullName"
+            name="fullname"
             component={renderInputText}
           />
           <Field
             type="text"
             label="Display Name"
-            placeholder="The display name"
-            name="displayName"
-            for="displayName"
+            name="displayname"
             component={renderInputText}
           />
           <input type="submit" value="Update" className="btn btn-primary" />
@@ -40,4 +37,6 @@ GeneralTab.defaultProps = {
   onSubmit: () => {}
 };
 
-export default reduxForm({ name: "profileGeneral" })(GeneralTab);
+export default reduxForm({ form: "profileGeneral", enableReinitialize: true })(
+  GeneralTab
+);

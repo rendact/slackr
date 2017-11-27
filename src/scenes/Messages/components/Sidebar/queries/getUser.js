@@ -5,6 +5,8 @@ export const getUser = gql`
     getUser(id: $id) {
       username
       lastLogin
+      fullname
+      displayname
     }
   }
 `;
