@@ -39,6 +39,18 @@ class Sidebar extends Component {
       location
     } = this.props;
 
+    let tagline;
+
+    if (!userLoading && user) {
+      if (user.displayname) {
+        tagline = user.displayname;
+      } else {
+        tagline = user.username;
+      }
+    } else {
+      tagline = "username";
+    }
+
     if (userLoading) {
       return (
         <div
@@ -68,8 +80,8 @@ class Sidebar extends Component {
         }}
       >
         <SidebarHead
-          title="Slackr"
-          tagline={!userLoading && user ? user.username : "username"}
+          title="upSlack"
+          tagline={tagline}
           onClick={this.handleToggle}
         />{" "}
         <Channels />
@@ -77,7 +89,7 @@ class Sidebar extends Component {
         <ProfileModal
           profileModalOpen={profileModalOpen}
           profileModalToggle={this.handleToggle}
-          username={!userLoading && user && user.username}
+          username={tagline}
           profileModalSignout={this.handleSignout}
         />
         <AccountSettingModal />
