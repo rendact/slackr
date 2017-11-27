@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, TabContent, TabPane, Row, Col } from "reactstrap";
+import { Alert, TabPane } from "reactstrap";
 import { Field, reduxForm } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";

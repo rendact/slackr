@@ -9,6 +9,9 @@ class GeneralTabWithQryMtn extends Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      updateSuccess: false
+    };
   }
 
   onSubmit(val) {
@@ -22,14 +25,22 @@ class GeneralTabWithQryMtn extends Component {
             }
           }
         })
-        .then(data => resolve(data))
+        .then(data => {
+          this.setState({ updateSuccess: true });
+          resolve(data);
+        })
         .catch(error => reject(error));
     });
   }
 
   render() {
     return (
-      <GeneralTab {...this.props} {...this.context} onSubmit={this.onSubmit} />
+      <GeneralTab
+        {...this.props}
+        updateSuccess={this.state.updateSuccess}
+        {...this.context}
+        onSubmit={this.onSubmit}
+      />
     );
   }
 }

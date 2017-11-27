@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TabContent, TabPane, Row, Col } from "reactstrap";
+import { TabPane, Alert } from "reactstrap";
 import { Field, reduxForm } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 
@@ -12,6 +12,9 @@ class GeneralTab extends Component {
   render() {
     return (
       <TabPane tabId="1">
+        <Alert isOpen={this.props.updateSuccess} color="success">
+          Profile updated successfully
+        </Alert>
         <form onSubmit={this.props.handleSubmit}>
           <Field
             type="text"

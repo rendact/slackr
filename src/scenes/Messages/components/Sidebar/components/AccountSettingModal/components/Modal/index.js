@@ -47,7 +47,7 @@ class AccountModal extends Component {
   render() {
     const { isOpen, toggle } = this.props;
     return (
-      <Modal isOpen={isOpen || true} toggle={toggle} size="lg">
+      <Modal isOpen={isOpen} toggle={toggle} size="lg">
         <ModalHeader>Account Name Setting</ModalHeader>
         <ModalBody>
           <div>
@@ -85,7 +85,11 @@ class AccountModal extends Component {
             </TabContent>
           </div>
         </ModalBody>
-        <ModalFooter>your friend from upslack</ModalFooter>
+        <ModalFooter>
+          <Button onClick={toggle} color="primary">
+            Done
+          </Button>
+        </ModalFooter>
       </Modal>
     );
   }
