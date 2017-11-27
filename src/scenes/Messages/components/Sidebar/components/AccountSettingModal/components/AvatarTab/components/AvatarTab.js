@@ -6,17 +6,12 @@ import { TabPane, Button, ButtonGroup, Label } from "reactstrap";
 
 class AvatarTab extends Component {
   render() {
-    const {
-      submitting,
-      onUpdateClick,
-      onResetClick,
-      onImageClick
-    } = this.props;
+    const { submitting, onChange, onUpdateClick, onResetClick } = this.props;
     return (
       <TabPane tabId="3">
         <div>
           <Label>Profile Picture</Label>
-          <ImageInput onClick={onImageClick} disabled={submitting} />
+          <ImageInput onChange={onChange} disabled={submitting} />
         </div>
         <ButtonGroup style={{ marginTop: 15 }}>
           <Button disabled={submitting} onClick={onUpdateClick} color="primary">
@@ -32,9 +27,9 @@ class AvatarTab extends Component {
 }
 
 AvatarTab.defaultProps = {
-  onImageClick: () => {},
   onUpdateClick: () => {},
-  onResetClick: () => {}
+  onResetClick: () => {},
+  onChange: () => {}
 };
 
 export default AvatarTab;
