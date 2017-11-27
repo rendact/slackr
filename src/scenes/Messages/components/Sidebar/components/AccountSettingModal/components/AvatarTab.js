@@ -11,19 +11,6 @@ class AvatarTab extends Component {
         <div>
           <Label>Profile Picture</Label>
           <ImageInput />
-          <Media
-            object
-            src={image}
-            className="img-thumbnail"
-            style={{ display: "block", width: 100, cursor: "pointer" }}
-          />
-          <input
-            ref={input => {
-              this.file = input;
-            }}
-            type="file"
-            style={{ visibility: "hidden", height: 0, width: 0 }}
-          />
         </div>
       </TabPane>
     );

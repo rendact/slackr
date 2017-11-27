@@ -90,11 +90,6 @@ class ImageInput extends Component {
           onMouseOver={this.onImgOver}
           onMouseOut={this.onImgOut}
         />
-        {this.state.wrongType && (
-          <small style={{ color: "red", display: "block", padding: 5 }}>
-            wrong type
-          </small>
-        )}
         <div
           style={styleHover}
           onMouseOver={this.onImgOver}
@@ -103,6 +98,11 @@ class ImageInput extends Component {
         >
           Upload<br /> Here
         </div>
+        {this.state.wrongType && (
+          <small style={{ color: "red", display: "block", padding: 5 }}>
+            wrong type
+          </small>
+        )}
         <input
           type="file"
           style={{ visiblity: "hidden", display: "none" }}
