@@ -31,7 +31,7 @@ class AccountModal extends Component {
     this.onImageClick = this.onImageClick.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: "1"
+      activeTab: "3"
     };
   }
 
@@ -47,7 +47,7 @@ class AccountModal extends Component {
   render() {
     const { isOpen, toggle } = this.props;
     return (
-      <Modal isOpen={isOpen} toggle={toggle} size="lg">
+      <Modal isOpen={isOpen || true} toggle={toggle} size="lg">
         <ModalHeader>Account Name Setting</ModalHeader>
         <ModalBody>
           <div>
@@ -78,7 +78,10 @@ class AccountModal extends Component {
               </NavItem>
             </Nav>
 
-            <TabContent activeTab={this.state.activeTab}>
+            <TabContent
+              activeTab={this.state.activeTab}
+              style={{ padding: "40px 10px" }}
+            >
               <GeneralTab {...this.props} {...this.context} {...this.state} />
               <PasswordTab {...this.props} {...this.context} {...this.state} />
               <AvatarTab {...this.props} {...this.context} {...this.state} />

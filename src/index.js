@@ -12,6 +12,7 @@ import Register from "scenes/Register";
 import Login from "scenes/Login";
 import Home from "scenes/Landing";
 import registerServiceWorker from "./registerServiceWorker";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 
