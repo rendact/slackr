@@ -8,14 +8,49 @@ class PasswordTabWithMutation extends Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      submitError: false,
+      errorMessage: "",
+      updateSuccess: false
+    };
   }
 
   onSubmit(val) {
-    debugger;
+    return new Promise((resolve, reject) => {
+      this.props
+        .changeUserPassword({
+          variables: {
+            input: {
+              id: localStorage.getItem("slackrUserId"),
+              oldPassword: val.oldPassword,
+              newPassword: val.newPassword.value
+            }
+          }
+        })
+        .then(data => {
+          this.setState({ updateSuccess: true, submitError: false });
+          resolve(data);
+        })
+        .catch(error => {
+          this.setState({
+            submitError: true,
+            updateSuccess: false,
+            errorMessage: error.message
+          });
+          reject(error);
+        });
+    });
   }
   render() {
     return (
-      <PasswordTab {...this.props} {...this.context} onSubmit={this.onSubmit} />
+      <PasswordTab
+        {...this.props}
+        {...this.context}
+        onSubmit={this.onSubmit}
+        submitError={this.state.submitError}
+        errorMessage={this.state.errorMessage}
+        updateSuccess={this.state.updateSuccess}
+      />
     );
   }
 }
