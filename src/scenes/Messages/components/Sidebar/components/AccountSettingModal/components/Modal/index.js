@@ -27,7 +27,6 @@ class AccountModal extends Component {
     // TODO: make it in another component
   }
   render() {
-    debugger;
     const { onSubmit, isOpen, toggle } = this.props;
     return (
       <Modal isOpen={isOpen} toggle={toggle} size="lg">
