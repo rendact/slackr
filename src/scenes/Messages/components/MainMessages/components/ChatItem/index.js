@@ -19,7 +19,11 @@ export default class ChatItem extends Component {
     return (
       <Media style={{ padding: "0 12px" }} className="chatItem">
         <Media left href="#">
-          <Media className="avatar" object src={image ? image : dummyprofile} />
+          <Media
+            className="avatar img-thumbnail"
+            object
+            src={image ? image : dummyprofile}
+          />
         </Media>
         <Media body className="chatBody">
           <Media heading>

@@ -39,6 +39,8 @@ body {
 
 .avatar {
   border-radius: 5px;
+  width:64px;
+  height:64px;
 }
 
 .chatBody {

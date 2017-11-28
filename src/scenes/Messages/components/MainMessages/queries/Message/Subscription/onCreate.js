@@ -11,6 +11,9 @@ export const messageSubscription = gql`
           author {
             id
             username
+            avatar {
+              blobUrl
+            }
           }
         }
       }
