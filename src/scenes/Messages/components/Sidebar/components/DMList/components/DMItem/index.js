@@ -13,7 +13,7 @@ export default class DMItem extends Component {
   }
 
   componentWillMount() {
-    debugger;
+    // loading userList
     this.props.userList &&
       this.props.userList.then(
         ({ data: { viewer: { allUsers: { edges: userList } } } }) =>
@@ -29,6 +29,7 @@ export default class DMItem extends Component {
 
     if (!otherNode) {
       // the hack :)
+      // this will display other name
       const userListIdFromName = name.split(";");
       const otherId = userListIdFromName.find(id => id !== currentUserId);
       otherNode = this.state.userList.find(u => u.node.id === otherId);
