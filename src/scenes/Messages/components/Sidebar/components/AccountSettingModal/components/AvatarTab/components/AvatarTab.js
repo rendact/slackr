@@ -44,7 +44,7 @@ class AvatarTab extends Component {
         </div>
         <ButtonGroup style={{ marginTop: 15 }}>
           <Button disabled={submitting} onClick={onUpdateClick} color="primary">
-            Update
+            {submitting ? <span className="fa fa-spinner fa-spin" /> : "Update"}
           </Button>
           <Button disabled={submitting} onClick={onResetClick} color="danger">
             Reset
