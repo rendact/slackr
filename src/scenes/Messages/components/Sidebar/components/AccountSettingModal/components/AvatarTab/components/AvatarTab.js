@@ -15,7 +15,8 @@ class AvatarTab extends Component {
       onUpdateClick,
       initialImage,
       onResetClick,
-      updateSuccess
+      updateSuccess,
+      reset
     } = this.props;
     return (
       <TabPane tabId="3">
@@ -36,6 +37,7 @@ class AvatarTab extends Component {
           <Label>Profile Picture</Label>
           <ImageInput
             initialImage={initialImage}
+            reset={reset}
             onChange={onChange}
             disabled={submitting}
           />

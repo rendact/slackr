@@ -8,7 +8,7 @@ class ImageInput extends Component {
     this.state = {
       imgOver: false,
       imgSrc: null,
-      worngType: false
+      wrongType: false
     };
 
     this.onImgOver = this.onImgOver.bind(this);
@@ -36,6 +36,7 @@ class ImageInput extends Component {
   }
 
   onClick(e) {
+    if (this.props.disabled) return;
     this.fileInput.click();
   }
 
@@ -47,9 +48,10 @@ class ImageInput extends Component {
     this.setState({ imgOver: false });
   }
   render() {
+    const { initialImage, reset, disabled } = this.props;
     let styleHover, imgSrc;
 
-    if (this.state.imgOver) {
+    if (this.state.imgOver && !disabled) {
       styleHover = {
         position: "relative",
         height: 100,
@@ -71,9 +73,9 @@ class ImageInput extends Component {
       };
     }
 
-    let { initialImage } = this.props;
-
-    if (this.state.imgSrc) {
+    if (this.state.imgSrc && reset) {
+      imgSrc = initialImage;
+    } else if (this.state.imgSrc && !reset) {
       imgSrc = this.state.imgSrc;
     } else if (initialImage) {
       imgSrc = initialImage;
@@ -93,7 +95,8 @@ class ImageInput extends Component {
             width: 100,
             height: 100,
             cursor: "pointer",
-            position: "absolute"
+            position: "absolute",
+            opacity: disabled ? "0.4" : "1"
           }}
           onMouseOver={this.onImgOver}
           onMouseOut={this.onImgOut}

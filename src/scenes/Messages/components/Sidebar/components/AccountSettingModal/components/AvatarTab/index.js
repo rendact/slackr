@@ -16,7 +16,8 @@ class AvatarTabWithMutation extends Component {
       pristine: true,
       submitting: false,
       updateSuccess: false,
-      serverError: null
+      serverError: null,
+      reset: false
     };
 
     this.onImageChange = this.onImageChange.bind(this);
@@ -29,6 +30,9 @@ class AvatarTabWithMutation extends Component {
    * will reset to avatar provided from database, 
    * and set pristine to true
    */
+
+    this.setState({ pristine: true, reset: true });
+    return;
   }
 
   onUpdateClick(e) {
@@ -118,7 +122,7 @@ class AvatarTabWithMutation extends Component {
   }
 
   onImageChange(file) {
-    this.setState({ ...file, pristine: false });
+    this.setState({ ...file, pristine: false, reset: false });
   }
 
   render() {
@@ -133,7 +137,8 @@ class AvatarTabWithMutation extends Component {
       pristineError,
       requiredError,
       updateSuccess,
-      serverError
+      serverError,
+      reset
     } = this.state;
 
     return (
@@ -146,6 +151,8 @@ class AvatarTabWithMutation extends Component {
         initialImage={avatar}
         updateSuccess={updateSuccess}
         serverError={serverError}
+        onResetClick={this.onResetClick}
+        reset={reset}
       />
     );
   }
