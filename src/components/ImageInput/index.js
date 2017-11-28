@@ -71,7 +71,15 @@ class ImageInput extends Component {
       };
     }
 
-    imgSrc = this.state.imgSrc ? this.state.imgSrc : image;
+    let { initialImage } = this.props;
+
+    if (this.state.imgSrc) {
+      imgSrc = this.state.imgSrc;
+    } else if (initialImage) {
+      imgSrc = initialImage;
+    } else {
+      imgSrc = image;
+    }
 
     return (
       <div>

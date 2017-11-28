@@ -11,6 +11,7 @@ class AvatarTab extends Component {
       submitting,
       onChange,
       onUpdateClick,
+      initialImage,
       onResetClick
     } = this.props;
     return (
@@ -20,7 +21,11 @@ class AvatarTab extends Component {
         </Alert>
         <div>
           <Label>Profile Picture</Label>
-          <ImageInput onChange={onChange} disabled={submitting} />
+          <ImageInput
+            initialImage={initialImage}
+            onChange={onChange}
+            disabled={submitting}
+          />
         </div>
         <ButtonGroup style={{ marginTop: 15 }}>
           <Button disabled={submitting} onClick={onUpdateClick} color="primary">

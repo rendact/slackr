@@ -56,11 +56,17 @@ class AvatarTabWithMutation extends Component {
   }
 
   render() {
+    const avatar = this.props.user.getUser
+      ? this.props.user.getUser.avatar
+        ? this.props.user.getUser.avatar.blobUrl
+        : null
+      : null;
     return (
       <AvatarTab
         onUpdateClick={this.onUpdateClick}
         onChange={this.onImageChange}
         requiredError={this.state.requiredError}
+        initialImage={avatar}
       />
     );
   }
