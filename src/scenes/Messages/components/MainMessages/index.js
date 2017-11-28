@@ -8,11 +8,13 @@ import MessageInputWithMutation from "./components/ChatInput";
 import ButtonJoin from "./components/ButtonJoin";
 import { getChannel } from "./queries/Channel/getChannel";
 import { messageSubscription } from "./queries/Message/Subscription/onCreate";
+import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
 
 class MessagesWrapper extends Component {
   constructor(props) {
     super(props);
     this.subscribeToMessage = this.subscribeToMessage.bind(this);
+    this.subscribeToAvatar = this.subscribeToAvatar.bind(this);
   }
   componentWillReceiveProps(props) {
     if (props.channel && !props.channel.loading && props.channel.getChannel) {
@@ -21,9 +23,46 @@ class MessagesWrapper extends Component {
         props.channel.getChannel.id !== this.props.channel.getChannel.id
       ) {
         this.subscribeToMessage();
+        this.subscribeToAvatar();
         return;
       }
     }
+  }
+
+  subscribeToAvatar() {
+    return this.props.channel.subscribeToMore({
+      document: avatarSubscription,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const {
+          data: { subscribeToFile: { value: avatar } }
+        } = subscriptionData;
+        const avatarUrl = avatar.blobUrl;
+        const oldEdges = prev.getChannel.messages.edges;
+        const newEdges = oldEdges.map(node => {
+          if (node.node.author.id === avatar.userAvatar.id) {
+            return {
+              node: {
+                ...node.node,
+                author: {
+                  ...node.node.author,
+                  avatar: {
+                    blobUrl: avatarUrl
+                  }
+                }
+              }
+            };
+          }
+          return node;
+        });
+        return {
+          getChannel: { ...prev.getChannel, messages: { edges: newEdges } }
+        };
+      }
+    });
   }
 
   subscribeToMessage() {
