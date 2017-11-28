@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import image from "images/dummy-profile.png";
 import ImageInput from "components/ImageInput";
 
-import { TabPane, Button, ButtonGroup, Label } from "reactstrap";
+import { Alert, TabPane, Button, ButtonGroup, Label } from "reactstrap";
 
 class AvatarTab extends Component {
   render() {
-    const { submitting, onChange, onUpdateClick, onResetClick } = this.props;
+    const {
+      requiredError,
+      submitting,
+      onChange,
+      onUpdateClick,
+      onResetClick
+    } = this.props;
     return (
       <TabPane tabId="3">
+        <Alert isOpen={requiredError} color="danger">
+          Please choose an image
+        </Alert>
         <div>
           <Label>Profile Picture</Label>
           <ImageInput onChange={onChange} disabled={submitting} />

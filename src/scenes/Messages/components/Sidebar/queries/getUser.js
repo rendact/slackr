@@ -7,6 +7,10 @@ export const getUser = gql`
       lastLogin
       fullname
       displayname
+      avatar {
+        id
+        blobUrl
+      }
     }
   }
 `;
