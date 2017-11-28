@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import { getUser } from "scenes/Messages/components/Sidebar/queries/getUser";
 import { updateUser } from "./mutations/updateUser";
 import GeneralTab from "./components/GeneralTab";
@@ -46,17 +47,25 @@ class GeneralTabWithQryMtn extends Component {
 }
 
 const withMutation = graphql(updateUser, { name: "updateUser" })(
-  GeneralTabWithQryMtn
+  withRouter(GeneralTabWithQryMtn)
 );
 
 export default graphql(getUser, {
-  options: { variables: { id: localStorage.getItem("slackrUserId") } },
+  options: props => ({
+    variables: {
+      id: localStorage.getItem("slackrUserId") || props.location.state.userId
+    }
+  }),
   name: "User",
-  props: ({ ownProps, User: { loading, getUser } }) => {
+  props: ({ ownProps, User: { loading, getUser, error } }) => {
     if (loading) {
       return {
         initialValues: { fullname: "loading...", displayname: "loading..." }
       };
+    }
+
+    if (error) {
+      return alert(error);
     }
 
     return {

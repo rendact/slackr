@@ -32,6 +32,7 @@ class Sidebar extends Component {
     localStorage.removeItem("slackrToken");
     localStorage.removeItem("slackrUserId");
     this.props.history.push("/login");
+    window.location.reload();
   }
 
   subscribeToUpdateUser(userId) {

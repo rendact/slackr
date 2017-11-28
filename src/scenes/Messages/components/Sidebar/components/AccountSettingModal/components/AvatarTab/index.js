@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AvatarTab from "./components/AvatarTab";
+import { withRouter } from "react-router-dom";
 import { graphql, compose } from "react-apollo";
 import { getUser } from "scenes/Messages/components/Sidebar/queries/getUser";
 import { createAvatar } from "./mutations/createAvatar";
@@ -159,11 +160,16 @@ class AvatarTabWithMutation extends Component {
 }
 
 const withMutation = compose(
+  withRouter,
   graphql(createAvatar, { name: "createAvatar" }),
   graphql(updateAvatar, { name: "updateAvatar" })
 )(AvatarTabWithMutation);
 
 export default graphql(getUser, {
   name: "user",
-  options: { variables: { id: localStorage.getItem("slackrUserId") } }
+  options: props => ({
+    variables: {
+      id: localStorage.getItem("slackrUserId") || props.location.state.userId
+    }
+  })
 })(withMutation);
