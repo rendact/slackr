@@ -65,6 +65,12 @@ class MessagesWrapper extends Component {
     });
   }
 
+  subscribeToUserChange() {
+    /*
+   * here we do subscription to user change
+   */
+  }
+
   subscribeToMessage() {
     return this.props.channel.subscribeToMore({
       document: messageSubscription,
@@ -143,7 +149,7 @@ class MessagesWrapper extends Component {
                   <ChatItem
                     key={idx}
                     body={message.node.content}
-                    head={message.node.author && message.node.author.username}
+                    head={message.node.author && message.node.author.fullname}
                     createdAt={message.node.createdAt}
                     id={message.node.id}
                     image={

@@ -56,6 +56,12 @@ body {
 /* 
  * toggle button
  */
+%tgTransform {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
 
 .tg {
   margin: 12px 0;
@@ -127,10 +133,7 @@ body {
 
   .tg.off .tg-btn .tg-off-text{
     visibility: visible;
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    transform: translateY(-100%);
+    @extend %tgTransform
 }
 
 
@@ -157,10 +160,7 @@ body {
 
   .tg.off .tg-label .tg-off-text {
     visibility: visible;
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    transform: translateY(-100%);
+    @extend %tgTransform
   }
 
   #button-join{

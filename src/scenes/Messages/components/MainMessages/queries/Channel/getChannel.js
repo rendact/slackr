@@ -11,6 +11,7 @@ export const getChannel = gql`
           node {
             id
             username
+            fullname
             avatar {
               blobUrl
             }
@@ -26,6 +27,7 @@ export const getChannel = gql`
             author {
               id
               username
+              fullname
               avatar {
                 blobUrl
               }
