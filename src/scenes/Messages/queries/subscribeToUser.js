@@ -4,6 +4,7 @@ export const subscribeToUpdateUser = gql`
   subscription subscribeToUpdateUser($filter: UserSubscriptionFilter) {
     subscribeToUser(mutations: [updateUser], filter: $filter) {
       value {
+        id
         displayname
         fullname
       }

@@ -9,12 +9,14 @@ import ButtonJoin from "./components/ButtonJoin";
 import { getChannel } from "./queries/Channel/getChannel";
 import { messageSubscription } from "./queries/Message/Subscription/onCreate";
 import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
+import { subscribeToUpdateUser } from "scenes/Messages/queries/subscribeToUser";
 
 class MessagesWrapper extends Component {
   constructor(props) {
     super(props);
     this.subscribeToMessage = this.subscribeToMessage.bind(this);
     this.subscribeToAvatar = this.subscribeToAvatar.bind(this);
+    this.subscribeToUserChange = this.subscribeToUserChange.bind(this);
   }
   componentWillReceiveProps(props) {
     if (props.channel && !props.channel.loading && props.channel.getChannel) {
@@ -24,6 +26,7 @@ class MessagesWrapper extends Component {
       ) {
         this.subscribeToMessage();
         this.subscribeToAvatar();
+        this.subscribeToUserChange();
         return;
       }
     }
@@ -69,6 +72,37 @@ class MessagesWrapper extends Component {
     /*
    * here we do subscription to user change
    */
+    return this.props.channel.subscribeToMore({
+      document: subscribeToUpdateUser,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+
+        const {
+          data: { subscribeToMessage: { value: user } }
+        } = subscriptionData;
+        const oldEdges = prev.getChannel.messages.edges;
+        const newEdges = oldEdges.map(edge => {
+          const author = edge.node.author;
+          if (author.id === user.id) {
+            return {
+              edge: {
+                ...edge.node,
+                author: {
+                  ...edge.node.author,
+                  fullname: user.fullname
+                }
+              }
+            };
+          }
+
+          return edge;
+        });
+
+        return {
+          getChannel: { ...prev.getChannel, messages: { edges: newEdges } }
+        };
+      }
+    });
   }
 
   subscribeToMessage() {

@@ -9,7 +9,7 @@ import ProfileModal from "./components/ProfileModal";
 import DMsSection from "./components/DMList";
 import AccountSettingModal from "./components/AccountSettingModal";
 import { getUser } from "./queries/getUser";
-import { subscribeToUpdateUser } from "./queries/subscribeToUser";
+import { subscribeToUpdateUser } from "scenes/Messages/queries/subscribeToUser";
 import { toggleProfileModal } from "./actions/profileModal";
 
 class Sidebar extends Component {
