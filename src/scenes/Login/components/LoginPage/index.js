@@ -8,14 +8,14 @@ import { renderInputText } from "components/reduxFormComponents/renderInputText"
 
 class LoginPage extends Component {
   render() {
-    const { isError, onSubmit, isProcess } = this.props;
+    const { isError, onSubmit, isProcess, errorMessage } = this.props;
     return (
       <Container style={{ margin: "0 auto", maxWidth: 500 }}>
         <Row>
           <Col md={12}>
             <h3>Login Form</h3>
             <Alert isOpen={isError} color="danger">
-              Wrong username or password
+              {errorMessage}
             </Alert>
             <Form onSubmit={this.props.handleSubmit(onSubmit)}>
               <Field

@@ -15,7 +15,8 @@ class Login extends Component {
       success: false,
       error: false,
       userId: null,
-      isProcess: false
+      isProcess: false,
+      errorMessage: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,7 +38,11 @@ class Login extends Component {
         });
       })
       .catch(error => {
-        this.setState({ error: true, isProcess: false });
+        this.setState({
+          error: true,
+          errorMessage: error.message,
+          isProcess: false
+        });
       });
   }
   render() {
@@ -53,6 +58,7 @@ class Login extends Component {
     return (
       <LoginPage
         isError={this.state.error}
+        errorMessage={this.state.errorMessage}
         isProcess={this.state.isProcess}
         onSubmit={this.handleSubmit}
       />
