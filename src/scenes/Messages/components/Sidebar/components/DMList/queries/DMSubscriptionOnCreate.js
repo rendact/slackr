@@ -13,6 +13,7 @@ export const dmSubscriptionOnCreate = gql`
               node {
                 id
                 username
+                fullname
               }
             }
           }

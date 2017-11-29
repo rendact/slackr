@@ -35,11 +35,15 @@ export default class DMItem extends Component {
       otherNode = this.state.userList.find(u => u.node.id === otherId);
     }
 
+    const otherName = otherNode.node.fullname
+      ? otherNode.node.fullname
+      : otherNode.node.username;
+
     return (
       <dd>
         <Link to={this.generateChannelUrl(id)}>
           <span className="fa fa-circle" style={{ color: "green" }} />{" "}
-          {otherNode && otherNode.node.username}
+          {otherName}
         </Link>
       </dd>
     );

@@ -20,6 +20,7 @@ export const getDMs = gql`
                 node {
                   id
                   username
+                  fullname
                 }
               }
             }

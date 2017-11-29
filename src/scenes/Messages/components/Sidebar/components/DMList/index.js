@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import { graphql, withApollo } from "react-apollo";
 
 import DMItem from "./components/DMItem";
+import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
+
 import { toggleDMUserList } from "scenes/Messages/components/Sidebar/actions/toggleDMUserList";
 import { getUsers } from "scenes/Messages/components/Sidebar/queries/getUsers";
 import { getDMs } from "./queries/getDMs";
 import { dmSubscriptionOnCreate } from "./queries/DMSubscriptionOnCreate";
-import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
 
 class DMsSection extends Component {
   constructor(props) {
