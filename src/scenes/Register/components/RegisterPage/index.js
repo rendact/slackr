@@ -11,14 +11,14 @@ import required from "utils/reduxFormValidations/required";
 
 class LoginPage extends Component {
   render() {
-    const { isError, onSubmit, submitting } = this.props;
+    const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
       <Container style={{ margin: "0 auto", maxWidth: 500 }}>
         <Row>
           <Col md={12}>
             <h3>Register Form</h3>
             <Alert isOpen={isError} color="danger">
-              Wrong username or password
+              {errorMessage}
             </Alert>
             <Form onSubmit={this.props.handleSubmit(onSubmit)}>
               <Field

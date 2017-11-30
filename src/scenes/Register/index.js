@@ -13,35 +13,41 @@ class Login extends Component {
 
     this.state = {
       success: false,
-      error: false,
-      userId: null,
-      isProcess: false
+      errorMessage: null,
+      error: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(val) {
+    this.setState({ error: false, errorMessage: null, success: false });
     return new Promise((resolve, reject) => {
       this.props
         .register({ variables: { ...val, password: val.password.value } })
-        .then(data => resolve(data))
-        .catch(error => reject(error));
+        .then(data => {
+          resolve(data);
+          this.setState({ success: true });
+        })
+        .catch(error => {
+          reject(error);
+          this.setState({ error: true, errorMessage: error.message });
+        });
     });
   }
   render() {
-    let { success, userId } = this.state;
-    let { from } = this.props.location.state || {
-      from: { pathname: "/messages", state: { userId: userId } }
-    };
+    let { success, error, errorMessage } = this.state;
 
-    if (success || localStorage.getItem("slackrToken")) {
-      return <Redirect to={from} />;
+    if (success) {
+      /*
+     * TODO: redirect to thankyou page or verification page
+     */
+      return <Redirect to="/login" />;
     }
 
     return (
       <RegisterPage
-        isError={this.state.error}
-        isProcess={this.state.isProcess}
+        isError={error}
+        errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
       />
     );
