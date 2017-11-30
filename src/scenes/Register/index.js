@@ -4,7 +4,7 @@ import { graphql } from "react-apollo";
 import { Redirect } from "react-router-dom";
 
 // project imports
-import { loginQry } from "./queries/Login";
+import { register } from "./queries/Register";
 import RegisterPage from "./components/RegisterPage";
 
 class Login extends Component {
@@ -21,24 +21,12 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(val) {
-    this.setState({ isProcess: true });
-    this.props
-      .login({
-        variables: { input: { username: val.email, password: val.password } }
-      })
-      .then(({ data: { loginUser: { token, user: { id } } } }) => {
-        localStorage.setItem("slackrToken", token);
-        localStorage.setItem("slackrUserId", id);
-        this.setState({
-          success: true,
-          error: false,
-          userId: id,
-          isProcess: false
-        });
-      })
-      .catch(error => {
-        this.setState({ error: true, isProcess: false });
-      });
+    return new Promise((resolve, reject) => {
+      this.props
+        .register({ variables: { ...val, password: val.password.value } })
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
   }
   render() {
     let { success, userId } = this.state;
@@ -60,4 +48,4 @@ class Login extends Component {
   }
 }
 
-export default graphql(loginQry, { name: "login" })(Login);
+export default graphql(register, { name: "register" })(Login);
