@@ -11,6 +11,7 @@ import PrivateRoute from "components/Router/PrivateRoute";
 import Register from "scenes/Register";
 import Login from "scenes/Login";
 import Home from "scenes/Landing";
+import Verify from "scenes/Verify";
 import registerServiceWorker from "./registerServiceWorker";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -26,6 +27,7 @@ ReactDOM.render(
           <PrivateRoute path="/messages/:id?" component={Messages} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/verify/:username/:code" component={Verify} />
           <Route component={Home} />
         </Switch>
       </HashRouter>
