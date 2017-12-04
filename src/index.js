@@ -12,6 +12,7 @@ import Register from "scenes/Register";
 import Login from "scenes/Login";
 import Home from "scenes/Landing";
 import Verify from "scenes/Verify";
+import RegisterSuccess from "scenes/Register/components/RegisterSuccess";
 import registerServiceWorker from "./registerServiceWorker";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -26,6 +27,7 @@ ReactDOM.render(
         <Switch>
           <PrivateRoute path="/messages/:id?" component={Messages} />
           <Route path="/login" component={Login} />
+          <Route path="/register/success" component={RegisterSuccess} />
           <Route path="/register" component={Register} />
           <Route path="/verify/:username/:code" component={Verify} />
           <Route component={Home} />

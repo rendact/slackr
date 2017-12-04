@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 import { register } from "./queries/Register";
 import RegisterPage from "./components/RegisterPage";
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +26,7 @@ class Login extends Component {
         .register({ variables: { ...val, password: val.password.value } })
         .then(data => {
           resolve(data);
-          this.setState({ success: true });
+          this.setState({ success: true, fullName: val.fullname });
         })
         .catch(error => {
           reject(error);
@@ -35,13 +35,14 @@ class Login extends Component {
     });
   }
   render() {
-    let { success, error, errorMessage } = this.state;
+    let { success, error, errorMessage, fullName } = this.state;
 
     if (success) {
-      /*
-     * TODO: redirect to thankyou page or verification page
-     */
-      return <Redirect to="/login" />;
+      return (
+        <Redirect
+          to={{ pathname: "/register/success", state: { user: fullName } }}
+        />
+      );
     }
 
     return (
@@ -54,4 +55,4 @@ class Login extends Component {
   }
 }
 
-export default graphql(register, { name: "register" })(Login);
+export default graphql(register, { name: "register" })(Register);
