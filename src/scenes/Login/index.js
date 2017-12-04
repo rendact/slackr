@@ -25,7 +25,7 @@ class Login extends Component {
     this.setState({ isProcess: true });
     this.props
       .login({
-        variables: { input: { username: val.email, password: val.password } }
+        variables: { input: { username: val.username, password: val.password } }
       })
       .then(({ data: { loginUser: { token, user: { id } } } }) => {
         localStorage.setItem("slackrToken", token);

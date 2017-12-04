@@ -19,13 +19,13 @@ class LoginPage extends Component {
             </Alert>
             <Form onSubmit={this.props.handleSubmit(onSubmit)}>
               <Field
-                label="Email"
-                name="email"
-                for="email"
-                id="email"
-                type="email"
+                label="username"
+                name="username"
+                for="username"
+                id="username"
+                type="text"
                 component={renderInputText}
-                placeholder="Your Email here"
+                placeholder="Your Username here"
                 disabled={isProcess}
               />
               <Field
