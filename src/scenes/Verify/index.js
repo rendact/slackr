@@ -45,7 +45,7 @@ class VerificationPage extends Component {
   }
 
   successHandler() {
-    this.props.location.push("/login");
+    this.props.history.push("/login");
   }
   render() {
     return (
