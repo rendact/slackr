@@ -10,7 +10,14 @@ class LoginPage extends Component {
   render() {
     const { isError, onSubmit, isProcess, errorMessage } = this.props;
     return (
-      <Row>
+      <Row
+        style={{
+          marginBottom: 10,
+          paddingBottom: 10,
+          height: "inherit",
+          borderBottom: "solid gray 1px"
+        }}
+      >
         <Col md={12}>
           <h3>Login Form</h3>
           <Alert isOpen={isError} color="danger">

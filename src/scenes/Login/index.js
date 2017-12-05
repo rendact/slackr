@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { loginQry } from "./queries/Login";
 import LoginPage from "./components/LoginPage";
 import LoginPageContainer from "./components/LoginPageContainer";
+import OauthButton from "./components/OauthButton";
 
 class Login extends Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class Login extends Component {
           isProcess={this.state.isProcess}
           onSubmit={this.handleSubmit}
         />
+        <OauthButton />
       </LoginPageContainer>
     );
   }
