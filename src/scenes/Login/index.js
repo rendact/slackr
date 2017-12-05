@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 // project imports
 import { loginQry } from "./queries/Login";
 import LoginPage from "./components/LoginPage";
+import LoginPageContainer from "./components/LoginPageContainer";
 
 class Login extends Component {
   constructor(props) {
@@ -56,12 +57,14 @@ class Login extends Component {
     }
 
     return (
-      <LoginPage
-        isError={this.state.error}
-        errorMessage={this.state.errorMessage}
-        isProcess={this.state.isProcess}
-        onSubmit={this.handleSubmit}
-      />
+      <LoginPageContainer>
+        <LoginPage
+          isError={this.state.error}
+          errorMessage={this.state.errorMessage}
+          isProcess={this.state.isProcess}
+          onSubmit={this.handleSubmit}
+        />
+      </LoginPageContainer>
     );
   }
 }

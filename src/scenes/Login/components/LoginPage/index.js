@@ -10,44 +10,42 @@ class LoginPage extends Component {
   render() {
     const { isError, onSubmit, isProcess, errorMessage } = this.props;
     return (
-      <Container style={{ margin: "0 auto", maxWidth: 500 }}>
-        <Row>
-          <Col md={12}>
-            <h3>Login Form</h3>
-            <Alert isOpen={isError} color="danger">
-              {errorMessage}
-            </Alert>
-            <Form onSubmit={this.props.handleSubmit(onSubmit)}>
-              <Field
-                label="username"
-                name="username"
-                for="username"
-                id="username"
-                type="text"
-                component={renderInputText}
-                placeholder="Your Username here"
-                disabled={isProcess}
-              />
-              <Field
-                label="Password"
-                for="password"
-                type="password"
-                component={renderInputText}
-                id="password"
-                name="password"
-                disabled={isProcess}
-              />
-              <Button color="primary" style={{ cursor: "pointer" }}>
-                {isProcess ? (
-                  <span className="fa fa-cog fa-spin fa-fw" />
-                ) : (
-                  "Login"
-                )}
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col md={12}>
+          <h3>Login Form</h3>
+          <Alert isOpen={isError} color="danger">
+            {errorMessage}
+          </Alert>
+          <Form onSubmit={this.props.handleSubmit(onSubmit)}>
+            <Field
+              label="username"
+              name="username"
+              for="username"
+              id="username"
+              type="text"
+              component={renderInputText}
+              placeholder="Your Username here"
+              disabled={isProcess}
+            />
+            <Field
+              label="Password"
+              for="password"
+              type="password"
+              component={renderInputText}
+              id="password"
+              name="password"
+              disabled={isProcess}
+            />
+            <Button color="primary" style={{ cursor: "pointer" }}>
+              {isProcess ? (
+                <span className="fa fa-cog fa-spin fa-fw" />
+              ) : (
+                "Login"
+              )}
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
