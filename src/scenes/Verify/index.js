@@ -22,7 +22,6 @@ class VerificationPage extends Component {
 
     if (match.params.code && match.params.username) {
       this.setState({ verifyProcess: true });
-      // lakukan mutasi disini
       verify({
         variables: { username: match.params.username, code: match.params.code }
       })
@@ -49,8 +48,14 @@ class VerificationPage extends Component {
   }
   render() {
     return (
-      <div>
-        Verification page
+      <div
+        style={{
+          margin: "0 auto",
+          height: "100vh",
+          background: "purple",
+          alignItems: "center"
+        }}
+      >
         {this.state.verifyProcess ? <IsProcess /> : null}
         {this.state.verifySuccess ? (
           <IsSuccess onComplete={this.successHandler} />

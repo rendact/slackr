@@ -28,7 +28,22 @@ class Home extends Component {
                 }}
                 size="lg"
               >
-                go to login page
+                Login
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button
+                style={{
+                  position: "absolute",
+                  zIndex: 15,
+                  top: "50%",
+                  left: "50%",
+                  margin: "-100px 0 0 -50px",
+                  cursor: "pointer"
+                }}
+                size="lg"
+              >
+                Register
               </Button>
             </Link>
           </Col>
