@@ -65,7 +65,7 @@ class Login extends Component {
           isProcess={this.state.isProcess}
           onSubmit={this.handleSubmit}
         />
-        <OauthButton />
+        {process.env.REACT_APP_OAUTH_TOKEN ? <OauthButton /> : null}
       </LoginPageContainer>
     );
   }
