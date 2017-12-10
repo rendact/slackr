@@ -14,7 +14,7 @@ let lock = new Auth0Lock(
     auth: {
       responseType: "token id_token",
       params: {
-        scope: "openid profile"
+        scope: "openid"
       }
     }
   }
@@ -61,6 +61,7 @@ function onAuthenticated(authResult) {
  * 6. not found, update user {fullname: name, displayname: nickname}
  * 7. authentication success
  */
+  localStorage.setItem("slackrToken", authResult.idToken);
   lock.getUserInfo(authResult.accessToken, (error, profile) => {
     if (error) {
       // Handle error

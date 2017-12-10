@@ -22,11 +22,24 @@ networkInterface.use([
       }
 
       const token = localStorage.getItem("slackrToken");
-      if (token) req.options.headers.authorization = `Bearer ${token}`;
+      if (token) req.options.headers.Authorization = `Bearer ${token}`;
       next();
     }
   }
 ]);
+
+networkInterface.useAfter([
+  {
+    applyAfterware({ response }, next) {
+      if (response.status === 401) {
+        localStorage.removeItem("slackrToken");
+        localStorage.removeItem("slackrUserId");
+      }
+      next();
+    }
+  }
+]);
+
 const wsClient = new SubscriptionClient(websocketUrl, {
   reconnect: true,
   timeout: 20000
