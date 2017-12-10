@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -23,7 +23,7 @@ const store = createStore(slackrApp);
 ReactDOM.render(
   <ApolloProvider client={client} store={store}>
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <PrivateRoute path="/messages/:id?" component={Messages} />
           <Route path="/login" component={Login} />
@@ -32,7 +32,7 @@ ReactDOM.render(
           <Route path="/verify/:username/:code" component={Verify} />
           <Route component={Home} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </ApolloProvider>,
   document.getElementById("root")
