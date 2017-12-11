@@ -1,7 +1,7 @@
 // system imports
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 // project imports
 import { loginQry } from "./queries/Login";
@@ -49,7 +49,7 @@ class Login extends Component {
   }
   render() {
     let { success, userId } = this.state;
-    let { from } = this.props.location.state || {
+    let { from } = (this.props.location && this.props.location.state) || {
       from: { pathname: "/messages", state: { userId: userId } }
     };
 
