@@ -14,7 +14,7 @@ import Home from "scenes/Landing";
 import Verify from "scenes/Verify";
 
 import AfterLogin from "scenes/AfterLogin";
-import RegisterSuccess from "scenes/Register/components/RegisterSuccess";
+import RegisterSuccess from "components/RegisterSuccess";
 import registerServiceWorker from "./registerServiceWorker";
 
 import "bootstrap/dist/css/bootstrap.css";
