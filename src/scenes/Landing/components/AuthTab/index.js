@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import Login from "components/Login";
+import Register from "components/Register";
 
 class AuthTab extends Component {
   constructor(props) {
@@ -33,7 +34,10 @@ class AuthTab extends Component {
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="login">
-            <Login />
+            <Login {...this.props} />
+          </TabPane>
+          <TabPane tabId="register">
+            <Register {...this.props} />
           </TabPane>
         </TabContent>
       </div>
