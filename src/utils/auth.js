@@ -12,6 +12,7 @@ let lock = new Auth0Lock(
   "upslack.auth0.com",
   {
     auth: {
+      redirectUrl: "http://localhost:3000/after-login",
       responseType: "token id_token",
       params: {
         scope: "openid"

@@ -4,6 +4,7 @@ import {
   addGraphQLSubscriptions
 } from "subscriptions-transport-ws-race";
 import { createNetworkInterface } from "./custom-network-interface";
+import { store } from "index";
 
 // creates a subscription ready Apollo Client instance
 
@@ -34,6 +35,7 @@ networkInterface.useAfter([
       if (response.status === 401) {
         localStorage.removeItem("slackrToken");
         localStorage.removeItem("slackrUserId");
+        store.dispatch({ type: "UNAUTHORIZED_ERROR" });
       }
       next();
     }

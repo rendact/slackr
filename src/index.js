@@ -12,6 +12,7 @@ import Register from "scenes/Register";
 import Login from "scenes/Login";
 import Home from "scenes/Landing";
 import Verify from "scenes/Verify";
+
 import AfterLogin from "scenes/AfterLogin";
 import RegisterSuccess from "scenes/Register/components/RegisterSuccess";
 import registerServiceWorker from "./registerServiceWorker";
@@ -19,7 +20,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 
-const store = createStore(slackrApp);
+export const store = createStore(slackrApp);
 
 ReactDOM.render(
   <ApolloProvider client={client} store={store}>
