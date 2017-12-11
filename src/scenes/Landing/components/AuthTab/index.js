@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import classnames from "classnames";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import Login from "components/Login";
 import Register from "components/Register";
@@ -22,17 +23,34 @@ class AuthTab extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.className} style={this.props.style}>
         <Nav tabs>
-          <NavItem onClick={() => this.toggle("login")}>
-            <NavLink>Login</NavLink>
+          <NavItem>
+            <NavLink
+              onClick={() => this.toggle("login")}
+              className={classnames({
+                active: this.state.activeTab === "login"
+              })}
+            >
+              Login
+            </NavLink>
           </NavItem>
-          <NavItem onClick={() => this.toggle("register")}>
-            <NavLink>Register</NavLink>
+          <NavItem>
+            <NavLink
+              onClick={() => this.toggle("register")}
+              className={classnames({
+                active: this.state.activeTab === "register"
+              })}
+            >
+              Register
+            </NavLink>
           </NavItem>
         </Nav>
 
-        <TabContent activeTab={this.state.activeTab}>
+        <TabContent
+          activeTab={this.state.activeTab}
+          style={{ paddingTop: 35, color: "white" }}
+        >
           <TabPane tabId="login">
             <Login {...this.props} />
           </TabPane>

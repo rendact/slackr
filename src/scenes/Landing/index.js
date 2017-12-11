@@ -12,14 +12,11 @@ class Home extends Component {
           margin: "0 auto",
           height: "100vh",
           background: "purple",
-          alignItems: "center"
+          alignItems: "center",
+          overflow: "scroll"
         }}
       >
-        <Row>
-          <Col md={12}>
-            <AuthTab />
-          </Col>
-        </Row>
+        <AuthTab style={{ margin: "0 auto", width: 796, paddingTop: 100 }} />
       </Container>
     );
   }
