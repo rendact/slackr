@@ -6,7 +6,6 @@ import { reduxForm, Field } from "redux-form";
 // project imports
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";
-import passwordMatch from "utils/reduxFormValidations/passwordMatch";
 import required from "utils/reduxFormValidations/required";
 
 class LoginPage extends Component {
@@ -67,7 +66,6 @@ class LoginPage extends Component {
                 name="password"
                 component={renderPasswordMatch}
                 disabled={submitting}
-                validate={[passwordMatch]}
               />
               <Button color="primary" style={{ cursor: "pointer" }}>
                 {submitting ? (
