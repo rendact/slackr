@@ -39,8 +39,8 @@ class LoginPage extends Component {
               for="password"
               type="password"
               component={renderInputText}
-              id="password"
               name="password"
+              id="password"
               disabled={isProcess}
             />
             <Button color="primary" style={{ cursor: "pointer" }}>
