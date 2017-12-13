@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Media } from "reactstrap";
 import profile from "images/dummy-profile.png";
 
-export default class DMUserItem extends Component {
+export default class UserItem extends Component {
   render() {
     const { username, status, image, onClick, isProcessing } = this.props;
     let style;
