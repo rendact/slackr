@@ -7,8 +7,11 @@ import { reduxForm, Field } from "redux-form";
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
 
 class LoginPage extends Component {
+  componentWillReceiveProps(props) {
+    debugger;
+  }
   render() {
-    const { isError, onSubmit, isProcess, errorMessage } = this.props;
+    const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
       <Row
         style={{
@@ -23,7 +26,7 @@ class LoginPage extends Component {
           <Alert isOpen={isError} color="danger">
             {errorMessage}
           </Alert>
-          <Form onSubmit={this.props.handleSubmit(onSubmit)}>
+          <Form onSubmit={this.props.handleSubmit}>
             <Field
               label="username"
               name="username"
@@ -32,7 +35,7 @@ class LoginPage extends Component {
               type="text"
               component={renderInputText}
               placeholder="Your Username here"
-              disabled={isProcess}
+              disabled={submitting}
             />
             <Field
               label="Password"
@@ -41,10 +44,10 @@ class LoginPage extends Component {
               component={renderInputText}
               name="password"
               id="password"
-              disabled={isProcess}
+              disabled={submitting}
             />
             <Button color="primary" style={{ cursor: "pointer" }}>
-              {isProcess ? (
+              {submitting ? (
                 <span className="fa fa-cog fa-spin fa-fw" />
               ) : (
                 "Login"
