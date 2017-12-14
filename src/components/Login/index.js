@@ -24,7 +24,7 @@ class Login extends Component {
   }
   handleSubmit(val) {
     this.setState({ isProcess: true });
-    this.props
+    return this.props
       .login({
         variables: { input: { username: val.username, password: val.password } }
       })
@@ -46,6 +46,7 @@ class Login extends Component {
         });
       });
   }
+
   render() {
     let { success, userId } = this.state;
     let { from } = (this.props.location && this.props.location.state) || {

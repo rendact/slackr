@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-import DMItem from "../../components/DMItem";
+import UserItem from "components/UserItem";
 
-export default class CreateDm extends Component {
+export default class UserListModal extends Component {
   render() {
     const {
       isLoading,
-      createDmIsOpen,
-      createDmToggle,
-      createDmHeaderClick,
-      DmItems
+      isOpen,
+      toggle,
+      onClick,
+      UserItems,
+      modalHeader,
+      isProcessing
     } = this.props;
     return (
-      <Modal toggle={createDmToggle} isOpen={createDmIsOpen || false} size="lg">
-        <ModalHeader onClick={createDmHeaderClick}>Direct Messages</ModalHeader>
+      <Modal toggle={toggle} isOpen={isOpen} size="lg">
+        <ModalHeader>{modalHeader}</ModalHeader>
         <ModalBody id="dm-list">
           {isLoading ? (
             <div id="users-loading">
@@ -22,12 +24,15 @@ export default class CreateDm extends Component {
               <span className="sr-only">Loading...</span>
             </div>
           ) : (
-            (DmItems &&
-              DmItems.map((item, i) => (
-                <DMItem
+            (UserItems &&
+              UserItems.map((item, i) => (
+                <UserItem
                   username={item.node.username}
                   userId={item.node.id}
+                  image={item.node.avatar && item.node.avatar.blobUrl}
+                  onClick={onClick(item.node.id)}
                   key={i}
+                  isProcessing={isProcessing}
                 />
               ))) ||
             "No user can be displayed."

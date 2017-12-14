@@ -8,7 +8,7 @@ import { renderInputText } from "components/reduxFormComponents/renderInputText"
 import renderPasswordMatch from "components/reduxFormComponents/renderPasswordMatch";
 import required from "utils/reduxFormValidations/required";
 
-class LoginPage extends Component {
+class Register extends Component {
   render() {
     const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
@@ -64,4 +64,4 @@ class LoginPage extends Component {
   }
 }
 
-export default reduxForm({ form: "login" })(LoginPage);
+export default reduxForm({ form: "register" })(Register);

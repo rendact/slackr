@@ -8,8 +8,11 @@ import { renderInputText } from "components/reduxFormComponents/renderInputText"
 import OauthButton from "../../components/OauthButton";
 
 class LoginPage extends Component {
+  componentWillReceiveProps(props) {
+    debugger;
+  }
   render() {
-    const { isError, onSubmit, isProcess, errorMessage } = this.props;
+    const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
       <Row>
         <Col md={12}>
@@ -17,7 +20,7 @@ class LoginPage extends Component {
           <Alert isOpen={isError} color="danger">
             {errorMessage}
           </Alert>
-          <Form onSubmit={this.props.handleSubmit(onSubmit)}>
+          <Form onSubmit={this.props.handleSubmit}>
             <Field
               name="username"
               id="username"
@@ -32,11 +35,11 @@ class LoginPage extends Component {
               name="password"
               id="password"
               placeholder="Type your password"
-              disabled={isProcess}
+              disabled={submitting}
             />
             <div className="form-group">
               <Button color="primary" style={{ cursor: "pointer" }}>
-                  {isProcess ? (
+                  {submitting ? (
                     <span className="fa fa-cog fa-spin fa-fw" />
                   ) : (
                     "Login"

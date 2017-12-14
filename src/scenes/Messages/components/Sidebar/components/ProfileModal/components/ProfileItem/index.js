@@ -22,4 +22,6 @@ class ProfileItemContainer extends Component {
   }
 }
 
-export default connect()(ProfileItemContainer);
+export default connect(props => {
+  debugger;
+})(ProfileItemContainer);
