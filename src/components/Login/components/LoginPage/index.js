@@ -27,7 +27,7 @@ class LoginPage extends Component {
               type="text"
               component={renderInputText}
               placeholder="Your username here"
-              disabled={isProcess}
+              disabled={submitting}
             />
             <Field
               type="password"
