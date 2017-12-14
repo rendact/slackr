@@ -6,18 +6,11 @@ import AuthTab from "./components/AuthTab";
 class Home extends Component {
   render() {
     return (
-      <Container
-        fluid
-        style={{
-          margin: "0 auto",
-          height: "100vh",
-          background: "purple",
-          alignItems: "center",
-          overflow: "scroll"
-        }}
-      >
-        <AuthTab style={{ margin: "0 auto", width: 796, paddingTop: 100 }} />
-      </Container>
+    	<div className="wrapper">
+	      <div className="form">
+	        <AuthTab />
+	      </div>
+      </div>
     );
   }
 }

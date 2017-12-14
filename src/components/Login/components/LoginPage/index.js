@@ -5,6 +5,7 @@ import { reduxForm, Field } from "redux-form";
 
 // project imports
 import { renderInputText } from "components/reduxFormComponents/renderInputText";
+import OauthButton from "../../components/OauthButton";
 
 class LoginPage extends Component {
   componentWillReceiveProps(props) {
@@ -13,14 +14,7 @@ class LoginPage extends Component {
   render() {
     const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
-      <Row
-        style={{
-          marginBottom: 10,
-          paddingBottom: 10,
-          height: "inherit",
-          borderBottom: "solid gray 1px"
-        }}
-      >
+      <Row>
         <Col md={12}>
           <h3>Login Form</h3>
           <Alert isOpen={isError} color="danger">
@@ -28,31 +22,31 @@ class LoginPage extends Component {
           </Alert>
           <Form onSubmit={this.props.handleSubmit}>
             <Field
-              label="username"
               name="username"
-              for="username"
               id="username"
               type="text"
               component={renderInputText}
-              placeholder="Your Username here"
+              placeholder="Your username here"
               disabled={submitting}
             />
             <Field
-              label="Password"
-              for="password"
               type="password"
               component={renderInputText}
               name="password"
               id="password"
+              placeholder="Type your password"
               disabled={submitting}
             />
-            <Button color="primary" style={{ cursor: "pointer" }}>
-              {submitting ? (
-                <span className="fa fa-cog fa-spin fa-fw" />
-              ) : (
-                "Login"
-              )}
-            </Button>
+            <div className="form-group">
+              <Button color="primary" style={{ cursor: "pointer" }}>
+                  {submitting ? (
+                    <span className="fa fa-cog fa-spin fa-fw" />
+                  ) : (
+                    "Login"
+                  )}
+              </Button>
+              {process.env.REACT_APP_OAUTH_TOKEN ? <OauthButton /> : null}
+            </div>
           </Form>
         </Col>
       </Row>
