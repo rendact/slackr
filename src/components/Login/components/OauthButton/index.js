@@ -10,13 +10,11 @@ export default class OauthButton extends Component {
   componentWillMount() {}
   render() {
     return (
-      <Row>
-        <Col md={12}>
-          <Button onClick={() => lock.show()} block>
-            social
+        
+          <Button className="pull-right" onClick={() => lock.show()}>
+            Auth0 Login
           </Button>
-        </Col>
-      </Row>
+       
     );
   }
 }

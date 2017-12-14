@@ -12,7 +12,6 @@ class LoginPage extends Component {
   render() {
     const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
-      <Container style={{ margin: "0 auto", maxWidth: 500 }}>
         <Row>
           <Col md={12}>
             <h3>Register Form</h3>
@@ -21,44 +20,28 @@ class LoginPage extends Component {
             </Alert>
             <Form onSubmit={this.props.handleSubmit(onSubmit)}>
               <Field
-                label="Full Name"
                 name="fullname"
-                for="fullname"
                 id="fullname"
                 type="text"
                 component={renderInputText}
-                placeholder=""
+                placeholder="Full Name"
                 disabled={submitting}
               />
               <Field
-                label="Display Name"
-                name="displayname"
-                for="displayname"
-                id="displayname"
-                type="text"
-                component={renderInputText}
-                placeholder=""
-                disabled={submitting}
-              />
-              <Field
-                label="Email"
                 name="email"
-                for="email"
                 id="email"
                 type="email"
                 component={renderInputText}
                 disabled={submitting}
                 validate={[required]}
+                placeholder="Email"
               />
-              <hr />
-              <p>input forms below used for login purpose</p>
               <Field
-                label="Username"
-                for="username"
                 type="text"
                 component={renderInputText}
                 id="username"
                 name="username"
+                placeholder="User Name"
                 disabled={submitting}
                 validate={[required]}
               />
@@ -77,7 +60,6 @@ class LoginPage extends Component {
             </Form>
           </Col>
         </Row>
-      </Container>
     );
   }
 }

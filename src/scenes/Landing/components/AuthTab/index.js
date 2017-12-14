@@ -16,31 +16,32 @@ class AuthTab extends Component {
   }
 
   toggle(tab) {
-    if (tab !== this.state.avtiveTab) {
+    if (tab !== this.state.activeTab) {
       this.setState({ activeTab: tab });
     }
   }
 
   render() {
     return (
-      <div className={this.props.className} style={this.props.style}>
-        <Nav tabs>
-          <NavItem>
+      <div>
+        <Nav tabs className="tab-group">
+          <NavItem className={classnames({
+                active: this.state.activeTab === "login",
+                tab: true
+              })}>
             <NavLink
               onClick={() => this.toggle("login")}
-              className={classnames({
-                active: this.state.activeTab === "login"
-              })}
+              
             >
               Login
             </NavLink>
           </NavItem>
-          <NavItem>
+          <NavItem className={classnames({
+                active: this.state.activeTab === "register",
+                tab: true
+              })}>
             <NavLink
               onClick={() => this.toggle("register")}
-              className={classnames({
-                active: this.state.activeTab === "register"
-              })}
             >
               Register
             </NavLink>

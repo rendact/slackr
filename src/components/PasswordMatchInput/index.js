@@ -37,16 +37,15 @@ export default class PasswordMatchInput extends Component {
     return (
       <div>
         <div className="form-group">
-          <label>Password</label>
           <input
             className="form-control"
             type="password"
             onChange={this.onTempChange}
             disabled={disabled}
+            placeholder="Password"
           />
         </div>
         <div className="form-group">
-          <label>Re-Enter Password</label>
           <input
             className={
               "form-control" +
@@ -58,6 +57,7 @@ export default class PasswordMatchInput extends Component {
             onChange={this.onMatching}
             onFocus={this.onConfirmFocus}
             disabled={disabled}
+            placeholder="Re-type password"
           />
           {this.state.confirmFocus &&
             (this.state.match ? null : (
