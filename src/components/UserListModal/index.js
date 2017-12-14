@@ -11,7 +11,8 @@ export default class UserListModal extends Component {
       toggle,
       onClick,
       UserItems,
-      modalHeader
+      modalHeader,
+      isProcessing
     } = this.props;
     return (
       <Modal toggle={toggle} isOpen={isOpen} size="lg">
@@ -29,8 +30,9 @@ export default class UserListModal extends Component {
                   username={item.node.username}
                   userId={item.node.id}
                   image={item.node.avatar && item.node.avatar.blobUrl}
-                  onClick={onClick}
+                  onClick={onClick(item.node.id)}
                   key={i}
+                  isProcessing={isProcessing}
                 />
               ))) ||
             "No user can be displayed."

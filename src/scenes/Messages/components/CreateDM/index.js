@@ -18,69 +18,53 @@ class CreateDmWithData extends Component {
     this.onItemClick = this.onItemClick.bind(this);
   }
 
-  onItemClick(e) {
-    this.props.dispatch(toggleProcessing());
-    e.preventDefault();
-    const otherId = this.props.userId;
-    const meId = localStorage.getItem("slackrUserId");
-    const client = this.props.client;
-    const channelName = [meId, otherId].sort().join(";");
-    let channelId;
+  onItemClick(userId) {
+    const me = this;
+    return e => {
+      this.props.dispatch(toggleProcessing());
+      e.preventDefault();
+      const otherId = userId;
+      const meId = localStorage.getItem("slackrUserId");
+      const client = me.props.client;
+      const channelName = [meId, otherId].sort().join(";");
+      let channelId;
 
-    client
-      .query({
-        query: checkDMExists,
-        variables: { channelName: channelName }
-      })
-      .then(({ data: { viewer: { allChannels: { edges: channels } } } }) => {
-        if (!channels[0]) {
-          debugger;
-          client
-            .mutate({
-              mutation: createChannel,
-              variables: { input: { name: channelName, type: "direct" } }
-            })
-            .then(({ data }) => {
-              channelId = data.createChannel.changedChannel.id;
-              client
-                .mutate({
-                  mutation: bindToDM,
-                  variables: {
-                    meId: meId,
-                    otherId: otherId,
-                    channelId: channelId
-                  }
-                })
-                .then(data => {
-                  this.props.history.push("/messages/" + channelId);
-                  this.props.dispatch(toggleProcessing());
-                  this.props.dispatch(toggleDMUserList());
-                })
-                .catch(error => {
-                  this.props.dispatch(toggleProcessing());
-                  // error in binding
-                  debugger;
-                });
-            })
-            .catch(({ error }) => {
-              this.props.dispatch(toggleProcessing());
-              // error when creating channel
-              debugger;
-            });
-        } else {
-          this.props.history.push("/messages/" + channels[0].node.id);
-          this.props.dispatch(toggleProcessing());
-          this.props.dispatch(toggleDMUserList());
-        }
-      })
-      .catch(error => {
-        // error inside check channel exists
-        debugger;
-        this.props.dispatch(toggleProcessing());
-      });
+      client
+        .query({
+          query: checkDMExists,
+          variables: { channelName: channelName }
+        })
+        .then(({ data: { viewer: { allChannels: { edges: channels } } } }) => {
+          if (!channels[0]) {
+            client
+              .mutate({
+                mutation: createChannel,
+                variables: { input: { name: channelName, type: "direct" } }
+              })
+              .then(({ data }) => {
+                channelId = data.createChannel.changedChannel.id;
+                me.props.history.push("/messages/" + channelId);
+                me.props.dispatch(toggleProcessing());
+                me.props.dispatch(toggleDMUserList());
+              })
+              .catch(({ error }) => {
+                me.props.dispatch(toggleProcessing());
+                // error when creating channel
+              });
+          } else {
+            me.props.history.push("/messages/" + channels[0].node.id);
+            me.props.dispatch(toggleProcessing());
+            me.props.dispatch(toggleDMUserList());
+          }
+        })
+        .catch(error => {
+          // error inside check channel exists
+          me.props.dispatch(toggleProcessing());
+        });
+    };
   }
   render() {
-    const { createDmIsOpen, users, dispatch } = this.props;
+    const { createDmIsOpen, users, isProcessing, dispatch } = this.props;
     const { edges: DmItems } =
       !users.loading && users.viewer
         ? users.viewer.allUsers
@@ -94,6 +78,7 @@ class CreateDmWithData extends Component {
         isLoading={users.loading}
         UserItems={DmItems}
         onClick={this.onItemClick}
+        isProcessing={isProcessing}
       />
     );
   }
