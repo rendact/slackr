@@ -17,18 +17,20 @@ class CreateChannel extends Component {
 
   createChannelSubmit(val) {
     this.props.dispatch(toggleCreateChannelSubmit());
+    const name = val.name + ";" + localStorage.get("slackrUserId");
     return new Promise((resolve, reject) => {
       this.props
         .createChannel({
           variables: {
             input: {
-              name: val.name,
+              name: name,
               type: val.type
             }
           }
         })
         .then(data => {
           this.props.dispatch(createChannelToggle());
+          /*
 
           this.props
             .bindUserChannel({
@@ -48,6 +50,7 @@ class CreateChannel extends Component {
               reject(error);
               this.props.dispatch(toggleCreateChannelSubmit());
             });
+            */
         })
         .catch(error => {
           reject(error);
