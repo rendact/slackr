@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import addUserModalToggle from "./actions/addUserModalToggle";
+import addUserModalToggle from "../../../../actions/addUserModalToggle";
 import AddUserButton from "./components/AddUserButton";
 
 class AddUserButtonContainer extends React.Component {
@@ -11,7 +11,6 @@ class AddUserButtonContainer extends React.Component {
   }
 
   onClick(e) {
-    debugger;
     this.props.dispatch(addUserModalToggle());
   }
 

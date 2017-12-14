@@ -179,7 +179,10 @@ class MessagesWrapper extends Component {
             channelId={match.params.id}
           />
           <ChatBody>
-            <AddUserModal participants={data.getChannel.participants.edges} />
+            <AddUserModal
+              channelId={match.params.id}
+              participants={data.getChannel.participants.edges}
+            />
             {data.getChannel && data.getChannel.messages
               ? data.getChannel.messages.edges.map((message, idx) => (
                   <ChatItem
