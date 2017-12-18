@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import UserListModal from "components/UserListModal";
 
 import removeUserFromChannel from "./mutations/removeUserFromChannel";
+import removeUserModalToggle from "../../actions/removeUserModalToggle";
 
 class RemoveUserModal extends React.Component {
   constructor(props) {
@@ -28,15 +29,17 @@ class RemoveUserModal extends React.Component {
         })
         .then(data => {
           this.setState({ isProcessing: false });
+          this.props.dispatch(removeUserModalToggle());
         })
         .catch(error => {
           this.setState({ isProcessing: false });
+          this.props.dispatch(removeUserModalToggle());
         });
     };
   }
 
   render() {
-    const { users, dispatch, isAddUserModalOpen, participants } = this.props;
+    const { users, dispatch, isRemoveUserModalOpen, participants } = this.props;
 
     const userItems = participants.filter(
       e => e.node.id !== localStorage.getItem("slackrUserId")
@@ -45,10 +48,11 @@ class RemoveUserModal extends React.Component {
     return (
       <UserListModal
         modalHeader="Remove User"
-        isOpen={isAddUserModalOpen || true}
+        isOpen={isRemoveUserModalOpen}
         onClick={this.onItemClick}
         isProcessing={this.state.isProcessing}
         UserItems={userItems}
+        toggle={() => dispatch(removeUserModalToggle())}
       />
     );
   }

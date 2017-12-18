@@ -6,6 +6,7 @@ import inputMessage from "./inputMessage";
 import dmUserList from "./dmUserList";
 import profileModal from "./profileModal";
 import addUserModal from "./addUserModal";
+import removeUserModal from "./removeUserModal";
 
 export default combineReducers({
   form: formReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   dmUserList,
   inputMessage,
   accountSetting,
-  addUserModal
+  addUserModal,
+  removeUserModal
 });
