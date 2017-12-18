@@ -30,6 +30,7 @@ class MessagesHead extends Component {
             isVisible={isChannelNameEditing}
             spanIcon={spanIcon}
             name={name}
+            channelId={channelId}
           />
 
           <ChannelName

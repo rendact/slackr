@@ -1,21 +1,39 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 
-const NameInput = props => (
+const NameInput = ({
+  spanIcon,
+  submitting,
+  isVisible,
+  handleSubmit,
+  onCancelClick
+}) => (
   <form
-    style={{ width: "50%", display: props.isVisible ? "" : "none" }}
+    style={{ width: "50%", display: isVisible ? "" : "none" }}
     className="input-group"
-    onSubmit={props.handleSubmit}
+    onSubmit={handleSubmit}
   >
     <span className="input-group-addon">
-      <i className={props.spanIcon} />
+      <i className={spanIcon} />
     </span>
-    <Field component="input" className="form-control" type="text" name="name" />
+    <Field
+      component="input"
+      className="form-control"
+      type="text"
+      name="name"
+      disabled={submitting}
+    />
     <span className="input-group-btn">
-      <button className="btn btn-primary">Update</button>
+      <button className="btn btn-primary" disabled={submitting}>
+        {submitting ? <span className="fa fa-spinner fa-spin" /> : "Update"}
+      </button>
     </span>
     <span className="input-group-btn">
-      <button onClick={props.onCancelClick} className="btn btn-warning">
+      <button
+        onClick={onCancelClick}
+        className="btn btn-warning"
+        disabled={submitting}
+      >
         Cancel
       </button>
     </span>
