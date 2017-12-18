@@ -7,6 +7,7 @@ import ChatItem from "./components/ChatItem";
 import MessageInputWithMutation from "./components/ChatInput";
 import ButtonJoin from "./components/ButtonJoin";
 import AddUserModal from "./components/AddUserListModal";
+import RemoveUserModal from "./components/RemoveUserListModal";
 import { getChannel } from "./queries/Channel/getChannel";
 import { messageSubscription } from "./queries/Message/Subscription/onCreate";
 import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
@@ -180,6 +181,10 @@ class MessagesWrapper extends Component {
           />
           <ChatBody>
             <AddUserModal
+              channelId={match.params.id}
+              participants={data.getChannel.participants.edges}
+            />
+            <RemoveUserModal
               channelId={match.params.id}
               participants={data.getChannel.participants.edges}
             />
