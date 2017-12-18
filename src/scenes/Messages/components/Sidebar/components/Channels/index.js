@@ -7,6 +7,7 @@ import ChannelItem from "./components/ChannelItem";
 import { getChannels } from "./queries/channels/getChannels";
 import { channelSubscription } from "./queries/channels/channelSubscription";
 import { subscribeToDeleteChannel } from "./queries/channels/subscription/delete";
+import channelSubscriptionUpdate from "./queries/channels/subscription/update";
 
 import { createChannelToggle } from "scenes/Messages/actions/createChannel";
 import CircleAddButton from "scenes/Messages/components/Sidebar/components/CircleAddButton";
@@ -17,6 +18,7 @@ class ChannelsSection extends Component {
 
     this.subscribeToCreateChannels = this.subscribeToCreateChannels.bind(this);
     this.subscribeToDeleteChannel = this.subscribeToDeleteChannel.bind(this);
+    this.subscribeToUpdateChannel = this.subscribeToUpdateChannel.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
@@ -67,9 +69,44 @@ class ChannelsSection extends Component {
     });
   }
 
+  subscribeToUpdateChannel() {
+    return this.props.channels.subscribeToMore({
+      document: channelSubscriptionUpdate,
+      variables: { filter: { type: { ne: "direct" } } },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+        const {
+          data: { subscribeToChannel: { value: { id, name } } }
+        } = subscriptionData;
+
+        const prevEdges = prev.viewer.allChannels.edges;
+
+        const newEdges = prevEdges.map(edge => {
+          if (edge.node.id === id) {
+            return {
+              node: {
+                ...edge.node,
+                name: name
+              }
+            };
+          }
+
+          return edge;
+        });
+
+        return {
+          viewer: { allChannels: { edges: newEdges } }
+        };
+      }
+    });
+  }
+
   componentWillMount() {
     this.subscribeToCreateChannels();
     this.subscribeToDeleteChannel();
+    this.subscribeToUpdateChannel();
   }
 
   renderChannels(channels) {
