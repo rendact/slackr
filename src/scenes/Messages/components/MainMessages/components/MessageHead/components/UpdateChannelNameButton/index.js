@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import channelNameEditingToggle from "../../actions/channelNameEditingToggle";
 import UpdateChannelNameButton from "./components/UpdateChannelNameButton";
 
 class AddUserButtonContainer extends React.Component {
@@ -10,7 +11,7 @@ class AddUserButtonContainer extends React.Component {
   }
 
   onClick(e) {
-    debugger;
+    this.props.dispatch(channelNameEditingToggle());
   }
 
   render() {

@@ -1,13 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default props => (
-  <div className="input-group" style={{ width: "50%" }}>
-    <span className="input-group-addon">
-      <i className={props.spanIcon} />
-    </span>
-    <input className="form-control" type="text" name="name" />
-    <span className="input-group-btn">
-      <button className="btn btn-primary">Update</button>
-    </span>
-  </div>
-);
+import channelNameEditingToggle from "../../actions/channelNameEditingToggle";
+import UpdateChannelNameInput from "./components/UpdateChannelNameInput";
+
+class UpdateChannelName extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onCancelClick = this.onCancelClick.bind(this);
+  }
+
+  onCancelClick(e) {
+    e.preventDefault();
+    this.props.dispatch(channelNameEditingToggle());
+  }
+
+  render() {
+    const { isVisible, name, spanIcon } = this.props;
+    return (
+      <UpdateChannelNameInput
+        isVisible={isVisible}
+        spanIcon={spanIcon}
+        onCancelClick={this.onCancelClick}
+        name={name}
+        onSubmit={() => {}}
+        initialValues={{ name: name }}
+      />
+    );
+  }
+}
+
+export default connect()(UpdateChannelName);
