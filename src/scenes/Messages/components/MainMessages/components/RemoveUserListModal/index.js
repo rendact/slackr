@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import UserListModal from "components/UserListModal";
 
+import removeUserFromChannel from "./mutations/removeUserFromChannel";
+
 class RemoveUserModal extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class RemoveUserModal extends React.Component {
     return e => {
       this.setState({ isProcessing: true });
       this.props
-        .bindUserChannel({
+        .removeUserFromChannel({
           variables: {
             input: { userId: userId, channelId: this.props.channelId }
           }
@@ -54,4 +56,7 @@ class RemoveUserModal extends React.Component {
 
 const mapStateToProps = state => state.removeUserModal || {};
 
-export default compose(connect(mapStateToProps))(RemoveUserModal);
+export default compose(
+  connect(mapStateToProps),
+  graphql(removeUserFromChannel, { name: "removeUserFromChannel" })
+)(RemoveUserModal);
