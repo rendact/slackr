@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { Form } from "reactstrap";
+import {
+  Form,
+  InputGroup,
+  InputGroupButton,
+  InputGroupAddon,
+  FormText
+} from "reactstrap";
 
 import { renderInputGroupTextWithSend } from "components/reduxFormComponents/renderInputGroupText";
 
@@ -15,7 +21,7 @@ class MessageInput extends Component {
       .then(() => {
         this.props.reset();
         // by triggering this, the message body scroll to bottom
-        this.props.triggerNewMessage();
+        //this.props.triggerNewMessage();
       })
       .catch(() => {
         debugger;
@@ -31,12 +37,29 @@ class MessageInput extends Component {
         }}
       >
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <Field
-            component={renderInputGroupTextWithSend}
-            name="messageContent"
-            id="messageContent"
-            isSending={isSending}
-          />
+          <InputGroup>
+            <InputGroupAddon>
+              <span className="fa fa-file-image-o" />
+            </InputGroupAddon>
+            <Field
+              className="form-control"
+              disabled={isSending}
+              id="messageContent"
+              name="messageContent"
+              component="input"
+            />
+            <InputGroupButton disabled={isSending} type="submit">
+              Send
+            </InputGroupButton>
+            {isSending && (
+              <FormText
+                color="muted"
+                style={{ marginTop: 40, position: "absolute" }}
+              >
+                Sending...
+              </FormText>
+            )}
+          </InputGroup>
         </Form>
       </div>
     );
