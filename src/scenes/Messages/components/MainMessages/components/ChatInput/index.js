@@ -40,6 +40,7 @@ class MessageInputWithMutation extends Component {
       <MessageInput
         isSending={this.props.isSending}
         onSubmit={this.handleCreateMessage}
+        channelId={this.props.channelId}
       />
     );
   }

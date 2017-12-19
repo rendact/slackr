@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
+import { graphql, compose } from "react-apollo";
 import {
   Form,
   InputGroup,
@@ -8,6 +9,7 @@ import {
   FormText
 } from "reactstrap";
 import ImageInputModal from "../ImageInputModal";
+import { createMessageMtn } from "../../queries/Message/create";
 
 class MessageInput extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class MessageInput extends Component {
     this.onImageAddonClick = this.onImageAddonClick.bind(this);
     this.imageInputModalToggle = this.imageInputModalToggle.bind(this);
     this.onImageInputChange = this.onImageInputChange.bind(this);
+    this.onImageInputSubmit = this.onImageInputSubmit.bind(this);
 
     this.state = {
       isImageInputModalOpen: false
@@ -44,7 +47,27 @@ class MessageInput extends Component {
   }
 
   onImageInputSubmit(val) {
-    debugger;
+    this.props
+      .createMessage({
+        variables: {
+          input: {
+            authorId: localStorage.getItem("slackrUserId"),
+            channelId: this.props.channelId,
+            content: val.caption,
+            attachment: {
+              name: val.name,
+              blobFieldName: "image",
+              image: this.state.imageFile
+            }
+          }
+        }
+      })
+      .then(data => {
+        debugger;
+      })
+      .catch(error => {
+        debugger;
+      });
   }
 
   onImageInputChange(e) {
@@ -60,9 +83,9 @@ class MessageInput extends Component {
       this.setState(prevState => ({
         isImageInputModalOpen: !prevState.isImageInputModalOpen,
         initialValues: {
-          image: file,
           title: file.name
         },
+        imageFile: file,
         imageUrl: e.target.result
       }));
     };
@@ -124,4 +147,7 @@ class MessageInput extends Component {
   }
 }
 
-export default reduxForm({ form: "message" })(MessageInput);
+export default compose(
+  reduxForm({ form: "message" }),
+  graphql(createMessageMtn, { name: "createMessage" })
+)(MessageInput);

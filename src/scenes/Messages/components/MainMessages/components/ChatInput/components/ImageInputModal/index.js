@@ -21,12 +21,6 @@ class ImageInputModal extends React.Component {
               className="img-thumbnail mx-auto d-block"
               style={{ maxWidth: 300 }}
             />
-            <Field
-              type="file"
-              name="image"
-              style={{ display: "none" }}
-              component="input"
-            />
             <br />
             <FormGroup>
               <Field
