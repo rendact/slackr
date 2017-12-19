@@ -14,7 +14,11 @@ export default class UserItem extends Component {
     return (
       <Media className="dm-item" onClick={onClick} style={style}>
         <Media left>
-          <Media object src={image ? image : profile} />
+          <Media
+            object
+            src={image ? image : profile}
+            style={{ maxWidth: 64, maxHeight: 64 }}
+          />
         </Media>
         <Media className="dm-item-body" body>
           <Media heading>{username}</Media>
