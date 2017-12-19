@@ -64,9 +64,12 @@ class MessageInput extends Component {
       })
       .then(data => {
         debugger;
+
+        this.imageInputModalToggle();
       })
       .catch(error => {
         debugger;
+        this.imageInputModalToggle();
       });
   }
 

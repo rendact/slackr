@@ -8,6 +8,10 @@ export const messageSubscription = gql`
           createdAt
           id
           content
+          attachment {
+            blobUrl
+            name
+          }
           author {
             id
             username
