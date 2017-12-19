@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Media, Tooltip } from "reactstrap";
 import dummyprofile from "images/dummy-profile.png";
 import moment from "moment";
+import marked from "marked";
 
 export default class ChatItem extends Component {
   constructor(props) {
@@ -61,12 +62,12 @@ export default class ChatItem extends Component {
                     className="fa fa-quote-left"
                     style={{ marginRight: 5 }}
                   />
-                  {body}
+                  <span dangerouslySetInnerHTML={{ __html: marked(body) }} />
                 </p>
               )}
             </div>
           ) : (
-            body
+            <span dangerouslySetInnerHTML={{ __html: marked(body) }} />
           )}
         </Media>
       </Media>

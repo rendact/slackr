@@ -51,6 +51,18 @@ class MessageInput extends Component {
               </FormText>
             )}
           </InputGroup>
+          <FormText
+            className="pull-right"
+            style={{
+              marginBottom: 0,
+              background: "deepskyblue",
+              padding: 5,
+              borderRadius: 10
+            }}
+          >
+            <b>**bold**</b> <i>*italics*</i> ~~strike~~ <code>`code`</code>{" "}
+            <code>```preformatted```</code> <span>&gt;quote</span>
+          </FormText>
         </Form>
       </div>
     );
