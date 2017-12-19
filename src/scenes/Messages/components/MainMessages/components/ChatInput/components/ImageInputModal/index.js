@@ -13,13 +13,13 @@ class ImageInputModal extends React.Component {
     const { handleSubmit, imageUrl, isOpen, onCancel, toggle } = this.props;
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <ModalHeader>Upload an Image</ModalHeader>
           <ModalBody>
             <img
-              src="{imgUrl}"
+              src={imageUrl}
               className="img-thumbnail mx-auto d-block"
-              style={{ maxWidth: 100 }}
+              style={{ maxWidth: 300 }}
             />
             <Field
               type="file"

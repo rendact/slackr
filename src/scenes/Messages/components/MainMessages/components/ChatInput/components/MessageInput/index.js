@@ -15,6 +15,7 @@ class MessageInput extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onImageAddonClick = this.onImageAddonClick.bind(this);
     this.imageInputModalToggle = this.imageInputModalToggle.bind(this);
+    this.onImageInputChange = this.onImageInputChange.bind(this);
 
     this.state = {
       isImageInputModalOpen: false
@@ -33,10 +34,38 @@ class MessageInput extends Component {
       });
   }
 
-  imageInputModalToggle() {
+  imageInputModalToggle(e) {
+    if (e) {
+      e.preventDefault();
+    }
     this.setState(prevState => ({
       isImageInputModalOpen: !prevState.isImageInputModalOpen
     }));
+  }
+
+  onImageInputSubmit(val) {
+    debugger;
+  }
+
+  onImageInputChange(e) {
+    const file = e.currentTarget.files[0];
+    if (!file.type.match(/image\/.*/)) {
+      throw new Error("not image error");
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = e => {
+      this.setState(prevState => ({
+        isImageInputModalOpen: !prevState.isImageInputModalOpen,
+        initialValues: {
+          image: file,
+          title: file.name
+        },
+        imageUrl: e.target.result
+      }));
+    };
   }
 
   onImageAddonClick(e) {
@@ -64,6 +93,10 @@ class MessageInput extends Component {
               <ImageInputModal
                 isOpen={this.state.isImageInputModalOpen}
                 toggle={this.imageInputModalToggle}
+                imageUrl={this.state.imageUrl}
+                initialValues={this.state.initialValues}
+                onSubmit={this.onImageInputSubmit}
+                onCancel={this.imageInputModalToggle}
               />
             </InputGroupAddon>
             <Field
