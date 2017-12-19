@@ -10,7 +10,14 @@ import {
 
 class ImageInputModal extends React.Component {
   render() {
-    const { handleSubmit, imageUrl, isOpen, onCancel, toggle } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      imageUrl,
+      isOpen,
+      onCancel,
+      toggle
+    } = this.props;
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
         <form onSubmit={handleSubmit}>
@@ -29,6 +36,7 @@ class ImageInputModal extends React.Component {
                 placeholder="Title"
                 type="text"
                 className="form-control"
+                disabled={submitting}
               />
             </FormGroup>
             <FormGroup>
@@ -38,12 +46,19 @@ class ImageInputModal extends React.Component {
                 type="text"
                 placeholder="Caption"
                 className="form-control"
+                disabled={submitting}
               />
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-primary">Send</button>
-            <button onClick={onCancel} className="btn btn-warning">
+            <button className="btn btn-primary" disabled={submitting}>
+              {submitting ? <span className="fa fa-spinner fa-spin" /> : "Send"}
+            </button>
+            <button
+              onClick={onCancel}
+              disabled={submitting}
+              className="btn btn-warning"
+            >
               Cancel
             </button>
           </ModalFooter>

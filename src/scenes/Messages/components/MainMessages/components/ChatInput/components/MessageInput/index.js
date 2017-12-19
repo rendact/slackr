@@ -47,30 +47,32 @@ class MessageInput extends Component {
   }
 
   onImageInputSubmit(val) {
-    this.props
-      .createMessage({
-        variables: {
-          input: {
-            authorId: localStorage.getItem("slackrUserId"),
-            channelId: this.props.channelId,
-            content: val.caption,
-            attachment: {
-              name: val.title,
-              blobFieldName: "image",
-              image: this.state.imageFile
+    return new Promise((resolve, reject) => {
+      this.props
+        .createMessage({
+          variables: {
+            input: {
+              authorId: localStorage.getItem("slackrUserId"),
+              channelId: this.props.channelId,
+              content: val.caption,
+              attachment: {
+                name: val.title,
+                blobFieldName: "image",
+                image: this.state.imageFile
+              }
             }
           }
-        }
-      })
-      .then(data => {
-        debugger;
+        })
+        .then(data => {
+          resolve(data);
 
-        this.imageInputModalToggle();
-      })
-      .catch(error => {
-        debugger;
-        this.imageInputModalToggle();
-      });
+          this.imageInputModalToggle();
+        })
+        .catch(error => {
+          this.imageInputModalToggle();
+          reject(error);
+        });
+    });
   }
 
   onImageInputChange(e) {
