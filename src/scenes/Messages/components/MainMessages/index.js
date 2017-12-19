@@ -178,6 +178,7 @@ class MessagesWrapper extends Component {
             name={data.getChannel && name}
             type={data.getChannel && type}
             channelId={match.params.id}
+            participants={data.getChannel.participants.edges}
           />
           <ChatBody>
             <AddUserModal

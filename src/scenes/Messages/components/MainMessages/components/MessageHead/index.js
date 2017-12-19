@@ -5,6 +5,7 @@ import AddUserButton from "./components/AddUserButton";
 import RemoveUserButton from "./components/RemoveUserButton";
 import UpdateChannelNameInput from "./components/UpdateChannelNameInput";
 import ChannelName from "./components/ChannelName";
+import isChannelAdmin from "./utils/isChannelAdmin";
 
 import channelNameEditingToggle from "./actions/channelNameEditingToggle";
 
@@ -20,7 +21,18 @@ class MessagesHead extends Component {
     this.props.dispatch(channelNameEditingToggle());
   }
   render() {
-    let { name, type, channelId, isChannelNameEditing } = this.props;
+    let {
+      participants,
+      name,
+      type,
+      channelId,
+      isChannelNameEditing
+    } = this.props;
+
+    const isAdmin = isChannelAdmin(
+      localStorage.getItem("slackrUserId"),
+      participants
+    );
 
     const spanIcon = type === "private" ? "fa fa-lock" : "fa fa-hashtag";
     return (
@@ -39,19 +51,22 @@ class MessagesHead extends Component {
             spanIcon={spanIcon}
             channelId={channelId}
             onChannelNameEditButtonClick={this.onChannelNameEditButtonClick}
+            isChannelAdmin={isAdmin}
           />
 
-          <div style={{ width: "50%" }}>
-            {type !== "direct" && (
-              <RemoveButton isRight channelId={channelId} />
-            )}
-            {type !== "direct" && (
-              <AddUserButton isRight channelId={channelId} />
-            )}
-            {type !== "direct" && (
-              <RemoveUserButton isRight channelId={channelId} />
-            )}
-          </div>
+          {isAdmin ? (
+            <div style={{ width: "50%" }}>
+              {type !== "direct" && (
+                <RemoveButton isRight channelId={channelId} />
+              )}
+              {type !== "direct" && (
+                <AddUserButton isRight channelId={channelId} />
+              )}
+              {type !== "direct" && (
+                <RemoveUserButton isRight channelId={channelId} />
+              )}
+            </div>
+          ) : null}
         </h2>
         <hr />
       </div>

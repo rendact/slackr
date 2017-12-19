@@ -6,15 +6,18 @@ export default ({
   name,
   spanIcon,
   channelId,
-  onChannelNameEditButtonClick
+  onChannelNameEditButtonClick,
+  isChannelAdmin
 }) => (
   <div style={{ width: "50%", display: isVisible ? "" : "none" }}>
     <span className={spanIcon} /> {name}
-    <sup>
-      <UpdateChannelNameButton
-        channelId={channelId}
-        onClick={onChannelNameEditButtonClick}
-      />
-    </sup>
+    {isChannelAdmin ? (
+      <sup>
+        <UpdateChannelNameButton
+          channelId={channelId}
+          onClick={onChannelNameEditButtonClick}
+        />
+      </sup>
+    ) : null}
   </div>
 );

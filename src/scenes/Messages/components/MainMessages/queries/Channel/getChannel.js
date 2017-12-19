@@ -8,6 +8,7 @@ export const getChannel = gql`
       type
       participants {
         edges {
+          memberType
           node {
             id
             username
