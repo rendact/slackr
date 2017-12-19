@@ -29,10 +29,9 @@ class MessagesHead extends Component {
       isChannelNameEditing
     } = this.props;
 
-    const isAdmin = isChannelAdmin(
-      localStorage.getItem("slackrUserId"),
-      participants
-    );
+    const isAdmin =
+      type !== "direct" &&
+      isChannelAdmin(localStorage.getItem("slackrUserId"), participants);
 
     const spanIcon = type === "private" ? "fa fa-lock" : "fa fa-hashtag";
     return (
