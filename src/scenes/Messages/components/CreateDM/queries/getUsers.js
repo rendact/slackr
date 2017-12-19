@@ -8,6 +8,9 @@ export const getUsers = gql`
           node {
             id
             username
+            avatar {
+              blobUrl
+            }
           }
         }
       }
