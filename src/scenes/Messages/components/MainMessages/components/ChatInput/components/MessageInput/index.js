@@ -7,8 +7,7 @@ import {
   InputGroupAddon,
   FormText
 } from "reactstrap";
-
-import { renderInputGroupTextWithSend } from "components/reduxFormComponents/renderInputGroupText";
+import ImageInputModal from "../ImageInputModal";
 
 class MessageInput extends Component {
   constructor(props) {
@@ -49,7 +48,9 @@ class MessageInput extends Component {
                 type="file"
                 style={{ display: "none" }}
                 ref={input => (this.input = input)}
+                onChange={this.onImageInputChange}
               />
+              <ImageInputModal />
             </InputGroupAddon>
             <Field
               className="form-control"
