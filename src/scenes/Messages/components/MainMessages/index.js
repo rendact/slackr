@@ -197,6 +197,7 @@ class MessagesWrapper extends Component {
                     head={message.node.author && message.node.author.fullname}
                     createdAt={message.node.createdAt}
                     id={message.node.id}
+                    attachment={message.node.attachment}
                     image={
                       message.node.author.avatar
                         ? message.node.author.avatar.blobUrl

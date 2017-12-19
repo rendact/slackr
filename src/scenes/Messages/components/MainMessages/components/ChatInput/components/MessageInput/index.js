@@ -55,7 +55,7 @@ class MessageInput extends Component {
             channelId: this.props.channelId,
             content: val.caption,
             attachment: {
-              name: val.name,
+              name: val.title,
               blobFieldName: "image",
               image: this.state.imageFile
             }

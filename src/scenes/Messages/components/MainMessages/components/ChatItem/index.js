@@ -13,7 +13,7 @@ export default class ChatItem extends Component {
   }
 
   render() {
-    const { image, head, body, createdAt, id } = this.props;
+    const { image, head, body, createdAt, id, attachment } = this.props;
     const onChatFormat = "hh:mm A";
 
     return (
@@ -45,7 +45,29 @@ export default class ChatItem extends Component {
               {moment(createdAt).format(onChatFormat)}
             </small>
           </Media>
-          {body ? body : "text hello message"}
+          {attachment ? (
+            <div>
+              <p>
+                Uploaded this image: <b>{attachment.name}</b>
+              </p>
+              <img
+                className="img-thumbnail"
+                src={attachment.blobUrl}
+                style={{ maxWidth: 300 }}
+              />
+              {body && (
+                <p>
+                  <span
+                    className="fa fa-quote-left"
+                    style={{ marginRight: 5 }}
+                  />
+                  {body}
+                </p>
+              )}
+            </div>
+          ) : (
+            body
+          )}
         </Media>
       </Media>
     );
