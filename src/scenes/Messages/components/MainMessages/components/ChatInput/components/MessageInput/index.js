@@ -14,6 +14,7 @@ class MessageInput extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onImageAddonClick = this.onImageAddonClick.bind(this);
   }
   onSubmit(val) {
     this.props
@@ -27,6 +28,10 @@ class MessageInput extends Component {
         debugger;
       });
   }
+
+  onImageAddonClick(e) {
+    this.input.click();
+  }
   render() {
     const { isSending } = this.props;
     return (
@@ -38,8 +43,13 @@ class MessageInput extends Component {
       >
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <InputGroup>
-            <InputGroupAddon>
+            <InputGroupAddon onClick={this.onImageAddonClick}>
               <span className="fa fa-file-image-o" />
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={input => (this.input = input)}
+              />
             </InputGroupAddon>
             <Field
               className="form-control"
