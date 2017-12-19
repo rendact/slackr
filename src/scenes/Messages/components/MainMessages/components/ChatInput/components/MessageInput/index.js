@@ -14,6 +14,11 @@ class MessageInput extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.onImageAddonClick = this.onImageAddonClick.bind(this);
+    this.imageInputModalToggle = this.imageInputModalToggle.bind(this);
+
+    this.state = {
+      isImageInputModalOpen: false
+    };
   }
   onSubmit(val) {
     this.props
@@ -26,6 +31,12 @@ class MessageInput extends Component {
       .catch(() => {
         debugger;
       });
+  }
+
+  imageInputModalToggle() {
+    this.setState(prevState => ({
+      isImageInputModalOpen: !prevState.isImageInputModalOpen
+    }));
   }
 
   onImageAddonClick(e) {
@@ -50,7 +61,10 @@ class MessageInput extends Component {
                 ref={input => (this.input = input)}
                 onChange={this.onImageInputChange}
               />
-              <ImageInputModal />
+              <ImageInputModal
+                isOpen={this.state.isImageInputModalOpen}
+                toggle={this.imageInputModalToggle}
+              />
             </InputGroupAddon>
             <Field
               className="form-control"
