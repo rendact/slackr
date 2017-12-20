@@ -7,7 +7,7 @@ class SnippetInputModal extends Component {
   render() {
     const { toggle, isOpen, handleSubmit } = this.props;
     return (
-      <Modal size="lg" toggle={toggle} isOpen={isOpen || true}>
+      <Modal size="lg" toggle={toggle} isOpen={isOpen}>
         <form onSubmit={handleSubmit}>
           <ModalHeader>Create Snippet</ModalHeader>
 
@@ -24,7 +24,7 @@ class SnippetInputModal extends Component {
               </div>
               <div className="col-md-4">
                 <Field component="select" name="lang" className="form-control">
-                  <option>Auto Detect</option>
+                  <option selected>Auto Detect</option>
                   {listLanguages().map((lang, id) => (
                     <option key={id}>{lang}</option>
                   ))}

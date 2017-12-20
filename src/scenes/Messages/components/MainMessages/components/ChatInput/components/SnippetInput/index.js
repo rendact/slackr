@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { graphql } from "react-apollo";
+import { createMessageMtn as createMessage } from "../../queries/Message/create";
 import { InputGroupAddon } from "reactstrap";
 import SnippetInputModal from "./components/SnippetInputModal";
 
@@ -7,6 +9,7 @@ class SnippetInputContainer extends Component {
     super(props);
 
     this.snippetInputModalToggle = this.snippetInputModalToggle.bind(this);
+    this.onSnippetSubmit = this.onSnippetSubmit.bind(this);
 
     this.state = {
       isSnippetInputModalOpen: false
@@ -20,7 +23,39 @@ class SnippetInputContainer extends Component {
   }
 
   onSnippetSubmit(val) {
-    debugger;
+    let { title, lang, snippet: code, caption } = val;
+
+    if (!lang || lang === "Auto Detect") {
+      // check lang here
+      //
+      //
+    }
+
+    return new Promise((resolve, reject) => {
+      this.props
+        .createMessage({
+          variables: {
+            input: {
+              channelId: this.props.channelId,
+              authorId: localStorage.getItem("slackrUserId"),
+              content: caption,
+              snippet: {
+                title: title,
+                code: code,
+                lang: lang
+              }
+            }
+          }
+        })
+        .then(data => {
+          debugger;
+          resolve(data);
+        })
+        .catch(error => {
+          debugger;
+          reject(error);
+        });
+    });
   }
 
   render() {
@@ -40,4 +75,6 @@ class SnippetInputContainer extends Component {
   }
 }
 
-export default SnippetInputContainer;
+export default graphql(createMessage, { name: "createMessage" })(
+  SnippetInputContainer
+);
