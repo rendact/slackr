@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
+import { highlightAuto } from "highlightjs";
 import { createMessageMtn as createMessage } from "../../queries/Message/create";
 import { InputGroupAddon } from "reactstrap";
 import SnippetInputModal from "./components/SnippetInputModal";
@@ -26,9 +27,7 @@ class SnippetInputContainer extends Component {
     let { title, lang, snippet: code, caption } = val;
 
     if (!lang || lang === "Auto Detect") {
-      // check lang here
-      //
-      //
+      lang = highlightAuto(code).language;
     }
 
     return new Promise((resolve, reject) => {
@@ -48,11 +47,11 @@ class SnippetInputContainer extends Component {
           }
         })
         .then(data => {
-          debugger;
+          this.snippetInputModalToggle();
           resolve(data);
         })
         .catch(error => {
-          debugger;
+          this.snippetInputModalToggle();
           reject(error);
         });
     });
