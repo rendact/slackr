@@ -57,13 +57,17 @@ export default class ChatItem extends Component {
                 style={{ maxWidth: 300 }}
               />
               {body && (
-                <p>
+                <div>
                   <span
-                    className="fa fa-quote-left"
-                    style={{ marginRight: 5 }}
+                    dangerouslySetInnerHTML={{
+                      __html: marked(
+                        ' <span class="fa fa-quote-left" style=" margin-right: 5px ;" ></span>' +
+                          body,
+                        { sanitize: false }
+                      )
+                    }}
                   />
-                  <span dangerouslySetInnerHTML={{ __html: marked(body) }} />
-                </p>
+                </div>
               )}
             </div>
           ) : (
