@@ -6,27 +6,29 @@ import marked from "marked";
 import ImageFullModal from "./components/ImageFullModal";
 import { highlightAuto } from "highlightjs";
 
-marked.setOptions({
-  highlight: function(code) {
-    return require("highlightjs").highlightAuto(code).value;
-  }
-});
-
 export default class ChatItem extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       dateTooltipOpen: false,
-      isImageFullModalOpen: false
+      isImageFullModalOpen: false,
+      isDisplaySnippetFull: false
     };
 
     this.onImageToggle = this.onImageToggle.bind(this);
+    this.onShowMoreToggle = this.onShowMoreToggle.bind(this);
   }
 
   onImageToggle() {
     this.setState(prev => ({
       isImageFullModalOpen: !prev.isImageFullModalOpen
+    }));
+  }
+
+  onShowMoreToggle() {
+    this.setState(prev => ({
+      isDisplaySnippetFull: !prev.isDisplaySnippetFull
     }));
   }
 
@@ -58,10 +60,22 @@ export default class ChatItem extends Component {
           <p>
             Uploaded this snippet: <b>{snippet.title}</b>
           </p>
-          <pre style={{ maxHeight: 100, overflow: "hidden" }}>
-            <code className={"hljs " + codeMarked.language}>
+          <pre>
+            <code
+              className={"hljs " + codeMarked.language}
+              style={{
+                maxHeight: this.state.isDisplaySnippetFull ? "none" : 100,
+                overflow: "hidden"
+              }}
+            >
               <span dangerouslySetInnerHTML={{ __html: codeMarked.value }} />
             </code>
+            <button
+              onClick={this.onShowMoreToggle}
+              className="btn btn-info btn-sm"
+            >
+              {this.state.isDisplaySnippetFull ? "Show less" : "Show more"}
+            </button>
           </pre>
           {body && (
             <div>
