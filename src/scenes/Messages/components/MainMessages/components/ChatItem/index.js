@@ -3,14 +3,24 @@ import { Media, Tooltip } from "reactstrap";
 import dummyprofile from "images/dummy-profile.png";
 import moment from "moment";
 import marked from "marked";
+import ImageFullModal from "./components/ImageFullModal";
 
 export default class ChatItem extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dateTooltipOpen: false
+      dateTooltipOpen: false,
+      isImageFullModalOpen: false
     };
+
+    this.onImageToggle = this.onImageToggle.bind(this);
+  }
+
+  onImageToggle() {
+    this.setState(prev => ({
+      isImageFullModalOpen: !prev.isImageFullModalOpen
+    }));
   }
 
   render() {
@@ -54,7 +64,15 @@ export default class ChatItem extends Component {
               <img
                 className="img-thumbnail"
                 src={attachment.blobUrl}
-                style={{ maxWidth: 300 }}
+                style={{ cursor: "zoom-in", maxWidth: 300 }}
+                onClick={this.onImageToggle}
+              />
+              <ImageFullModal
+                toggle={this.onImageToggle}
+                isOpen={this.state.isImageFullModalOpen}
+                imageUrl={attachment.blobUrl}
+                title={attachment.name}
+                caption={body}
               />
               {body && (
                 <div>
