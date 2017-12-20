@@ -25,6 +25,11 @@ export const getChannel = gql`
             id
             content
             createdAt
+            snippet {
+              title
+              lang
+              code
+            }
             attachment {
               blobUrl
               name
