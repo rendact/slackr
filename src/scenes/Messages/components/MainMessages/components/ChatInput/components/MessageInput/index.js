@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { Form, InputGroup, InputGroupButton, FormText } from "reactstrap";
 import ImageInput from "../ImageInput";
+import SnippetInput from "../SnippetInput";
 
 class MessageInput extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class MessageInput extends Component {
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <InputGroup>
             <ImageInput channelId={this.props.channelId} />
+            <SnippetInput channelId={this.props.channelId} />
             <Field
               className="form-control"
               disabled={isSending}
