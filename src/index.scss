@@ -10,6 +10,17 @@ body {
   height: 100vh;
 }
 
+// fix dropdown in bootstrap
+
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu-right {
+  left: auto;
+  right: 0;
+}
+
 #messages-wrapper > * {
   flex: 1 100%;
 }

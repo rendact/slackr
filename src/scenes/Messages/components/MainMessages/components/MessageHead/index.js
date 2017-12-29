@@ -4,6 +4,7 @@ import RemoveButton from "./components/RemoveButton";
 import AddUserButton from "./components/AddUserButton";
 import RemoveUserButton from "./components/RemoveUserButton";
 import UpdateChannelNameInput from "./components/UpdateChannelNameInput";
+import OtherMenuDropdown from "./components/OtherMenuDropdown";
 import ChannelName from "./components/ChannelName";
 import isChannelAdmin from "./utils/isChannelAdmin";
 
@@ -66,6 +67,8 @@ class MessagesHead extends Component {
               )}
             </div>
           ) : null}
+
+          <OtherMenuDropdown />
         </h2>
         <hr />
       </div>
