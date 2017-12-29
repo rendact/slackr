@@ -12,6 +12,7 @@ import Register from "scenes/Register";
 import Login from "scenes/Login";
 import Home from "scenes/Landing";
 import Verify from "scenes/Verify";
+import Files from "scenes/Files";
 
 import AfterLogin from "scenes/AfterLogin";
 import RegisterSuccess from "components/Register/components/RegisterSuccess";
@@ -32,6 +33,7 @@ ReactDOM.render(
           <Route path="/login" component={Login} />
           <Route path="/register/success" component={RegisterSuccess} />
           <Route path="/register" component={Register} />
+          <Route path="/files" component={Files} />
           <Route path="/verify/:username/:code" component={Verify} />
           <Route component={Home} />
         </Switch>
