@@ -1,0 +1,32 @@
+@import 'colors';
+
+body {
+  background-color: $green-light !important;
+}
+
+.tab-pane.active {
+  background-color: white !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-color:white !important;
+  border-color: white !important;
+  border-top: solid 3px $blue-dark !important;
+}
+
+.files-management-wrapper {
+  max-width: $content-width;
+  margin: 0 auto;
+
+  .files-management-header{
+    margin: 30px 0;
+  }
+
+}
+
+.files-management-content {
+  padding: 30px;
+}
+
+
+@import 'file-item';

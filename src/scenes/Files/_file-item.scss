@@ -1,0 +1,27 @@
+@import 'colors';
+
+.file-item-wrapper {
+  border: solid 1px $green-light;
+  border-radius: 5px;
+  box-shadow:  1px 2px 0 $green-dark;
+  transition: all 0.3s ease;
+  padding: 5px;
+
+  &:hover{
+    padding: 10px;
+    box-shadow:  1px 2px 0 $green-dark,
+                 2px 4px 0 $green-dark;
+    font-size: 1.05em;
+  }
+
+  &:hover .file-item-thumb img {
+    width: 50px;
+  }
+}
+
+.file-item-thumb img {
+  width: 45px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+
+}
