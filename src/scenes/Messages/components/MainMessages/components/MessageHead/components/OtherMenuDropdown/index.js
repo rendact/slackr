@@ -33,11 +33,12 @@ class OtherMenuDropdown extends React.Component {
           <span className="fa fa-ellipsis-v" />
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem>
+            <span className="fa fa-files-o" /> Manage Files
+          </DropdownItem>
+          <DropdownItem>
+            <span className="fa fa-book" /> Help
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );
