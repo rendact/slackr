@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import { withRouter } from "react-router-dom";
 
 class OtherMenuDropdown extends React.Component {
   constructor(props) {
@@ -33,7 +34,11 @@ class OtherMenuDropdown extends React.Component {
           <span className="fa fa-ellipsis-v" />
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              this.props.history.push("/pages");
+            }}
+          >
             <span className="fa fa-files-o" /> Manage Files
           </DropdownItem>
           <DropdownItem>
@@ -45,4 +50,4 @@ class OtherMenuDropdown extends React.Component {
   }
 }
 
-export default OtherMenuDropdown;
+export default withRouter(OtherMenuDropdown);
