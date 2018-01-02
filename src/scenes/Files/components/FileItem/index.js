@@ -4,6 +4,8 @@ import FileItem from "./components/FileItem";
 import ImageShareModal from "../../components/ImageShareModal";
 import deleteFile from "../../queries/File/delete";
 import deleteMessage from "../../queries/Message/delete";
+import allMemberTo from "./queries/Channel/allMemberTo";
+import myUserId from "constans/myUserId";
 
 class FileItemContainer extends Component {
   constructor(props) {
@@ -61,6 +63,7 @@ class FileItemContainer extends Component {
             this.imageShareModalToggle();
           }}
           initialValues={{ title: this.props.title }}
+          channels={this.props.channels}
         />
       </div>
     );
@@ -68,5 +71,9 @@ class FileItemContainer extends Component {
 }
 export default compose(
   graphql(deleteFile, { name: "deleteFile" }),
-  graphql(deleteMessage, { name: "deleteMessage" })
+  graphql(deleteMessage, { name: "deleteMessage" }),
+  graphql(allMemberTo, {
+    name: "channels",
+    options: { variables: { userId: myUserId } }
+  })
 )(FileItemContainer);
