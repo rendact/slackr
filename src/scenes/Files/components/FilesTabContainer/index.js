@@ -90,13 +90,37 @@ class FilesTabContainer extends Component {
                       timestamp={file.node.createdAt}
                       title={file.node.attachment.name}
                       channel={file.node.channel.name}
+                      userId={file.node.author.id}
                     />
                   ))
                 )}
               </div>
             </TabPane>
             <TabPane tabId="2">
-              <div className="files-management-content">hello world</div>
+              <div className="files-management-content">
+                {allFiles.loading ? (
+                  <p>Loading</p>
+                ) : (
+                  allFiles.viewer.allMessages.edges.map((file, id) => {
+                    if (
+                      file.node.author.id ===
+                      localStorage.getItem("slackrUserId")
+                    ) {
+                      return (
+                        <FileItem
+                          key={id}
+                          img={file.node.attachment.blobUrl}
+                          author={file.node.author.fullname}
+                          timestamp={file.node.createdAt}
+                          title={file.node.attachment.name}
+                          channel={file.node.channel.name}
+                          userId={file.node.author.id}
+                        />
+                      );
+                    }
+                  })
+                )}
+              </div>
             </TabPane>
           </TabContent>
         </div>

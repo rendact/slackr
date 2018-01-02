@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 
-export default ({ img, author, timestamp, title, channel }) => (
+export default ({ img, author, timestamp, title, channel, userId }) => (
   <div className="file-item-wrapper">
     <div className="actions">
       <button className="share">
         <span className="fa fa-share" />
       </button>
-      <button className="delete">
-        <span className="fa fa-trash" />
-      </button>
+
+      {userId === localStorage.getItem("slackrUserId") && (
+        <button className="delete">
+          <span className="fa fa-trash" />
+        </button>
+      )}
     </div>
     <div className="file-item-thumb">
       <img src={img} />

@@ -11,4 +11,7 @@ class FilesContainer extends Component {
   }
 }
 
-export default graphql(allFiles, { name: "allFiles" })(FilesContainer);
+export default graphql(allFiles, {
+  name: "allFiles",
+  options: { variables: { userId: localStorage.getItem("slackrUserId") } }
+})(FilesContainer);
