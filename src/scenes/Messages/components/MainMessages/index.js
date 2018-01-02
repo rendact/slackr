@@ -12,6 +12,7 @@ import { getChannel } from "./queries/Channel/getChannel";
 import { messageSubscription } from "./queries/Message/Subscription/onCreate";
 import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
 import { subscribeToUpdateUser } from "scenes/Messages/queries/subscribeToUser";
+import subscribeToDeleteMessage from "queries/Messages/subscribeToDelete";
 
 class MessagesWrapper extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class MessagesWrapper extends Component {
     this.subscribeToMessage = this.subscribeToMessage.bind(this);
     this.subscribeToAvatar = this.subscribeToAvatar.bind(this);
     this.subscribeToUserChange = this.subscribeToUserChange.bind(this);
+    this.subscribeToDeleteMessage = this.subscribeToDeleteMessage.bind(this);
   }
   componentWillReceiveProps(props) {
     if (props.channel && !props.channel.loading && props.channel.getChannel) {
@@ -29,9 +31,33 @@ class MessagesWrapper extends Component {
         this.subscribeToMessage();
         this.subscribeToAvatar();
         this.subscribeToUserChange();
+        this.subscribeToDeleteMessage();
         return;
       }
     }
+  }
+
+  subscribeToDeleteMessage() {
+    this.props.channel.subscribeToMore({
+      document: subscribeToDeleteMessage,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const {
+          data: { subscribeToMessage: { value: { id: deletedMessageId } } }
+        } = subscriptionData;
+
+        const newEdges = prev.getChannel.messages.edges.filter(
+          edge => edge.node.id !== deletedMessageId
+        );
+
+        return {
+          getChannel: { ...prev.getChannel, messages: { edges: newEdges } }
+        };
+      }
+    });
   }
 
   subscribeToAvatar() {
