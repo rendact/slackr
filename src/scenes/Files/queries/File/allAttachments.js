@@ -11,6 +11,7 @@ export default gql`
       ) {
         edges {
           node {
+            id
             attachment {
               blobUrl
               id

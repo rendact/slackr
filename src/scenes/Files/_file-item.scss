@@ -1,5 +1,9 @@
 @import 'colors';
 
+.disabled {
+  opacity: 0.5;
+}
+
 .file-item-wrapper {
   position: relative;
   display: flex;
@@ -8,6 +12,10 @@
   padding: 5px;
   cursor: pointer;
   margin: 10px;
+
+  &:disabled *{
+    opacity: 0.5;
+  }
 
   &:hover{
     border: solid 1px $green-light;

@@ -1,26 +1,50 @@
 import React, { Component } from "react";
+import { graphql, compose } from "react-apollo";
 
-export default ({ img, author, timestamp, title, channel, userId }) => (
-  <div className="file-item-wrapper">
-    <div className="actions">
-      <button className="share">
-        <span className="fa fa-share" />
-      </button>
+import FileItem from "./components/FileItem";
+import deleteFile from "../../queries/File/delete";
+import deleteMessage from "../../queries/Message/delete";
 
-      {userId === localStorage.getItem("slackrUserId") && (
-        <button className="delete">
-          <span className="fa fa-trash" />
-        </button>
-      )}
-    </div>
-    <div className="file-item-thumb">
-      <img src={img} />
-    </div>
-    <div className="file-item-info">
-      <span className="file-item-author">{author}</span>
-      <span className="file-item-timestamp">{timestamp}</span>
-      <div className="file-item-title">{title}</div>
-      <span className="file-item-channel">{channel}</span>
-    </div>
-  </div>
-);
+class FileItemContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+
+    this.state = {
+      deleteProcess: false
+    };
+  }
+
+  onDeleteClick(e) {
+    this.setState({ deleteProcess: !this.state.deleteProcess });
+    this.props
+      .deleteFile({ variables: { fileId: this.props.fileId } })
+      .then(() => {
+        this.props
+          .deleteMessage({ variables: { messageId: this.props.messageId } })
+          .then(() => {
+            this.setState({ deleteProcess: !this.state.deleteProcess });
+          })
+          .catch(error => {
+            this.setState({ deleteProcess: !this.state.deleteProcess });
+          });
+      })
+      .catch(error => {
+        this.setState({ deleteProcess: !this.state.deleteProcess });
+      });
+  }
+
+  render() {
+    return (
+      <FileItem
+        {...this.props}
+        deleteProcess={this.state.deleteProcess}
+        onDeleteClick={this.onDeleteClick}
+      />
+    );
+  }
+}
+export default compose(
+  graphql(deleteFile, { name: "deleteFile" }),
+  graphql(deleteMessage, { name: "deleteMessage" })
+)(FileItemContainer);

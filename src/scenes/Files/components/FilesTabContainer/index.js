@@ -91,6 +91,8 @@ class FilesTabContainer extends Component {
                       title={file.node.attachment.name}
                       channel={file.node.channel.name}
                       userId={file.node.author.id}
+                      messageId={file.node.id}
+                      fileId={file.node.attachment.id}
                     />
                   ))
                 )}
@@ -114,6 +116,8 @@ class FilesTabContainer extends Component {
                           timestamp={file.node.createdAt}
                           title={file.node.attachment.name}
                           channel={file.node.channel.name}
+                          messageId={file.node.id}
+                          fileId={file.node.attachment.id}
                           userId={file.node.author.id}
                         />
                       );
