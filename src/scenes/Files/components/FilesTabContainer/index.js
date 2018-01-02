@@ -37,6 +37,8 @@ class FilesTabContainer extends Component {
   }
 
   render() {
+    const userId = localStorage.getItem("slackrUserId");
+    const { allFiles } = this.props;
     return (
       <Container>
         <Navbar color="faded" expands="md" light>
@@ -77,13 +79,20 @@ class FilesTabContainer extends Component {
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <div className="files-management-content">
-                <FileItem
-                  img={require("images/dummy-profile.png")}
-                  author="ihfazhillah"
-                  timestamp="Kemarin"
-                  title="ss.png"
-                  channel="coba"
-                />
+                {allFiles.loading ? (
+                  <p>Loading</p>
+                ) : (
+                  allFiles.viewer.allMessages.edges.map((file, id) => (
+                    <FileItem
+                      key={id}
+                      img={file.node.attachment.blobUrl}
+                      author={file.node.author.fullname}
+                      timestamp={file.node.createdAt}
+                      title={file.node.attachment.name}
+                      channel={file.node.channel.name}
+                    />
+                  ))
+                )}
               </div>
             </TabPane>
             <TabPane tabId="2">
