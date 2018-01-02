@@ -44,7 +44,12 @@ networkInterface.useAfter([
 
 const wsClient = new SubscriptionClient(websocketUrl, {
   reconnect: true,
-  timeout: 20000
+  timeout: 20000,
+  connectionParams: () => {
+    return {
+      Authorization: `Bearer ${localStorage.getItem("slackrUserId")}`
+    };
+  }
 });
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
   networkInterface,

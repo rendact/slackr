@@ -12,6 +12,11 @@ export const messageSubscription = gql`
             blobUrl
             name
           }
+          snippet {
+            title
+            lang
+            code
+          }
           author {
             id
             username
