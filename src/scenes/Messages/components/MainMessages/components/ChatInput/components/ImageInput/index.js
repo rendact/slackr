@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "react-apollo";
 import ImageInputModal from "./components/ImageInputModal";
 import { InputGroupAddon } from "reactstrap";
-import { createMessageMtn } from "../../queries/Message/create";
+import { createMessageMtn } from "queries/Messages/create";
 
 class ImageInput extends React.Component {
   constructor(props) {

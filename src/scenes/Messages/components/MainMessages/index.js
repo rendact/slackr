@@ -204,12 +204,14 @@ class MessagesWrapper extends Component {
             name={data.getChannel && name}
             type={data.getChannel && type}
             channelId={match.params.id}
-            participants={data.getChannel.participants.edges}
+            participants={data.getChannel && data.getChannel.participants.edges}
           />
           <ChatBody>
             <AddUserModal
               channelId={match.params.id}
-              participants={data.getChannel.participants.edges}
+              participants={
+                data.getChannel && data.getChannel.participants.edges
+              }
             />
             <RemoveUserModal
               channelId={match.params.id}
@@ -267,7 +269,9 @@ class MessagesWrapper extends Component {
 export default graphql(getChannel, {
   name: "channel",
   options: props => {
-    const id = props.match.params ? props.match.params.id : null;
+    const id = props.match.params
+      ? props.match.params.id
+      : props.location.state.channelId;
 
     return {
       variables: { id: id }

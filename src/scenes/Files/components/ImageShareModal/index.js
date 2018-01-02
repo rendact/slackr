@@ -57,16 +57,7 @@ class ImageShareModal extends React.Component {
               style={{ maxWidth: 300 }}
             />
             <br />
-            <FormGroup>
-              <Field
-                component="input"
-                name="title"
-                placeholder="Title"
-                type="text"
-                className="form-control"
-                disabled={submitting}
-              />
-            </FormGroup>
+            {this.props.title}
             <FormGroup>
               Share to :
               <Field
@@ -76,6 +67,7 @@ class ImageShareModal extends React.Component {
                 disabled={submitting}
                 style={{ marginLeft: 20 }}
               >
+                <option />
                 {channels.viewer ? (
                   channelList.map((channel, id) => (
                     <option value={channel.id} key={id}>

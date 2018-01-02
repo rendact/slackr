@@ -5,7 +5,7 @@ export default gql`
     viewer {
       allMessages(
         where: {
-          attachmentId: { isNull: false }
+          attachment: { blobUrl: { isNull: false } }
           channel: { participants: { node: { id: { eq: $userId } } } }
         }
       ) {

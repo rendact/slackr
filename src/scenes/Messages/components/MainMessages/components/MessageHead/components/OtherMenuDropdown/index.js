@@ -36,7 +36,10 @@ class OtherMenuDropdown extends React.Component {
         <DropdownMenu right>
           <DropdownItem
             onClick={() => {
-              this.props.history.push("/pages");
+              this.props.history.push({
+                pathname: "/files",
+                state: { channelId: this.props.match.id }
+              });
             }}
           >
             <span className="fa fa-files-o" /> Manage Files

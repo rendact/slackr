@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import {
   Container,
   Navbar,
@@ -44,7 +45,11 @@ class FilesTabContainer extends Component {
         <Navbar color="faded" expands="md" light>
           <Nav>
             <NavItem>
-              <Button>
+              <Button
+                onClick={() => {
+                  this.props.history.push("/messages");
+                }}
+              >
                 <span className="fa fa-arrow-left" /> Back
               </Button>
             </NavItem>
@@ -133,4 +138,4 @@ class FilesTabContainer extends Component {
   }
 }
 
-export default FilesTabContainer;
+export default withRouter(FilesTabContainer);

@@ -33,7 +33,7 @@ class FilesContainer extends Component {
     });
   }
   render() {
-    return <FilesTabContainer allFiles={this.props.allFiles} />;
+    return <FilesTabContainer {...this.props} allFiles={this.props.allFiles} />;
   }
 }
 

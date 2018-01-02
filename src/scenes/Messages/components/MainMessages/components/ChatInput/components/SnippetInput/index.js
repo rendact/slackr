@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { highlightAuto } from "highlightjs";
-import { createMessageMtn as createMessage } from "../../queries/Message/create";
+import { createMessageMtn as createMessage } from "queries/Messages/create";
 import { InputGroupAddon } from "reactstrap";
 import SnippetInputModal from "./components/SnippetInputModal";
 

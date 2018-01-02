@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { graphql } from "react-apollo";
 
 import MessageInput from "./components/MessageInput";
-import { createMessageMtn } from "./queries/Message/create";
+import { createMessageMtn } from "queries/Messages/create";
 import { toggleSending } from "./actions/toggleSending";
 
 class MessageInputWithMutation extends Component {
@@ -49,5 +49,4 @@ class MessageInputWithMutation extends Component {
 const mapStateToProps = state => state.inputMessage || {};
 
 const withRedux = connect(mapStateToProps)(MessageInputWithMutation);
-
 export default graphql(createMessageMtn, { name: "createMessage" })(withRedux);
