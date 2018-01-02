@@ -78,15 +78,25 @@ class FilesContainer extends Component {
             <TabPane tabId="1">
               <div className="files-management-content">
                 <div className="file-item-wrapper">
+                  <div className="actions">
+                    <button className="share">
+                      <span className="fa fa-share" />
+                    </button>
+                    <button className="delete">
+                      <span className="fa fa-trash" />
+                    </button>
+                  </div>
                   <div className="file-item-thumb">
                     <img src={require("images/dummy-profile.png")} />
                   </div>
-                  <div className="file-item-title">Screenshot.png</div>
-                  <div className="file-item-author">ihfazhillah</div>
-                  <div className="file-item-timestamp">
-                    Yesterday at 10:06 AM
+                  <div className="file-item-info">
+                    <span className="file-item-author">ihfazhillah</span>
+                    <span className="file-item-timestamp">
+                      Yesterday at 10:06 AM
+                    </span>
+                    <div className="file-item-title">Screenshot.png</div>
+                    <span className="file-item-channel">channel name</span>
                   </div>
-                  <div className="file-item-channel">channel name</div>
                 </div>
               </div>
             </TabPane>
