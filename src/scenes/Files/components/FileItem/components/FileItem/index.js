@@ -3,6 +3,7 @@ import classnames from "classnames";
 
 export default ({
   onDeleteClick,
+  onShareClick,
   img,
   author,
   timestamp,
@@ -19,7 +20,7 @@ export default ({
       disabled={deleteProcess}
       className={classnames("actions", { disabled: deleteProcess })}
     >
-      <button disabled={deleteProcess} className="share">
+      <button onClick={onShareClick} disabled={deleteProcess} className="share">
         <span className="fa fa-share" />
       </button>
 

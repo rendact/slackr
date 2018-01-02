@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-
 import FileItem from "./components/FileItem";
+import ImageShareModal from "../../components/ImageShareModal";
 import deleteFile from "../../queries/File/delete";
 import deleteMessage from "../../queries/Message/delete";
 
@@ -9,10 +9,18 @@ class FileItemContainer extends Component {
   constructor(props) {
     super(props);
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.imageShareModalToggle = this.imageShareModalToggle.bind(this);
 
     this.state = {
-      deleteProcess: false
+      deleteProcess: false,
+      isImageShareModalOpen: false
     };
+  }
+
+  imageShareModalToggle() {
+    this.setState(prevState => ({
+      isImageShareModalOpen: !prevState.isImageShareModalOpen
+    }));
   }
 
   onDeleteClick(e) {
@@ -36,11 +44,25 @@ class FileItemContainer extends Component {
 
   render() {
     return (
-      <FileItem
-        {...this.props}
-        deleteProcess={this.state.deleteProcess}
-        onDeleteClick={this.onDeleteClick}
-      />
+      <div>
+        <FileItem
+          {...this.props}
+          deleteProcess={this.state.deleteProcess}
+          onDeleteClick={this.onDeleteClick}
+          onShareClick={() => {
+            this.imageShareModalToggle();
+          }}
+        />
+        <ImageShareModal
+          isOpen={this.state.isImageShareModalOpen}
+          imageUrl={this.props.img}
+          toggle={this.imageShareModalToggle}
+          onCancel={() => {
+            this.imageShareModalToggle();
+          }}
+          initialValues={{ title: this.props.title }}
+        />
+      </div>
     );
   }
 }
