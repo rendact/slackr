@@ -5,11 +5,13 @@ export default class ChatBody extends Component {
     document
       .getElementById("input-wrapper")
       .scrollIntoView({ behavior: "smooth" });
+    document.getElementById("theLast").scrollIntoView({ behavior: "smooth" });
   }
   componentDidUpdate() {
     document
       .getElementById("input-wrapper")
       .scrollIntoView({ behavior: "smooth" });
+    document.getElementById("theLast").scrollIntoView({ behavior: "smooth" });
   }
   render() {
     return (
@@ -18,6 +20,7 @@ export default class ChatBody extends Component {
         style={{ overflowY: "scroll", background: "deepskyblue" }}
       >
         {this.props.children}
+        <div id="theLast" />
       </div>
     );
   }
