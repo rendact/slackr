@@ -31,6 +31,7 @@ export const getChannel = gql`
               code
             }
             attachment {
+              id
               blobUrl
               name
             }

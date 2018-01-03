@@ -212,13 +212,12 @@ class MessagesWrapper extends Component {
           <div
             style={{
               fontSize: "larger",
-              animation: "blinking 4s infinite",
               position: "fixed",
               bottom: "50%",
               left: "50%"
             }}
           >
-            {data.error}
+            <p>{JSON.stringify(data.error)}</p>
           </div>
         </div>
       );
