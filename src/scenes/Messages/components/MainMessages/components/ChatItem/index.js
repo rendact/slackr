@@ -4,7 +4,10 @@ import dummyprofile from "images/dummy-profile.png";
 import moment from "moment";
 import marked from "marked";
 import ImageFullModal from "./components/ImageFullModal";
+import ChatItemImage from "./components/ChatItemImage";
 import { highlightAuto } from "highlightjs";
+
+import "./style/chat-item.css";
 
 export default class ChatItem extends Component {
   constructor(props) {
@@ -12,18 +15,10 @@ export default class ChatItem extends Component {
 
     this.state = {
       dateTooltipOpen: false,
-      isImageFullModalOpen: false,
       isDisplaySnippetFull: false
     };
 
-    this.onImageToggle = this.onImageToggle.bind(this);
     this.onShowMoreToggle = this.onShowMoreToggle.bind(this);
-  }
-
-  onImageToggle() {
-    this.setState(prev => ({
-      isImageFullModalOpen: !prev.isImageFullModalOpen
-    }));
   }
 
   onShowMoreToggle() {
@@ -40,7 +35,8 @@ export default class ChatItem extends Component {
       createdAt,
       id,
       attachment,
-      snippet
+      snippet,
+      authorId
     } = this.props;
     const onChatFormat = "hh:mm A";
 
@@ -96,37 +92,12 @@ export default class ChatItem extends Component {
 
     if (attachment) {
       chat = (
-        <div>
-          <p>
-            Uploaded this image: <b>{attachment.name}</b>
-          </p>
-          <img
-            className="img-thumbnail"
-            src={attachment.blobUrl}
-            style={{ cursor: "zoom-in", maxWidth: 300 }}
-            onClick={this.onImageToggle}
-          />
-          <ImageFullModal
-            toggle={this.onImageToggle}
-            isOpen={this.state.isImageFullModalOpen}
-            imageUrl={attachment.blobUrl}
-            title={attachment.name}
-            caption={body}
-          />
-          {body && (
-            <div>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: marked(
-                    ' <span class="fa fa-quote-left" style=" margin-right: 5px ;" ></span>' +
-                      body,
-                    { sanitize: false }
-                  )
-                }}
-              />
-            </div>
-          )}
-        </div>
+        <ChatItemImage
+          imageUrl={attachment.blobUrl}
+          title={attachment.name}
+          authorId={authorId}
+          caption={body}
+        />
       );
     }
 

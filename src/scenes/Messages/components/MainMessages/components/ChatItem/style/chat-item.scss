@@ -1,0 +1,18 @@
+.chat-item-image {
+  position: relative;
+  padding: 10px;
+
+  .actions {
+    display: none;
+    cursor: pointer;
+  }
+
+  &:hover .actions{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+    background: purple;
+    display: block;
+  }
+}

@@ -268,6 +268,8 @@ class MessagesWrapper extends Component {
                 id={message.node.id}
                 attachment={message.node.attachment}
                 snippet={message.node.snippet}
+                authorId={message.node.author.id}
+                channelId={match.params.id}
                 image={
                   message.node.author.avatar
                     ? message.node.author.avatar.blobUrl
