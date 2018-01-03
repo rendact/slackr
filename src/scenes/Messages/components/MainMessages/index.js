@@ -228,7 +228,6 @@ class MessagesWrapper extends Component {
     const isMember = !!(
       userArray && userArray.find(el => el.node.id === myUserId)
     );
-    debugger;
 
     // configuring name and type of channel
     // if type is direct, the name is will be the other user name

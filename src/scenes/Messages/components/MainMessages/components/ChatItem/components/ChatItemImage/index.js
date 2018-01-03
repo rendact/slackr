@@ -139,12 +139,14 @@ class ChatItemImage extends React.Component {
           <p>
             Uploaded this image: <b>{title}</b>
           </p>
-          <img
-            className="img-thumbnail"
-            src={imageUrl}
-            style={{ cursor: "zoom-in", maxWidth: 300 }}
-            onClick={this.onImageToggle}
-          />
+          <div className="img-container">
+            <img
+              className="img-thumbnail chat-img"
+              src={imageUrl}
+              style={{ cursor: "zoom-in", maxWidth: 300 }}
+              onClick={this.onImageToggle}
+            />
+          </div>
           <ImageFullModal
             toggle={this.onImageToggle}
             isOpen={this.state.isImageFullModalOpen}

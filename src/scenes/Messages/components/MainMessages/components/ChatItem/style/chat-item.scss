@@ -15,8 +15,32 @@
     background: purple;
     display: block;
   }
+
+  .img-container{
+    position: relative;
+    height: 200px;
+    width: 300px;
+
+    &:before{
+      height: 100%;
+      content: "";
+      display: block;
+    }
+
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: auto;
+      bottom:auto;
+    }
+  }
+
+
+
 }
 
 .disabled{
   opacity: 0.5;
 }
+

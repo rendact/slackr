@@ -12,6 +12,7 @@ class MessageInputWithMutation extends Component {
 
     this.handleCreateMessage = this.handleCreateMessage.bind(this);
   }
+
   handleCreateMessage(val) {
     return new Promise((resolve, reject) => {
       this.props.dispatch(toggleSending());
