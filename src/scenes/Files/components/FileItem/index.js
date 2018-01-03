@@ -81,7 +81,7 @@ class FileItemContainer extends Component {
         .then(data => {
           this.imageShareModalToggle();
           res(data);
-          /* Debug me !! why its throw error ??
+          /*
           this.props.history.push({
             pathname: "/messages/" + val.channel,
             state: { channelId: val.channel }

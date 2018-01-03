@@ -9,7 +9,7 @@ import ButtonJoin from "./components/ButtonJoin";
 import AddUserModal from "./components/AddUserListModal";
 import RemoveUserModal from "./components/RemoveUserListModal";
 import { getChannel } from "./queries/Channel/getChannel";
-import { messageSubscription } from "./queries/Message/Subscription/onCreate";
+import messageSubscription from "queries/Messages/subscribeToCreate";
 import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
 import { subscribeToUpdateUser } from "scenes/Messages/queries/subscribeToUser";
 import subscribeToDeleteMessage from "queries/Messages/subscribeToDelete";

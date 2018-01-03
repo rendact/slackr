@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const messageSubscription = gql`
+export default gql`
   subscription sub($filter: MessageSubscriptionFilter) {
     subscribeToMessage(mutations: [createMessage], filter: $filter) {
       edge {
@@ -9,6 +9,7 @@ export const messageSubscription = gql`
           id
           content
           attachment {
+            id
             blobUrl
             name
           }
@@ -17,9 +18,15 @@ export const messageSubscription = gql`
             lang
             code
           }
+          channel {
+            id
+            name
+            type
+          }
           author {
             id
             username
+            fullname
             avatar {
               blobUrl
             }
