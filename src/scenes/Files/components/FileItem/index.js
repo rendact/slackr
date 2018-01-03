@@ -31,16 +31,31 @@ class FileItemContainer extends Component {
   onDeleteClick(e) {
     this.setState({ deleteProcess: !this.state.deleteProcess });
     this.props
-      .deleteFile({ variables: { fileId: this.props.fileId } })
-      .then(() => {
-        this.props
-          .deleteMessage({ variables: { messageId: this.props.messageId } })
-          .then(() => {
-            this.setState({ deleteProcess: !this.state.deleteProcess });
-          })
-          .catch(error => {
-            this.setState({ deleteProcess: !this.state.deleteProcess });
-          });
+      .deleteMessage({ variables: { messageId: this.props.messageId } })
+      .then(({ deleteMessage }) => {
+        const {
+          changedMessage: {
+            attachment: {
+              chatAttachment: { aggregations: { count: messagesInFileCount } }
+            }
+          }
+        } = deleteMessage;
+
+        if (messagesInFileCount === 0) {
+          // check, if file still belong to message or not. if not so, delete the file
+          // else dont delete the file
+          this.props
+            .deleteFile({ variables: { fileId: this.props.fileId } })
+            .then(() => {
+              this.setState({ deleteProcess: !this.state.deleteProcess });
+            })
+            .catch(error => {
+              this.setState({ deleteProcess: !this.state.deleteProcess });
+            });
+          return;
+        }
+
+        this.setState({ deleteProcess: !this.state.deleteProcess });
       })
       .catch(error => {
         this.setState({ deleteProcess: !this.state.deleteProcess });

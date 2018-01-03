@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import FileItem from "../FileItem";
+import myUserId from "constans/myUserId";
 
 class FilesTabContainer extends Component {
   constructor(props) {
@@ -38,7 +39,6 @@ class FilesTabContainer extends Component {
   }
 
   render() {
-    const userId = localStorage.getItem("slackrUserId");
     const { allFiles } = this.props;
     return (
       <Container>
@@ -109,10 +109,7 @@ class FilesTabContainer extends Component {
                   <p>Loading</p>
                 ) : (
                   allFiles.viewer.allMessages.edges.map((file, id) => {
-                    if (
-                      file.node.author.id ===
-                      localStorage.getItem("slackrUserId")
-                    ) {
+                    if (file.node.author.id === myUserId) {
                       return (
                         <FileItem
                           key={id}

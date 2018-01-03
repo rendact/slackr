@@ -1,8 +1,10 @@
 import React from "react";
 import { graphql } from "react-apollo";
-import ImageInputModal from "./components/ImageInputModal";
 import { InputGroupAddon } from "reactstrap";
+
+import ImageInputModal from "./components/ImageInputModal";
 import { createMessageMtn } from "queries/Messages/create";
+import myUserId from "constans/myUserId";
 
 class ImageInput extends React.Component {
   constructor(props) {
@@ -31,13 +33,14 @@ class ImageInput extends React.Component {
         .createMessage({
           variables: {
             input: {
-              authorId: localStorage.getItem("slackrUserId"),
+              authorId: myUserId,
               channelId: this.props.channelId,
               content: val.caption,
               attachment: {
                 name: val.title,
                 blobFieldName: "image",
-                image: this.state.imageFile
+                image: this.state.imageFile,
+                creatorId: myUserId
               }
             }
           }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import myUserId from "constans/myUserId";
 
 export default ({
   onDeleteClick,
@@ -24,7 +25,7 @@ export default ({
         <span className="fa fa-share" />
       </button>
 
-      {userId === localStorage.getItem("slackrUserId") && (
+      {userId === myUserId && (
         <button
           disabled={deleteProcess}
           onClick={onDeleteClick}
