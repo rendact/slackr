@@ -29,11 +29,11 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
           <PrivateRoute path="/messages/:id?" component={Messages} />
+          <PrivateRoute path="/files" component={Files} />
           <Route path="/after-login" component={AfterLogin} />
           <Route path="/login" component={Login} />
           <Route path="/register/success" component={RegisterSuccess} />
           <Route path="/register" component={Register} />
-          <Route path="/files" component={Files} />
           <Route path="/verify/:username/:code" component={Verify} />
           <Route component={Home} />
         </Switch>

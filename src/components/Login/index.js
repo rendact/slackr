@@ -54,6 +54,7 @@ class Login extends Component {
     };
 
     if (success || localStorage.getItem("slackrToken")) {
+      from.state = { userId: userId };
       return <Redirect to={from} />;
     }
 

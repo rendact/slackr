@@ -5,6 +5,7 @@ import FilesTabContainer from "./components/FilesTabContainer";
 import allFiles from "./queries/File/allAttachments";
 import subscribeToDeleteMessage from "queries/Messages/subscribeToDelete";
 import "./files-management.css";
+import myUserId from "constans/myUserId";
 
 class FilesContainer extends Component {
   constructor(props) {
@@ -39,5 +40,7 @@ class FilesContainer extends Component {
 
 export default graphql(allFiles, {
   name: "allFiles",
-  options: { variables: { userId: localStorage.getItem("slackrUserId") } }
+  options: props => ({
+    variables: { userId: myUserId || props.location.state.userId }
+  })
 })(FilesContainer);
