@@ -217,7 +217,7 @@ class MessagesWrapper extends Component {
               left: "50%"
             }}
           >
-            <p>{JSON.stringify(data.error)}</p>
+            {JSON.stringify(data.error)}
           </div>
         </div>
       );
@@ -241,21 +241,21 @@ class MessagesWrapper extends Component {
     return (
       <div style={{}} className="messages-wrapper" id="messages-wrapper">
         <MessagesHead
-          name={data.getChannel && name}
-          type={data.getChannel && type}
+          name={name}
+          type={type}
           channelId={match.params.id}
-          participants={data.getChannel && data.getChannel.participants.edges}
+          participants={data.getChannel.participants.edges}
         />
         <ChatBody>
           <AddUserModal
             channelId={match.params.id}
-            participants={data.getChannel && data.getChannel.participants.edges}
+            participants={data.getChannel.participants.edges}
           />
           <RemoveUserModal
             channelId={match.params.id}
             participants={data.getChannel.participants.edges}
           />
-          {data.getChannel.messages ? (
+          {data.getChannel.messages.edges.length ? (
             data.getChannel.messages.edges.map((message, idx) => (
               <ChatItem
                 key={idx}
@@ -277,14 +277,9 @@ class MessagesWrapper extends Component {
           )}
         </ChatBody>
         {isMember ? (
-          <MessageInputWithMutation
-            channelId={match.params && match.params.id}
-          />
+          <MessageInputWithMutation channelId={match.params.id} />
         ) : (
-          <ButtonJoin
-            isVisible={!isMember}
-            channelId={match.params && match.params.id}
-          />
+          <ButtonJoin isVisible={!isMember} channelId={match.params.id} />
         )}
       </div>
     );
