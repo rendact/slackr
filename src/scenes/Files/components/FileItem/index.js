@@ -6,7 +6,7 @@ import ImageShareModal from "components/ImageShareModal";
 import deleteFile from "queries/File/delete";
 import deleteMessage from "queries/Messages/delete";
 import { createMessageMtn } from "queries/Messages/create";
-import allMemberTo from "./queries/Channel/allMemberTo";
+import allMemberTo from "queries/Channel/allMemberTo";
 import myUserId from "constans/myUserId";
 
 class FileItemContainer extends Component {
