@@ -97,6 +97,8 @@ export default class ChatItem extends Component {
           title={attachment.name}
           authorId={authorId}
           caption={body}
+          fileId={attachment.id}
+          id={id}
         />
       );
     }
