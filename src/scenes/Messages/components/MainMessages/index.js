@@ -155,6 +155,7 @@ class MessagesWrapper extends Component {
         }
 
         const { data: { subscribeToMessage: { edge } } } = subscriptionData;
+
         const oldEdge = prev.getChannel.messages.edges;
         const newEdges = [...oldEdge, edge];
 

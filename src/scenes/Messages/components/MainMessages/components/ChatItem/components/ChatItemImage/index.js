@@ -110,14 +110,28 @@ class ChatItemImage extends React.Component {
     const { title, imageUrl, caption, authorId } = this.props;
     return (
       <div>
-        <div className="chat-item-image">
-          <div className="actions">
-            <button onClick={this.imageShareModalToggle}>
+        <div
+          className={classnames("chat-item-image", {
+            disabled: this.state.deleteProcess
+          })}
+        >
+          <div
+            className={classnames("actions", {
+              disabled: this.state.deleteProcess
+            })}
+          >
+            <button
+              disabled={this.state.deleteProcess}
+              onClick={this.imageShareModalToggle}
+            >
               <span className="fa fa-share" />
             </button>
 
             {authorId === myUserId && (
-              <button onClick={this.onDeleteClick}>
+              <button
+                disabled={this.state.deleteProcess}
+                onClick={this.onDeleteClick}
+              >
                 <span className="fa fa-trash" />
               </button>
             )}
