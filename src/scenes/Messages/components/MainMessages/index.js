@@ -13,6 +13,7 @@ import { messageSubscription } from "./queries/Message/Subscription/onCreate";
 import { avatarSubscription } from "./queries/File/Subscription/avatarSubscription";
 import { subscribeToUpdateUser } from "scenes/Messages/queries/subscribeToUser";
 import subscribeToDeleteMessage from "queries/Messages/subscribeToDelete";
+import myUserId from "constans/myUserId";
 
 class MessagesWrapper extends Component {
   constructor(props) {
@@ -23,7 +24,12 @@ class MessagesWrapper extends Component {
     this.subscribeToDeleteMessage = this.subscribeToDeleteMessage.bind(this);
   }
   componentWillReceiveProps(props) {
-    if (props.channel && !props.channel.loading && props.channel.getChannel) {
+    if (
+      props.channel &&
+      !props.channel.loading &&
+      props.channel.getChannel &&
+      this.props.channel
+    ) {
       if (
         !this.props.channel.getChannel ||
         props.channel.getChannel.id !== this.props.channel.getChannel.id
@@ -160,26 +166,28 @@ class MessagesWrapper extends Component {
   }
   render() {
     const { match, channel: data } = this.props;
-    const userArray =
-      data && data.getChannel && data.getChannel.participants.edges;
-    const isMember =
-      userArray &&
-      userArray.find(el => el.node.id === localStorage.getItem("slackrUserId"));
-    let name, type;
 
-    if (data && !data.loading && data.getChannel) {
-      if (data.getChannel.type === "direct") {
-        type = "direct";
-        name = userArray.find(
-          u => u.node.id !== localStorage.getItem("slackrUserId")
-        ).node.username;
-      } else {
-        type = data.getChannel.type;
-        name = data.getChannel.name;
-      }
+    // default page without channelId
+    if (!match.params.id) {
+      return (
+        <div
+          style={{
+            background: "blue",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            flex: "10 0px",
+            order: 1,
+            padding: 15
+          }}
+          className="messages-wrapper"
+          id="messages-wrapper"
+        />
+      );
     }
 
-    if (data && data.loading) {
+    // when still loading
+    if (data.loading) {
       return (
         <div className="messages-wrapper" id="messages-wrapper">
           <div
@@ -197,71 +205,89 @@ class MessagesWrapper extends Component {
       );
     }
 
+    // not loading, but still cant get getChannel
+    if (!data.loading && data.error) {
+      return (
+        <div className="messages-wrapper" id="messages-wrapper">
+          <div
+            style={{
+              fontSize: "larger",
+              animation: "blinking 4s infinite",
+              position: "fixed",
+              bottom: "50%",
+              left: "50%"
+            }}
+          >
+            {data.error}
+          </div>
+        </div>
+      );
+    }
+
+    const userArray = data.getChannel.participants.edges;
+    const isMember = userArray && userArray.find(el => el.node.id === myUserId);
+
+    // configuring name and type of channel
+    // if type is direct, the name is will be the other user name
+    let name, type;
+
+    if (data.getChannel.type === "direct") {
+      type = "direct";
+      name = userArray.find(u => u.node.id !== myUserId).node.username;
+    } else {
+      type = data.getChannel.type;
+      name = data.getChannel.name;
+    }
+
     return (
-      (match.params.id && (
-        <div style={{}} className="messages-wrapper" id="messages-wrapper">
-          <MessagesHead
-            name={data.getChannel && name}
-            type={data.getChannel && type}
+      <div style={{}} className="messages-wrapper" id="messages-wrapper">
+        <MessagesHead
+          name={data.getChannel && name}
+          type={data.getChannel && type}
+          channelId={match.params.id}
+          participants={data.getChannel && data.getChannel.participants.edges}
+        />
+        <ChatBody>
+          <AddUserModal
             channelId={match.params.id}
             participants={data.getChannel && data.getChannel.participants.edges}
           />
-          <ChatBody>
-            <AddUserModal
-              channelId={match.params.id}
-              participants={
-                data.getChannel && data.getChannel.participants.edges
-              }
-            />
-            <RemoveUserModal
-              channelId={match.params.id}
-              participants={data.getChannel.participants.edges}
-            />
-            {data.getChannel && data.getChannel.messages
-              ? data.getChannel.messages.edges.map((message, idx) => (
-                  <ChatItem
-                    key={idx}
-                    body={message.node.content}
-                    head={message.node.author && message.node.author.fullname}
-                    createdAt={message.node.createdAt}
-                    id={message.node.id}
-                    attachment={message.node.attachment}
-                    snippet={message.node.snippet}
-                    image={
-                      message.node.author.avatar
-                        ? message.node.author.avatar.blobUrl
-                        : null
-                    }
-                  />
-                ))
-              : null}
-          </ChatBody>
-          {isMember ? (
-            <MessageInputWithMutation
-              channelId={match.params && match.params.id}
-            />
+          <RemoveUserModal
+            channelId={match.params.id}
+            participants={data.getChannel.participants.edges}
+          />
+          {data.getChannel.messages ? (
+            data.getChannel.messages.edges.map((message, idx) => (
+              <ChatItem
+                key={idx}
+                body={message.node.content}
+                head={message.node.author && message.node.author.fullname}
+                createdAt={message.node.createdAt}
+                id={message.node.id}
+                attachment={message.node.attachment}
+                snippet={message.node.snippet}
+                image={
+                  message.node.author.avatar
+                    ? message.node.author.avatar.blobUrl
+                    : null
+                }
+              />
+            ))
           ) : (
-            <ButtonJoin
-              isVisible={!isMember}
-              channelId={match.params && match.params.id}
-            />
+            <p>No Messages Found</p>
           )}
-        </div>
-      )) || (
-        <div
-          style={{
-            background: "blue",
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            flex: "10 0px",
-            order: 1,
-            padding: 15
-          }}
-          className="messages-wrapper"
-          id="messages-wrapper"
-        />
-      )
+        </ChatBody>
+        {isMember ? (
+          <MessageInputWithMutation
+            channelId={match.params && match.params.id}
+          />
+        ) : (
+          <ButtonJoin
+            isVisible={!isMember}
+            channelId={match.params && match.params.id}
+          />
+        )}
+      </div>
     );
   }
 }
