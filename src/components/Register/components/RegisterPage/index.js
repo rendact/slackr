@@ -12,9 +12,7 @@ class Register extends Component {
   render() {
     const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
-        <Row>
-          <Col md={12}>
-            <h3>Register Form</h3>
+        <div>
             <Alert isOpen={isError} color="danger">
               {errorMessage}
             </Alert>
@@ -58,8 +56,7 @@ class Register extends Component {
                 )}
               </Button>
             </Form>
-          </Col>
-        </Row>
+        </div>
     );
   }
 }

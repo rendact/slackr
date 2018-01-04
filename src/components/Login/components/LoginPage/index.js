@@ -14,9 +14,7 @@ class LoginPage extends Component {
   render() {
     const { isError, onSubmit, submitting, errorMessage } = this.props;
     return (
-      <Row>
-        <Col md={12}>
-          <h3>Login Form</h3>
+      <div>
           <Alert isOpen={isError} color="danger">
             {errorMessage}
           </Alert>
@@ -48,8 +46,7 @@ class LoginPage extends Component {
               {process.env.REACT_APP_OAUTH_TOKEN ? <OauthButton /> : null}
             </div>
           </Form>
-        </Col>
-      </Row>
+      </div>
     );
   }
 }

@@ -2,10 +2,12 @@ import React, { Component } from "react";
 
 export default class ChatBody extends Component {
   componentDidMount() {
-    document
-      .getElementById("input-wrapper")
-      .scrollIntoView({ behavior: "smooth" });
-    document.getElementById("theLast").scrollIntoView({ behavior: "smooth" });
+    document.addEventListener("DOMContentLoaded", function(event) { 
+      document
+        .getElementById("input-wrapper")
+        .scrollIntoView({ behavior: "smooth" });
+      document.getElementById("theLast").scrollIntoView({ behavior: "smooth" });
+    });    
   }
   componentDidUpdate() {
     document
@@ -16,8 +18,7 @@ export default class ChatBody extends Component {
   render() {
     return (
       <div
-        id="chat-body"
-        style={{ overflowY: "scroll", background: "deepskyblue" }}
+        className="chat-content"
       >
         {this.props.children}
         <div id="theLast" />

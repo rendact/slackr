@@ -171,18 +171,7 @@ class MessagesWrapper extends Component {
     // default page without channelId
     if (!match.params.id) {
       return (
-        <div
-          style={{
-            background: "blue",
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            flex: "10 0px",
-            order: 1,
-            padding: 15
-          }}
-          className="messages-wrapper"
-          id="messages-wrapper"
+        <div className="messages-wrapper" id="messages-wrapper"
         />
       );
     }
