@@ -109,7 +109,7 @@ class FilesTabContainer extends Component {
                   <p>Loading</p>
                 ) : (
                   allFiles.viewer.allMessages.edges.map((file, id) => {
-                    if (file.node.author.id === myUserId) {
+                    if (file.node.author.id === myUserId()) {
                       return (
                         <FileItem
                           key={id}

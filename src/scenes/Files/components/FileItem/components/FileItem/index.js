@@ -25,7 +25,7 @@ export default ({
         <span className="fa fa-share" />
       </button>
 
-      {userId === myUserId && (
+      {userId === myUserId() && (
         <button
           disabled={deleteProcess}
           onClick={onDeleteClick}

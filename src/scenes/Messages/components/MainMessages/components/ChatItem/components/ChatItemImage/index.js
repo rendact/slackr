@@ -85,7 +85,7 @@ class ChatItemImage extends React.Component {
               channelId: val.channel,
               attachmentId: this.props.fileId,
               content: val.caption,
-              authorId: myUserId
+              authorId: myUserId()
             }
           }
         })
@@ -127,7 +127,7 @@ class ChatItemImage extends React.Component {
               <span className="fa fa-share" />
             </button>
 
-            {authorId === myUserId && (
+            {authorId === myUserId() && (
               <button
                 disabled={this.state.deleteProcess}
                 onClick={this.onDeleteClick}
@@ -190,7 +190,7 @@ export default compose(
   graphql(deleteMessage, { name: "deleteMessage" }),
   graphql(allMemberTo, {
     name: "channels",
-    options: { variables: { userId: myUserId } }
+    options: { variables: { userId: myUserId() } }
   }),
   graphql(createMessageMtn, {
     name: "createMessage"

@@ -1,1 +1,1 @@
-export default localStorage.getItem("slackrUserId");
+export default () => localStorage.getItem("slackrUserId");

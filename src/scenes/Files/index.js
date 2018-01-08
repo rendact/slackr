@@ -76,6 +76,6 @@ class FilesContainer extends Component {
 export default graphql(allFiles, {
   name: "allFiles",
   options: props => ({
-    variables: { userId: myUserId || props.location.state.userId }
+    variables: { userId: myUserId() || props.location.state.userId }
   })
 })(FilesContainer);

@@ -74,7 +74,7 @@ class FileItemContainer extends Component {
               channelId: val.channel,
               attachmentId: this.props.fileId,
               content: val.caption,
-              authorId: myUserId
+              authorId: myUserId()
             }
           }
         })
@@ -127,7 +127,7 @@ export default compose(
   graphql(deleteMessage, { name: "deleteMessage" }),
   graphql(allMemberTo, {
     name: "channels",
-    options: { variables: { userId: myUserId } }
+    options: { variables: { userId: myUserId() } }
   }),
   graphql(createMessageMtn, {
     name: "createMessage"

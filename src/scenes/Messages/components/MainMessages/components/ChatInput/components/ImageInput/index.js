@@ -33,14 +33,14 @@ class ImageInput extends React.Component {
         .createMessage({
           variables: {
             input: {
-              authorId: myUserId,
+              authorId: myUserId(),
               channelId: this.props.channelId,
               content: val.caption,
               attachment: {
                 name: val.title,
                 blobFieldName: "image",
                 image: this.state.imageFile,
-                creatorId: myUserId
+                creatorId: myUserId()
               }
             }
           }

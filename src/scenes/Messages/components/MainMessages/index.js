@@ -170,10 +170,7 @@ class MessagesWrapper extends Component {
 
     // default page without channelId
     if (!match.params.id) {
-      return (
-        <div className="messages-wrapper" id="messages-wrapper"
-        />
-      );
+      return <div className="messages-wrapper" id="messages-wrapper" />;
     }
 
     // when still loading
@@ -215,7 +212,7 @@ class MessagesWrapper extends Component {
 
     const userArray = data.getChannel.participants.edges;
     const isMember = !!(
-      userArray && userArray.find(el => el.node.id === myUserId)
+      userArray && userArray.find(el => el.node.id === myUserId())
     );
 
     // configuring name and type of channel
@@ -224,7 +221,7 @@ class MessagesWrapper extends Component {
 
     if (data.getChannel.type === "direct") {
       type = "direct";
-      name = userArray.find(u => u.node.id !== myUserId).node.username;
+      name = userArray.find(u => u.node.id !== myUserId()).node.username;
     } else {
       type = data.getChannel.type;
       name = data.getChannel.name;
